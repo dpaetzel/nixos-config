@@ -60,7 +60,7 @@
     emacs
     rxvt_unicode-with-plugins
     # firefox
-    vimb
+    # vimb
     chromium
     cacert
     zathura
@@ -107,11 +107,13 @@
     psmisc
     which
     zip
+    unzip
     pmount
     zsh
     silver-searcher
     bc
     file
+    # man
     man_db
 
     # development
@@ -122,6 +124,20 @@
     ghc
     ruby
   ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    # firefox = {
+    #   enableGoogleTalkPlugin = true;
+    #   enableAdobeFlash = true;
+    # };
+
+    chromium = {
+      enablePepperFlash = true; # Chromium removed support for Mozilla (NPAPI) plugins so Adobe Flash no longer works
+      enablePepperPDF = true;
+    };
+  };
 
   # Enable proper backlight management.
   programs.light.enable = true;
