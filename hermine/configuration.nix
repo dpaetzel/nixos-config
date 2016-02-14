@@ -69,6 +69,7 @@
 
     # main cli programs
     fish
+    git
 
     # utility cli programs
     htop
@@ -84,6 +85,20 @@
     # silver-searcher
     # bc
   ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    firefox = {
+      enableGoogleTalkPlugin = true;
+      enableAdobeFlash = true;
+    };
+
+    chromium = {
+      enablePepperFlash = true; # Chromium removed support for Mozilla (NPAPI) plugins so Adobe Flash no longer works
+      enablePepperPDF = true;
+    };
+  };
 
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
@@ -106,7 +121,10 @@
   # services.openssh.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.regine = {
