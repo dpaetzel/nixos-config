@@ -19,8 +19,8 @@
   # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+    consoleKeyMap = "de";
+    defaultLocale = "de_DE.UTF-8";
   };
 
   # Set your time zone.
@@ -107,7 +107,7 @@
   services.xserver = {
     enable = true;
     layout = "de";
-    xkbVariant = "neo";
+    # xkbVariant = "neo";
     synaptics = {
       enable = true;
       twoFingerScroll = true;
