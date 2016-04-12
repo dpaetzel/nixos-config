@@ -84,6 +84,9 @@
     # zsh
     # silver-searcher
     # bc
+
+    # utility gui programs
+    gnome3.gnome-tweak-tool
   ];
 
   nixpkgs.config = {
