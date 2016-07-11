@@ -170,7 +170,7 @@
     # };
 
     chromium = {
-      enablePepperFlash = true; # Chromium removed support for Mozilla (NPAPI) plugins so Adobe Flash no longer works
+      enablePepperFlash = true;
       enablePepperPDF = true;
     };
   };
@@ -181,6 +181,15 @@
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
 
+  # Enable fast searching for files.
+  services.locate.enable = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  # Enable CUPS to print documents.
+  # services.printing.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -189,20 +198,19 @@
     synaptics = {
       enable = true;
       twoFingerScroll = true;
-      # TODO add other options
     };
     displayManager.slim.defaultUser = "david";
+
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
     };
+
+    startGnuPGAgent = true;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  # Must be disabled for GnuPGAgent to work.
+  programs.ssh.startAgent = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.david = {
@@ -229,5 +237,8 @@
   system.autoUpgrade.enable = true;
 
   # Generate setuid wrappers.
-  security.setuidPrograms = ["slock"];
+  security.setuidPrograms = [
+    "pmount"
+    "slock"
+  ];
 }
