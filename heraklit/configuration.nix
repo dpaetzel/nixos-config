@@ -216,6 +216,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.david = {
+    # shell = "${pkgs.zsh}/zsh";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
