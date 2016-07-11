@@ -19,8 +19,8 @@
   # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+    consoleKeyMap = "de";
+    defaultLocale = "de_DE.UTF-8";
   };
 
   # Set your time zone.
@@ -69,6 +69,7 @@
 
     # main cli programs
     fish
+    git
 
     # utility cli programs
     htop
@@ -83,6 +84,9 @@
     # zsh
     # silver-searcher
     # bc
+
+    # utility gui programs
+    gnome3.gnome-tweak-tool
   ];
 
   nixpkgs.config = {
@@ -106,7 +110,7 @@
   services.xserver = {
     enable = true;
     layout = "de";
-    xkbVariant = "neo";
+    # xkbVariant = "neo";
     synaptics = {
       enable = true;
       twoFingerScroll = true;
@@ -120,7 +124,10 @@
   # services.openssh.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.regine = {
