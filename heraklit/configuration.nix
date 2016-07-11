@@ -28,10 +28,20 @@
   networking = {
     hostName = "heraklit"; # Define your hostname.
     networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager.basePackages =
+      with pkgs; {
+        # the openssl backend doesn’t like the protocols of my university
+        networkmanager_openconnect =
+          pkgs.networkmanager_openconnect.override { openconnect = pkgs.openconnect_gnutls; };
+        inherit networkmanager modemmanager wpa_supplicant
+                networkmanager_openvpn networkmanager_vpnc
+                networkmanager_pptp networkmanager_l2tp;
+    };
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     extraHosts = ''
       192.168.0.10 anaxagoras
     '';
+    firewall.enable = false;
   };
 
   # Installed fonts.
