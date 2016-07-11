@@ -237,7 +237,7 @@
   ];
 
   # Automatically upgrade once a day.
-  system.autoUpgrade.enable = true;
+  # system.autoUpgrade.enable = true;
 
   # Generate setuid wrappers.
   security.setuidPrograms = [
