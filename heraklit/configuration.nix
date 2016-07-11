@@ -199,6 +199,8 @@
       enable = true;
       twoFingerScroll = true;
     };
+    videoDrivers = [ "intel" ];
+
     displayManager.slim.defaultUser = "david";
 
     windowManager.xmonad = {
