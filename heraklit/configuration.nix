@@ -55,6 +55,7 @@
       inconsolata
       # ipafont
       kochi-substitute
+      source-code-pro
       symbola
       terminus_font
       ubuntu_font_family
