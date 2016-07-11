@@ -68,72 +68,97 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # main applications
-    emacs
-    rxvt_unicode-with-plugins
-    # firefox
-    # vimb
+    anki
     chromium
-    cacert
-    zathura
+    # cutegram
+    emacs
+    # firefox
+    libreoffice
+    lilyterm
+    # rxvt_unicode-with-plugins
     vim
     vlc
+    zathura
 
     # utility applications
     arandr
-    pavucontrol
-    slock
-    xorg.xev
-    scrot
     feh
+    gimp
+    pavucontrol
+    scrot
+    slock
+    trayer
+    xorg.xev
+    xdotool
 
     # graphical user interface
+    conky
+    dmenu2
+    dunst
+    dzen2
+    libnotify
+    lxappearance
+    networkmanagerapplet
+    parcellite
     redshift
     unclutter
     xcompmgr
-    dzen2
-    conky
-    dunst
-    dmenu2
-    networkmanagerapplet
+
+    # numix-gtk-theme
+    # numix-icon-theme
+    # elementary-icon-theme
+    # gtk-engine-murrine
+    # arc-gtk-theme
 
     # e-mail
+    elinks
+    gnupg
+    msmtp
     mutt
     offlineimap
-    msmtp
-    gnupg
-    elinks
-    # urlview
+    urlview
 
     # main cli programs
     fish
-    rcm
-    kbd
     git
     gitAndTools.git-annex
+    rcm
+    weechat
+    python27Packages.turses
+    zsh
 
     # utility cli programs
-    htop
-    wget
-    curl
-    psmisc
-    which
-    zip
-    unzip
-    pmount
-    zsh
-    silver-searcher
-    bc
+    dosfstools
     file
-    # man
-    man_db
+    htop
+    manpages
+    pmount
+    psmisc
+    (nmap.override { graphicalSupport = true; })
+    silver-searcher
+    telnet
+    tmux
+    traceroute
+    wget curl
+    which
+
+    # archive managment
+    atool
+    unzip
+    zip
+
+    # misc
+    cacert
+    kbd
+    networkmanager_openconnect
 
     # development
-    scala
-    sbt
     gcc
-    gnumake
     ghc
+    gnumake
     ruby
+    sbt
+    scala
   ];
 
   nixpkgs.config = {
