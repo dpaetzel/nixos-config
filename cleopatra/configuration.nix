@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ # include the results of the hardware scan
       ./hardware-configuration.nix
       ../common.nix
     ];
@@ -18,13 +18,13 @@
     ];
   };
 
-  # Mount the home partition.
+  # mount the home partition
   fileSystems."/home" =
     { device = "/dev/sda9";
       fsType = "ext4";
     };
 
-  # Use the gummiboot efi boot loader.
+  # use the gummiboot efi boot loader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
