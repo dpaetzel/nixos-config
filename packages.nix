@@ -1,14 +1,17 @@
-{ config, pkgs, ... } :
+pkgs :
 
 with pkgs; {
+  system = [
+    # cacert
+    # kbd
+    # networkmanager_openconnect
+  ];
   applications = {
     main = [
       androidsdk # for getting files from android phones
       anki
       chromium
-      # cutegram
       emacs
-      # firefox
       gimp
       gnupg
       libreoffice
@@ -96,11 +99,5 @@ with pkgs; {
     ruby
     sbt
     scala
-  ];
-
-  misc = [
-    cacert
-    kbd
-    networkmanager_openconnect
   ];
 }

@@ -25,7 +25,7 @@
     };
 
   # Use the gummiboot efi boot loader.
-  boot.loader.gummiboot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   i18n = {
@@ -36,10 +36,10 @@
   services.xserver = {
     layout = "de";
     # xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      twoFingerScroll = true;
-    };
+    # synaptics = {
+    #   enable = true;
+    #   twoFingerScroll = true;
+    # };
     displayManager.slim.defaultUser = "regine";
     desktopManager.gnome3.enable = true;
   };
@@ -49,11 +49,12 @@
     drivers = [ pkgs.gutenprint ];
   };
 
-  let
-    pkgGroups = import ../packages.nix;
-  in
-    environment.systemPackages = with pkgGroups;
+  environment.systemPackages =
+    with (import ../packages.nix pkgs);
+      system ++
       applications.main ++
       commandline.main ++
-      misc
+      [
+        cutegram
+      ];
 }

@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-  [
-    ./packages.nix
-  ]
-
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "15.09";
 
@@ -17,15 +12,6 @@
   # Networking.
   networking = {
     networkmanager.enable = true;
-    networkmanager.basePackages =
-      with pkgs; {
-        # needed for university vpn
-        networkmanager_openconnect =
-          pkgs.networkmanager_openconnect.override { openconnect = pkgs.openconnect_gnutls; };
-        inherit networkmanager modemmanager wpa_supplicant
-                networkmanager_openvpn networkmanager_vpnc
-                networkmanager_pptp networkmanager_l2tp;
-    };
     extraHosts = ''
       192.168.2.100 anaxagoras
       192.168.2.101 heraklit
@@ -86,7 +72,6 @@
 
   i18n = {
     consoleFont = "lat9w-16";
-    defaultLocale = "en_US.UTF-8";
   };
   time.timeZone = "Europe/Berlin";
 }
