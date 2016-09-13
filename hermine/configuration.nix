@@ -4,7 +4,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../common.nix
     ];
+
+  # Networking.
+  networking.hostName = "hermine";
 
   # Mount the home partition.
   fileSystems."/home" =
@@ -18,84 +22,14 @@
 
   # Select internationalisation properties.
   i18n = {
-    consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "de";
     defaultLocale = "de_DE.UTF-8";
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Networking.
-  networking = {
-    hostName = "hermine"; # Define your hostname.
-    networkmanager.enable = true;
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  };
-
-  # Installed fonts.
-  fonts = {
-    enableFontDir = true;
-    enableGhostscriptFonts = true;
-    fonts = with pkgs; [
-      cm_unicode
-      corefonts
-      dejavu_fonts
-      inconsolata
-      # ipafont
-      kochi-substitute
-      symbola
-      terminus_font
-      ubuntu_font_family
-      unifont
-      vistafonts
-    ];
-  };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    # main applications
-    firefox
-    chromium
-    cacert
-    emacs
-    vim
-    vlc
-
-    # e-mail
-    thunderbird
-    gnupg
-
-    # main cli programs
-    fish
-    git
-
-    # utility cli programs
-    htop
-    wget
-    curl
-    psmisc
-    which
-    zip
-    pmount
-    file
-    man_db
-    # zsh
-    # silver-searcher
-    # bc
-
-    # utility gui programs
-    gnome3.gnome-tweak-tool
-  ];
+  environment.systemPackages = with pkgs; [ TODO ];
 
   nixpkgs.config = {
     allowUnfree = true;
-
-    firefox = {
-      enableGoogleTalkPlugin = true;
-      enableAdobeFlash = true;
-    };
 
     chromium = {
       enablePepperFlash = true; # Chromium removed support for Mozilla (NPAPI) plugins so Adobe Flash no longer works
@@ -144,4 +78,4 @@
 
   # Automatically upgrade once a day.
   system.autoUpgrade.enable = true;
-}
+

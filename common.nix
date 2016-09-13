@@ -1,26 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "15.09";
 
+  # „On 64-bit systems, whether to support Direct Rendering for 32-bit
+  # applications (such as Wine). This is currently only supported for the nvidia
+  # and ati_unfree drivers, as well as Mesa.“
   hardware.opengl.driSupport32Bit = true;
-
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda";
 
   # Networking.
   networking = {
-    hostName = "heraklit";
     networkmanager.enable = true;
     networkmanager.basePackages =
       with pkgs; {
@@ -31,9 +21,9 @@
                 networkmanager_openvpn networkmanager_vpnc
                 networkmanager_pptp networkmanager_l2tp;
     };
-    # wireless.enable = true;  # enables wireless support via wpa_supplicant
     extraHosts = ''
       192.168.2.100 anaxagoras
+      192.168.2.101 heraklit
     '';
     firewall.enable = false;
   };
@@ -60,33 +50,37 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    # main applications
+  main-applications = [
+    androidsdk # for getting files from android phones
     anki
     chromium
     # cutegram
     emacs
     # firefox
+    gimp
+    gnupg
     libreoffice
     lilyterm
-    # rxvt_unicode-with-plugins
+    thunderbird
     vim
     vlc
     zathura
+  ];
 
-    # utility applications
+  # if there is no desktop environment, these might be useful
+  utility-applications = [
     arandr
-    androidsdk
     feh
-    gimp
     pavucontrol
     scrot
     slock
     trayer
     xorg.xev
     xdotool
+  ];
 
-    # graphical user interface
+  # if there is no desktop environment, these make up a nice UI
+  graphical-user-interface = [
     conky
     dmenu2
     dunst
@@ -98,30 +92,35 @@
     redshift
     unclutter
     xcompmgr
+  ];
 
+  themes = [
     # numix-gtk-theme
     # numix-icon-theme
     # elementary-icon-theme
     # gtk-engine-murrine
     # arc-gtk-theme
+  ];
 
-    # e-mail
+
+  mutt = [
     elinks
     gnupg
     msmtp
     mutt
     offlineimap
     urlview
+  ];
 
-    # main cli programs
+  main-cli-programs = [
     dfc
     git
     gitAndTools.git-annex
     rcm
     weechat
-    # python27Packages.turses
+  ];
 
-    # utility cli programs
+  utility-cli-programs = [
     dosfstools
     file
     htop
@@ -135,18 +134,21 @@
     traceroute
     wget curl
     which
+  ];
 
-    # archive managment
+  archive-managment = [
     atool
     unzip
     zip
+  ];
 
-    # misc
+  misc = [
     cacert
     kbd
     networkmanager_openconnect
+  ];
 
-    # development
+  development = [
     gcc
     ghc
     gnumake
@@ -170,69 +172,24 @@
     };
   };
 
-  security.setuidPrograms = [
-    "pmount"
-    "slock"
-  ];
-
-
   # proper backlight management
   programs.light.enable = true;
 
-  # my favourite shells
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
   hardware.pulseaudio.enable = true;
 
-  services.openssh.enable = true;
-  # services.printing.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "de";
-    xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      twoFingerScroll = true;
-    };
-    videoDrivers = [ "intel" ];
-
-    displayManager.slim.defaultUser = "david";
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
   };
 
   # must be disabled for GnuPGAgent to work
   programs.ssh.startAgent = false;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.david = {
-    # shell = "/run/current-system/sw/bin/zsh";
-    shell = "${pkgs.zsh}/bin/zsh";
-    isNormalUser = true;
-    uid = 1000;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-  };
-
-  # The encrypted partition.
-  boot.initrd.luks.devices = [
-    { name = "crypted";
-      device = "/dev/sda3";
-      preLVM = true;
-    }
-  ];
-
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "neo";
+    consoleFont = "lat9w-16";
     defaultLocale = "en_US.UTF-8";
   };
   time.timeZone = "Europe/Berlin";
