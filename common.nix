@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+  [
+    ./packages.nix
+  ]
+
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "15.09";
 
@@ -47,115 +52,6 @@
       vistafonts
     ];
   };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  main-applications = [
-    androidsdk # for getting files from android phones
-    anki
-    chromium
-    # cutegram
-    emacs
-    # firefox
-    gimp
-    gnupg
-    libreoffice
-    lilyterm
-    thunderbird
-    vim
-    vlc
-    zathura
-  ];
-
-  # if there is no desktop environment, these might be useful
-  utility-applications = [
-    arandr
-    feh
-    pavucontrol
-    scrot
-    slock
-    trayer
-    xorg.xev
-    xdotool
-  ];
-
-  # if there is no desktop environment, these make up a nice UI
-  graphical-user-interface = [
-    conky
-    dmenu2
-    dunst
-    dzen2
-    libnotify
-    lxappearance
-    networkmanagerapplet
-    parcellite
-    redshift
-    unclutter
-    xcompmgr
-  ];
-
-  themes = [
-    # numix-gtk-theme
-    # numix-icon-theme
-    # elementary-icon-theme
-    # gtk-engine-murrine
-    # arc-gtk-theme
-  ];
-
-
-  mutt = [
-    elinks
-    gnupg
-    msmtp
-    mutt
-    offlineimap
-    urlview
-  ];
-
-  main-cli-programs = [
-    dfc
-    git
-    gitAndTools.git-annex
-    rcm
-    weechat
-  ];
-
-  utility-cli-programs = [
-    dosfstools
-    file
-    htop
-    manpages
-    pmount
-    psmisc
-    (nmap.override { graphicalSupport = true; })
-    silver-searcher
-    telnet
-    tmux
-    traceroute
-    wget curl
-    which
-  ];
-
-  archive-managment = [
-    atool
-    unzip
-    zip
-  ];
-
-  misc = [
-    cacert
-    kbd
-    networkmanager_openconnect
-  ];
-
-  development = [
-    gcc
-    ghc
-    gnumake
-    ruby
-    sbt
-    scala
-  ];
 
   nixpkgs.config = {
     allowUnfree = true;
