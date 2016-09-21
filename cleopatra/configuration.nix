@@ -55,6 +55,6 @@
       applications.main ++
       commandline.main ++
       [
-        cutegram
+        pkgs.cutegram
       ];
 }
