@@ -2,7 +2,9 @@ pkgs :
 
 with pkgs; {
   system = [
-    # cacert
+    # needed e.g. for accessing gmail from offlineimap (enable using
+    # security.pki.certificateFiles = ["${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"])
+    cacert
     # kbd
     # networkmanager_openconnect
   ];
@@ -13,7 +15,9 @@ with pkgs; {
       chromium
       emacs
       gimp
+      gnucash
       gnupg
+      gparted
       libreoffice
       lilyterm
       thunderbird
@@ -45,6 +49,7 @@ with pkgs; {
     networkmanagerapplet
     parcellite
     redshift
+    xfce.thunar
     unclutter
     xcompmgr
 
@@ -56,10 +61,13 @@ with pkgs; {
   ];
 
   mutt = [
+    alot
+    python35Packages.afew
     elinks
     gnupg
     msmtp
-    mutt
+    mutt-kz
+    notmuch
     offlineimap
     urlview
   ];
@@ -71,6 +79,9 @@ with pkgs; {
       git
       gitAndTools.git-annex
       rcm
+      pdfjam
+      telegram-cli
+      tree
       unzip
       weechat
       zip
@@ -79,7 +90,9 @@ with pkgs; {
       dosfstools
       file
       htop
+      lsof
       manpages
+      nix-repl
       pmount
       psmisc
       (nmap.override { graphicalSupport = true; })
@@ -93,6 +106,7 @@ with pkgs; {
   };
 
   development = [
+    cloc
     gcc
     ghc
     gnumake
