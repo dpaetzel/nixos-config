@@ -29,13 +29,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   i18n = {
-    consoleKeyMap = "de";
+    consoleKeyMap = "neo";
     defaultLocale = "de_DE.UTF-8";
   };
 
   services.xserver = {
     layout = "de";
-    # xkbVariant = "neo";
+    xkbVariant = "neo";
     # synaptics = {
     #   enable = true;
     #   twoFingerScroll = true;
