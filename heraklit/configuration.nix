@@ -53,9 +53,16 @@
       enable = true;
       enableContribAndExtras = true;
     };
+    # otherwise an xterm spawns the window manager(?!?)
+    desktopManager.xterm.enable = false;
   };
 
+  # other services
   services.openssh.enable = true;
+  services.tlp.enable = true; # power management/saving for laptops
+  # “A list of files containing trusted root certificates in PEM format. These
+  # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
+  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
   security.setuidPrograms = [
     "pmount"
@@ -82,5 +89,8 @@
       mutt ++
       commandline.main ++
       commandline.utility ++
-      development;
+      development ++
+      (with pkgs; [
+      # other pkgs
+      ]);
 }
