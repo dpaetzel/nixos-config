@@ -39,9 +39,10 @@
   services.xserver = {
     layout = "de";
     xkbVariant = "neo";
-    # videoDrivers = [ "intel" ];
+    videoDrivers = [ "nvidia" ];
 
     config = import ./monitors.nix;
+    # xrandrHeads = [ "DVI-0" "HDMI-0" "DisplayPort-0" ];
 
     displayManager.slim.defaultUser = "david";
 
