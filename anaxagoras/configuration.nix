@@ -41,6 +41,8 @@
     xkbVariant = "neo";
     # videoDrivers = [ "intel" ];
 
+    config = import ./monitors.nix;
+
     displayManager.slim.defaultUser = "david";
 
     windowManager.xmonad = {
