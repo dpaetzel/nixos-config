@@ -22,13 +22,13 @@
   # the encrypted partition
   boot.initrd.luks.devices = [
     { name = "DecryptedHome";
-      device = "/dev/mapper/LinuxData-Home";
-      # preLVM = true;
+      device = "/dev/LinuxData/Home";
+      preLVM = false;
     }
   ];
 
   # use the gummiboot efi boot loader
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   i18n = {
