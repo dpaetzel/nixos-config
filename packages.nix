@@ -7,6 +7,7 @@ with pkgs; {
     cacert
     # kbd
     # networkmanager_openconnect
+    ntfs3g
   ];
   applications = {
     main = [
