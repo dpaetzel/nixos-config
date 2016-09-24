@@ -15,6 +15,7 @@ with pkgs; {
       anki
       chromium
       emacs
+      geeqie
       gimp
       gnucash
       gnupg
