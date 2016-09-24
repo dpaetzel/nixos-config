@@ -7,6 +7,7 @@ with pkgs; {
     cacert
     # kbd
     # networkmanager_openconnect
+    ntfs3g
   ];
   applications = {
     main = [
@@ -14,6 +15,7 @@ with pkgs; {
       anki
       chromium
       emacs
+      geeqie
       gimp
       gnucash
       gnupg
