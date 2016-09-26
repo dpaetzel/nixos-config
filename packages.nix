@@ -77,6 +77,7 @@ with pkgs; {
   commandline = {
     main = [
       atool
+      curl
       dfc
       git
       gitAndTools.git-annex
@@ -102,7 +103,7 @@ with pkgs; {
       telnet
       tmux
       traceroute
-      wget curl
+      wget
       which
     ];
   };
