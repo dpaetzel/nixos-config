@@ -104,6 +104,7 @@ with pkgs; {
       tmux
       traceroute
       wget
+      wirelesstools
       which
     ];
   };
