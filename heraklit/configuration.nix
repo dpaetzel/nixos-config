@@ -2,8 +2,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
       ../common.nix
     ];
 
@@ -27,11 +26,41 @@
     }
   ];
 
+  fileSystems."/" =
+    # { device = "/dev/disk/by-uuid/c9e1e74d-b05b-4e22-a896-28ac43566d04";
+    { device = "/dev/vg/root";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    # { device = "/dev/disk/by-uuid/89623a96-8cbb-4740-a387-7d3896d95768";
+    { device = "/dev/disk/by-label/boot";
+      fsType = "ext2";
+    };
+
+  fileSystems."/home" =
+    # { device = "/dev/disk/by-uuid/1cf62dd4-ed52-4f0a-a44f-ed3fa28f9d50";
+    { device = "/dev/vg/home";
+      fsType = "ext4";
+    };
+
+  swapDevices =
+    # [ { device = "/dev/disk/by-uuid/73e49284-5397-4a58-95f0-1f71f6d4002b"; }
+    [ { device = "/dev/vg/swap"; }
+    ];
+
+  nix.maxJobs = 4;
+
   # use the GRUB 2 boot loader
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   # define on which hard drive you want to install GRUB
   boot.loader.grub.device = "/dev/sda";
+
+  # boot/kernel stuff
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "usb_storage" "usbhid" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   i18n = {
     consoleKeyMap = "neo";

@@ -4,6 +4,10 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "15.09";
 
+  # “Turn on this option if you want to enable all the firmware shipped in
+  # linux-firmware.”
+  hardware.enableAllFirmware = true;
+
   # „On 64-bit systems, whether to support Direct Rendering for 32-bit
   # applications (such as Wine). This is currently only supported for the nvidia
   # and ati_unfree drivers, as well as Mesa.“
