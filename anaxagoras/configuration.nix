@@ -42,10 +42,18 @@
   services.xserver = {
     layout = "de";
     xkbVariant = "neo";
-    videoDrivers = [ "nvidia" ];
 
-    config = import ./monitors.nix;
-    # xrandrHeads = [ "DVI-0" "HDMI-0" "DisplayPort-0" ];
+    # not working properly (everything gets too big, setting dpi manually doesn't help a thing)
+    # videoDrivers = [ "nvidia" ];
+    # config = import ./monitors-nouveau.nix;
+    videoDrivers = [ "nouveau" ];
+    displayManager.sessionCommands =
+      ''
+      if [[ $(hostname) == anaxagoras ]]; then
+          sleep 1
+          xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
+      fi
+      '';
 
     displayManager.slim.defaultUser = "david";
 
