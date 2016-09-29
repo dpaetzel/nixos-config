@@ -22,14 +22,17 @@
   # the encrypted partition
   boot.initrd.luks.devices = [
     { name = "DecryptedHome";
-      device = "/dev/mapper/LinuxData-Home";
-      # preLVM = true;
+      device = "/dev/LinuxData/Home";
+      preLVM = false;
     }
   ];
 
   # use the gummiboot efi boot loader
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # rotate console by 90 degrees
+  boot.kernelParams = [ "fbcon=rotate:3" ];
 
   i18n = {
     consoleKeyMap = "neo";
@@ -39,7 +42,18 @@
   services.xserver = {
     layout = "de";
     xkbVariant = "neo";
-    # videoDrivers = [ "intel" ];
+
+    # not working properly (everything gets too big, setting dpi manually doesn't help a thing)
+    # videoDrivers = [ "nvidia" ];
+    # config = import ./monitors-nouveau.nix;
+    videoDrivers = [ "nouveau" ];
+    displayManager.sessionCommands =
+      ''
+      if [[ $(hostname) == anaxagoras ]]; then
+          sleep 1
+          xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
+      fi
+      '';
 
     displayManager.slim.defaultUser = "david";
 
