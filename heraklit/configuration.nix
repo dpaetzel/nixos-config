@@ -49,8 +49,6 @@
     [ { device = "/dev/vg/swap"; }
     ];
 
-  nix.maxJobs = 4;
-
   # use the GRUB 2 boot loader
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -97,6 +95,12 @@
     "pmount"
     "slock"
   ];
+
+  # “This option defines the maximum number of jobs that Nix will try to build
+  # in parallel. The default is 1. You should generally set it to the total
+  # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
+  # each and hyper-threading).”
+  nix.maxJobs = 4;
 
   networking.networkmanager.basePackages =
     with pkgs; {
