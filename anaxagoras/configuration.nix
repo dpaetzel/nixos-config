@@ -31,6 +31,9 @@
   boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # rotate console by 90 degrees
+  boot.kernelParams = [ "fbcon=rotate:3" ];
+
   i18n = {
     consoleKeyMap = "neo";
     defaultLocale = "en_US.UTF-8";
