@@ -2,8 +2,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
       ../common.nix
     ];
 
@@ -27,12 +26,43 @@
     }
   ];
 
+  fileSystems."/" =
+    { device = "/dev/disk/by-label/NixOSRoot";
+      fsType = "ext4";
+    };
+
+  fileSystems."/home" =
+    # { device = "/dev/disk/by-uuid/69465e01-04a9-4d43-8a0b-eb980ea23c86";
+    { device = "/dev/mapper/DecryptedHome";
+      fsType = "ext4";
+    };
+
+  fileSystems."/nix/store" =
+    { device = "/dev/LinuxData/NixStore";
+      fsType = "ext4";
+    };
+
+  swapDevices =
+    # [ { device = "/dev/disk/by-uuid/e78ecb48-f1d0-49e9-9ab8-d0fcad961085"; }
+    [ { device = "/dev/disk/by-label/Linux\x20Swap"; }
+    ];
+
   # use the gummiboot efi boot loader
   boot.loader.gummiboot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # rotate console by 90 degrees
-  boot.kernelParams = [ "fbcon=rotate:3" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ehci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelParams = [ "fbcon=rotate:3" ]; # rotate console by 90 degrees
+  boot.extraModulePackages = [ ];
 
   i18n = {
     consoleKeyMap = "neo";
@@ -76,6 +106,12 @@
     "pmount"
     "slock"
   ];
+
+  # “This option defines the maximum number of jobs that Nix will try to build
+  # in parallel. The default is 1. You should generally set it to the total
+  # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
+  # each and hyper-threading).”
+  nix.maxJobs = 8;
 
   networking.networkmanager.basePackages =
     with pkgs; {
