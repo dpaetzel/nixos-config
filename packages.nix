@@ -5,6 +5,7 @@ with pkgs; {
     # needed e.g. for accessing gmail from offlineimap (enable using
     # security.pki.certificateFiles = ["${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"])
     cacert
+    cryptsetup
     # kbd
     # networkmanager_openconnect
     ntfs3g
@@ -81,6 +82,9 @@ with pkgs; {
       dfc
       git
       gitAndTools.git-annex
+      ledger
+      # haskellPackages.hledger
+      # haskellPackages.hledger-web
       rcm
       pdfjam
       telegram-cli
