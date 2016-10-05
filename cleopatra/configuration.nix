@@ -8,6 +8,8 @@
     ];
 
   networking.hostName = "cleopatra";
+  # disable the internal wifi-card as it interfers with the USB one
+  networking.networkmanager.unmanaged = [ "mac:40:f0:2f:57:6b:47" ];
 
   users.extraUsers.regine = {
     isNormalUser = true;
