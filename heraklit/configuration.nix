@@ -131,6 +131,13 @@
       commandline.utility ++
       development ++
       (with pkgs; [
+        (with texlive; combine {
+          # inherit scheme-medium minted units collection-bibtexextra ifplatform xstring doublestroke csquotes;
+          # inherit xstring doublestroke csquotes;
+          inherit scheme-full wrapfig capt-of biblatex biblatex-ieee logreq xstring;
+          # ieeetran?
+        })
+        biber
       # other pkgs
       ]);
 }

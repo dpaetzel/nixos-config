@@ -77,6 +77,7 @@ with pkgs; {
 
   commandline = {
     main = [
+      p7zip
       atool
       curl
       dfc
