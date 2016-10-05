@@ -56,7 +56,13 @@
   boot.loader.grub.device = "/dev/sda";
 
   # boot/kernel stuff
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "usb_storage" "usbhid" ];
+  boot.initrd.availableKernelModules = [
+    "ehci_pci"
+    "ahci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+  ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -72,7 +78,8 @@
       enable = true;
       twoFingerScroll = true;
     };
-    videoDrivers = [ "intel" ];
+    # videoDrivers = [ "intel" ];
+    videoDrivers = [ "mesa" ];
 
     displayManager.slim.defaultUser = "david";
 
