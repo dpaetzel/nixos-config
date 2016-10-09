@@ -12,6 +12,7 @@
   networking.networkmanager.unmanaged = [ "mac:40:f0:2f:57:6b:47" ];
 
   users.extraUsers.regine = {
+    shell = "${pkgs.zsh}/bin/zsh";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
