@@ -99,6 +99,7 @@ with pkgs; {
       dosfstools
       file
       htop
+      imagemagick
       lsof
       manpages
       nix-repl
