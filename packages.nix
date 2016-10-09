@@ -15,6 +15,7 @@ with pkgs; {
       androidsdk # for getting files from android phones
       anki
       chromium
+      cutegram
       emacs
       geeqie
       gimp
