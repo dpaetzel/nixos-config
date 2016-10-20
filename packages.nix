@@ -71,7 +71,8 @@ with pkgs; {
     elinks
     gnupg
     msmtp
-    mutt-kz
+    # mutt-kz
+    neomutt
     notmuch
     offlineimap
     urlview
