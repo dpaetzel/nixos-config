@@ -37,8 +37,9 @@
   };
 
   services.xserver = {
-    layout = "de";
-    xkbVariant = "neo";
+    layout = "de,de";
+    xkbVariant = "neo,";
+    xkbOptions = "grp:ctrl_shift_toggle,terminate:ctrl_alt_bksp";
     # synaptics = {
     #   enable = true;
     #   twoFingerScroll = true;
