@@ -24,6 +24,7 @@ with pkgs; {
       gparted
       libreoffice
       lilyterm
+      mediathekview
       thunderbird
       vim
       vlc
@@ -113,6 +114,7 @@ with pkgs; {
       wget
       wirelesstools
       which
+      youtube-dl
     ];
   };
 
