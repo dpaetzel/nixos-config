@@ -140,6 +140,17 @@
           # ieeetran?
         })
         biber
-      # other pkgs
+
+        # other pkgs
+        # eclipses.eclipse-sdk-442 # latest classic
+        # eclipses.eclipse-sdk-452 # latest mars
+        # eclipses.eclipse-sdk-46 # neon
+        # jdk
+
+        # sbt
+        # scala
+        # idea.idea-community
+
+        # nodejs
       ]);
 }
