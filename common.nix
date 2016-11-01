@@ -58,6 +58,17 @@
     };
   };
 
+  # TODO fix GTK theming
+  # environment.shellInit = ''
+    # Set GTK_PATH so that GTK+ can find the Xfce theme engine.
+    # export GTK_PATH=${config.system.path}/lib/gtk-2.0
+
+    # Set GTK_DATA_PREFIX so that GTK+ can find the Xfce themes.
+    # export GTK_DATA_PREFIX=${config.system.path}
+
+    # export GTK2_RC_FILES=$GTK2_RC_FILES:~/.nix-profile/share/themes/oxygen-gtk/gtk-2.0/gtkrc
+  # '';
+
   # proper backlight management
   programs.light.enable = true;
 

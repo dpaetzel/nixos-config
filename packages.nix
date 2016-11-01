@@ -58,11 +58,33 @@ with pkgs; {
     unclutter
     xcompmgr
 
-    # numix-gtk-theme
-    # numix-icon-theme
-    # elementary-icon-theme
+    # works
+    gnome3.adwaita-icon-theme
+    arc-icon-theme
+    paper-icon-theme
+
+    # works probably
+    gtk-engine-murrine
+
+    # all(?) themes, probably not working at all
+    # `command ag --nonumbers misc.themes ~/Code/nixpkgs/pkgs/top-level/all-packages.nix`
+    # adapta-gtk-theme
+    # albatross
+    # arc-theme
+    # blackbird
+    # clearlooks-phenix
+    # flat-plat
+    # gnome-breeze
+    # greybird
     # gtk-engine-murrine
-    # arc-gtk-theme
+    # gtk_engines
+    # numix-gtk-theme
+    # orion
+    # oxygen-gtk2
+    # oxygen-gtk3
+    # paper-gtk-theme
+    # theme-vertex
+    # zuki-themes
   ];
 
   mutt = [
