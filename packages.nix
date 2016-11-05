@@ -128,10 +128,11 @@ with pkgs; {
       imagemagick
       lsof
       manpages
+      nix-prefetch-git
       nix-repl
+      (nmap.override { graphicalSupport = true; })
       pmount
       psmisc
-      (nmap.override { graphicalSupport = true; })
       python35Packages.rainbowstream
       silver-searcher
       telnet
