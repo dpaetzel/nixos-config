@@ -17,6 +17,7 @@ with pkgs; {
       audacity lame
       chromium
       cutegram
+      dropbox-cli
       emacs
       geeqie
       gimp
@@ -29,6 +30,7 @@ with pkgs; {
       thunderbird
       vim
       vlc
+      wine winetricks # always handy to keep around; you never know x)
       zathura
     ];
     # useful esp. if there is no desktop environment
