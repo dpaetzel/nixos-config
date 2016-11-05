@@ -105,16 +105,15 @@ with pkgs; {
 
   commandline = {
     main = [
-      p7zip
       atool
       curl
       dfc
       git
       gitAndTools.git-annex
       ledger
-      # haskellPackages.hledger
-      # haskellPackages.hledger-web
       rcm
+      p7zip
+      pass
       pdfjam
       telegram-cli
       tree
