@@ -134,6 +134,7 @@ with pkgs; {
       pmount
       psmisc
       python35Packages.rainbowstream
+      python27Packages.goobook
       silver-searcher
       telnet
       tmux
