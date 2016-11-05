@@ -132,6 +132,7 @@ with pkgs; {
       pmount
       psmisc
       (nmap.override { graphicalSupport = true; })
+      python35Packages.rainbowstream
       silver-searcher
       telnet
       tmux
