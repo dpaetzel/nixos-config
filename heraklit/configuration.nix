@@ -141,6 +141,8 @@
         })
         biber
 
+        powertop
+
         # other pkgs
         # eclipses.eclipse-sdk-442 # latest classic
         # eclipses.eclipse-sdk-452 # latest mars
