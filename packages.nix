@@ -14,6 +14,7 @@ with pkgs; {
     main = [
       androidsdk # for getting files from android phones
       anki
+      audacity lame
       chromium
       cutegram
       emacs
