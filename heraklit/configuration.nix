@@ -76,7 +76,7 @@
     xkbVariant = "neo";
     synaptics = {
       enable = true;
-      twoFingerScroll = true;
+      # twoFingerScroll = true;
     };
     # videoDrivers = [ "intel" ];
     videoDrivers = [ "mesa" ];
