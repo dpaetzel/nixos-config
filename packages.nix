@@ -16,12 +16,10 @@ with pkgs; {
       anki
       audacity lame
       chromium
-      cutegram
       dropbox-cli
       emacs
       geeqie
       gimp
-      gnucash
       gnupg
       gparted
       libreoffice
