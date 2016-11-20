@@ -32,6 +32,8 @@
       cm_unicode
       corefonts
       dejavu_fonts
+      fira
+      fira-code
       inconsolata
       # ipafont
       kochi-substitute
