@@ -145,10 +145,12 @@ with pkgs; {
   };
 
   development = [
+    cabal-install
     cloc
     gcc
     ghc
     gnumake
+    haskellPackages.hlint
     ruby
     sbt
     scala
