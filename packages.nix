@@ -112,7 +112,7 @@ with pkgs; {
       rcm
       p7zip
       pass
-      pdfjam
+      # pdfjam
       telegram-cli
       tree
       unzip
@@ -154,5 +154,6 @@ with pkgs; {
     ruby
     sbt
     scala
+    stack
   ];
 }
