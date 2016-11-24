@@ -88,16 +88,12 @@ with pkgs; {
   ];
 
   mutt = [
-    alot
-    python35Packages.afew
     elinks
     gnupg
     msmtp
-    # mutt-kz
     neomutt
     notmuch
     offlineimap
-    urlview
   ];
 
   commandline = {
