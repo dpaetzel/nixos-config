@@ -51,6 +51,9 @@
     desktopManager.gnome3.enable = true;
   };
 
+  # breaks things
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+
   services.printing = {
     enable = true;
     drivers = [ pkgs.gutenprint ];
