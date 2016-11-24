@@ -56,11 +56,11 @@
     drivers = [ pkgs.gutenprint ];
   };
 
+  nixpkgs.config.chromium.gnomeSupport = true;
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
       applications.main ++
       commandline.main ++
-      [
-      ];
 }

@@ -49,10 +49,11 @@
   nixpkgs.config = {
     allowUnfree = true;
 
-    chromium = {
-      enablePepperFlash = true;
-      enablePepperPDF = true;
-    };
+    chromium.pulseSupport = true;
+    # chromium = {
+    #   enablePepperFlash = true;
+    #   enablePepperPDF = true;
+    # };
   };
 
   # TODO fix GTK theming
