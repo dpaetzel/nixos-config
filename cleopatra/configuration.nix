@@ -62,5 +62,5 @@
     with (import ../packages.nix pkgs);
       system ++
       applications.main ++
-      commandline.main ++
+      commandline.main;
 }
