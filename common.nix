@@ -49,12 +49,6 @@
   nixpkgs.config = {
     allowUnfree = true;
 
-    # this is a bad browser since pentadactyl's death
-    # firefox = {
-    #   enableGoogleTalkPlugin = true;
-    #   enableAdobeFlash = true;
-    # };
-
     chromium = {
       enablePepperFlash = true;
       enablePepperPDF = true;

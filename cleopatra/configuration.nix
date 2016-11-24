@@ -44,7 +44,10 @@
     #   enable = true;
     #   twoFingerScroll = true;
     # };
-    displayManager.slim.defaultUser = "regine";
+    videoDrivers = [ "mesa" ];
+
+    # displayManager.slim.defaultUser = "regine";
+    displayManager.lightdm.enable = true;
     desktopManager.gnome3.enable = true;
   };
 
