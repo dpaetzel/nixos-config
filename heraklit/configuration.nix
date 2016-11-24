@@ -150,6 +150,8 @@
 
         powertop
 
+        wine winetricks # always handy to keep around; you never know x)
+
         # other pkgs
         # eclipses.eclipse-sdk-442 # latest classic
         # eclipses.eclipse-sdk-452 # latest mars

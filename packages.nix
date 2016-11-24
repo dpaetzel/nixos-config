@@ -28,7 +28,6 @@ with pkgs; {
       thunderbird
       vim
       vlc
-      wine winetricks # always handy to keep around; you never know x)
       zathura
     ];
     # useful esp. if there is no desktop environment
