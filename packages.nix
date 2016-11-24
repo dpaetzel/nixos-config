@@ -108,7 +108,6 @@ with pkgs; {
       p7zip
       pass
       # pdfjam
-      telegram-cli
       tree
       unzip
       weechat
