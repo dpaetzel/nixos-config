@@ -55,8 +55,6 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  networking.networkmanager.enable = true;
-
   i18n = {
     consoleKeyMap = "de";
     defaultLocale = "de_DE.UTF-8";
@@ -89,11 +87,11 @@
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
   # each and hyper-threading).”
-  nix.maxJobs = lib.mkDefault 2;
+  nix.maxJobs = 2;
 
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
       applications.main ++
-      commandline.main
+      commandline.main;
 }
