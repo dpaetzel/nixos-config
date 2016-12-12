@@ -25,6 +25,7 @@ with pkgs; {
       libreoffice
       lilyterm
       mediathekview
+      redshift
       thunderbird
       vim
       vlc
@@ -53,7 +54,6 @@ with pkgs; {
     lxappearance
     networkmanagerapplet
     parcellite
-    redshift
     xfce.thunar
     unclutter
     xcompmgr
