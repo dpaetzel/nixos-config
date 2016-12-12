@@ -125,6 +125,7 @@ with pkgs; {
       (nmap.override { graphicalSupport = true; })
       pmount
       psmisc
+      pv
       python35Packages.rainbowstream
       python27Packages.goobook
       silver-searcher
@@ -134,6 +135,7 @@ with pkgs; {
       wget
       wirelesstools
       which
+      whois
       youtube-dl
     ];
   };
