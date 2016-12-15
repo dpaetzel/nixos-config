@@ -78,8 +78,7 @@
       enable = true;
       # twoFingerScroll = true;
     };
-    # videoDrivers = [ "intel" ];
-    videoDrivers = [ "mesa" ];
+    videoDrivers = [ "intel" ];
 
     displayManager.slim = {
       defaultUser = "david";
