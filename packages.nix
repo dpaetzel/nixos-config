@@ -39,6 +39,7 @@ with pkgs; {
       scrot
       slock
       trayer
+      udiskie
       xorg.xev
       xdotool
     ];
