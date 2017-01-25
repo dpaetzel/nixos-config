@@ -26,6 +26,7 @@ with pkgs; {
       lilyterm
       mediathekview
       redshift
+      telegram-desktop
       thunderbird
       vim
       vlc
