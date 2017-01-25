@@ -26,7 +26,7 @@ with pkgs; {
       lilyterm
       mediathekview
       redshift
-      telegram-desktop
+      tdesktop
       thunderbird
       vim
       vlc
@@ -117,6 +117,7 @@ with pkgs; {
     ];
     utility = [
       dosfstools
+      entr
       file
       htop
       imagemagick
@@ -149,6 +150,7 @@ with pkgs; {
     ghc
     gnumake
     haskellPackages.hlint
+    haskellPackages.lhs2tex
     ruby
     sbt
     scala
