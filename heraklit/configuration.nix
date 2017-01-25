@@ -76,7 +76,12 @@
     xkbVariant = "neo";
     synaptics = {
       enable = true;
-      # twoFingerScroll = true;
+      # 1 should be left, 2 should be right and 3 should be middle click
+      additionalOptions = ''
+        Option "TapButton1" "1"
+        Option "TapButton2" "3"
+        Option "TapButton3" "2"
+      '';
     };
     videoDrivers = [ "intel" ];
 
@@ -96,6 +101,11 @@
     # otherwise an xterm spawns the window manager(?!?)
     desktopManager.xterm.enable = false;
   };
+
+  # seems to make stuff like Chromium go slightly bananas in terms of performance
+  # hardware.opengl.extraPackages = with pkgs; [
+  #   vaapiIntel libvdpau-va-gl vaapiVdpau
+  # ];
 
   # other services
   services.openssh.enable = true;
