@@ -21,6 +21,7 @@ with pkgs; {
       geeqie
       gimp
       gnupg
+      google-chrome # for DRM-protected streaming
       gparted
       libreoffice
       lilyterm
