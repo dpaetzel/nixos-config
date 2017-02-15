@@ -107,6 +107,7 @@ with pkgs; {
       git
       gitAndTools.git-annex
       ledger
+      mr
       rcm
       p7zip
       pass
