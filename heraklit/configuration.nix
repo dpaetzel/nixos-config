@@ -116,11 +116,6 @@
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
-  security.setuidPrograms = [
-    "pmount"
-    "slock"
-  ];
-
   # “This option defines the maximum number of jobs that Nix will try to build
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
