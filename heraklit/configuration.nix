@@ -111,6 +111,10 @@
   services.openssh.enable = true;
   services.tlp.enable = true; # power management/saving for laptops
   services.cron.enable = true;
+  # udev rule for my android phone
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
+  '';
 
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
