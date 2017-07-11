@@ -29,7 +29,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-label/NixOSRoot";
       fsType = "ext4";
-      options = "discard";
+      options = [ "discard" ];
     };
 
   fileSystems."/home" =
