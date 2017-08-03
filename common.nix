@@ -34,9 +34,13 @@
       dejavu_fonts
       fira
       fira-code
+      fira-mono
       inconsolata
       # ipafont
       kochi-substitute
+      libertine
+      lmmath
+      lmodern
       source-code-pro
       symbola
       terminus_font
