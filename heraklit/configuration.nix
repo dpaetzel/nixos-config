@@ -97,6 +97,7 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
+      extraPackages = haskellPackages : [ haskellPackages.split ];
     };
     # otherwise an xterm spawns the window manager(?!?)
     desktopManager.xterm.enable = false;
