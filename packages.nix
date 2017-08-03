@@ -12,6 +12,8 @@ with pkgs; {
   ];
   applications = {
     main = [
+      abcde # for occasionally ripping CDs
+      adobe-reader # for occasionally having to read comments in PDFs
       androidsdk # for getting files from android phones
       anki
       audacity lame
@@ -26,8 +28,12 @@ with pkgs; {
       libreoffice
       lilyterm
       mediathekview
+      mpv # much faster than big ol' vlc
+      musescore
       redshift
+      simplescreenrecorder
       tdesktop
+      teamviewer # sometimes needed, happy when its already installed
       thunderbird
       vim
       vlc
@@ -49,17 +55,19 @@ with pkgs; {
 
   # useful esp. if there is no desktop environment
   graphical-user-interface = [
+    autocutsel # the only sane(?) clipboard management
     conky
+    compton
     dmenu2
     dunst
     dzen2
     libnotify
     lxappearance
     networkmanagerapplet
-    parcellite
+    # parcellite
+    setroot
     xfce.thunar
     unclutter
-    xcompmgr
 
     # works
     gnome3.adwaita-icon-theme
@@ -97,6 +105,7 @@ with pkgs; {
     neomutt
     notmuch
     offlineimap
+    # python3Packages.urlscan # not yet there?
   ];
 
   commandline = {
@@ -105,13 +114,14 @@ with pkgs; {
       curl
       dfc
       git
-      gitAndTools.git-annex
+      # gitAndTools.git-annex # its broken?
       ledger
+      lzip # some people do use LZMA compression
       mr
       rcm
       p7zip
+      pandoc
       pass
-      # pdfjam
       tree
       unzip
       weechat
@@ -123,16 +133,20 @@ with pkgs; {
       file
       htop
       imagemagick
+      ffmpeg
       lsof
       manpages
       nix-prefetch-git
       nix-repl
+      nix-zsh-completions
       (nmap.override { graphicalSupport = true; })
+      pastebinit
+      pdfgrep
       pmount
       psmisc
       pv
-      python35Packages.rainbowstream
       python27Packages.goobook
+      quvi # flash video scraper/getter/…
       silver-searcher
       telnet
       tmux
@@ -142,17 +156,24 @@ with pkgs; {
       which
       whois
       youtube-dl
+      xclip
     ];
   };
 
   development = [
+    automake autoconf # always annoying when these are needed but not available
     cabal-install
     cloc
+    elmPackages.elm
     gcc
+    gdb # sometimes you need it
     ghc
     gnumake
+    haskellPackages.ghc-mod
     haskellPackages.hlint
     haskellPackages.lhs2tex
+    patchelf # so handy
+    python
     ruby
     sbt
     scala
