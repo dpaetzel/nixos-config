@@ -131,6 +131,7 @@ with pkgs; {
       dosfstools
       entr
       file
+      ghostscript
       htop
       imagemagick
       ffmpeg
