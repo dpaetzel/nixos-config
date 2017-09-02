@@ -3,10 +3,11 @@
 {
   imports =
     [
+      ./hardware-configuration.nix
       ../common.nix
     ];
 
-  networking.hostName = "heraklit";
+  networking.hostName = "sokrates";
 
   users.extraUsers.david = {
     shell = "${pkgs.zsh}/bin/zsh";
@@ -19,52 +20,54 @@
   };
 
   # the encrypted partition
-  boot.initrd.luks.devices = [
-    { name = "crypted";
-      device = "/dev/sda3";
-      preLVM = true;
-    }
-  ];
+  # boot.initrd.luks.devices = [
+  #   { name = "crypted";
+  #     device = "/dev/sda3";
+  #     preLVM = true;
+  #   }
+  # ];
 
-  fileSystems."/" =
-    # { device = "/dev/disk/by-uuid/c9e1e74d-b05b-4e22-a896-28ac43566d04";
-    { device = "/dev/vg/root";
-      fsType = "ext4";
-    };
+  # fileSystems."/" =
+  #   # { device = "/dev/disk/by-uuid/c9e1e74d-b05b-4e22-a896-28ac43566d04";
+  #   { device = "/dev/vg/root";
+  #     fsType = "ext4";
+  #   };
 
-  fileSystems."/boot" =
-    # { device = "/dev/disk/by-uuid/89623a96-8cbb-4740-a387-7d3896d95768";
-    { device = "/dev/disk/by-label/boot";
-      fsType = "ext2";
-    };
+  # fileSystems."/boot" =
+  #   # { device = "/dev/disk/by-uuid/89623a96-8cbb-4740-a387-7d3896d95768";
+  #   { device = "/dev/disk/by-label/boot";
+  #     fsType = "ext2";
+  #   };
 
-  fileSystems."/home" =
-    # { device = "/dev/disk/by-uuid/1cf62dd4-ed52-4f0a-a44f-ed3fa28f9d50";
-    { device = "/dev/vg/home";
-      fsType = "ext4";
-    };
+  # fileSystems."/home" =
+  #   # { device = "/dev/disk/by-uuid/1cf62dd4-ed52-4f0a-a44f-ed3fa28f9d50";
+  #   { device = "/dev/vg/home";
+  #     fsType = "ext4";
+  #   };
 
-  swapDevices =
-    # [ { device = "/dev/disk/by-uuid/73e49284-5397-4a58-95f0-1f71f6d4002b"; }
-    [ { device = "/dev/vg/swap"; }
-    ];
+  # swapDevices =
+  #   # [ { device = "/dev/disk/by-uuid/73e49284-5397-4a58-95f0-1f71f6d4002b"; }
+  #   [ { device = "/dev/vg/swap"; }
+  #   ];
 
   # use the GRUB 2 boot loader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  # boot.loader.grub.enable = true;
+  boot.loader.systemd-boot.enable = true;
   # define on which hard drive you want to install GRUB
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/nvme0n1";
+  # TODO needed (was generated…)?
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # boot/kernel stuff
-  boot.initrd.availableKernelModules = [
-    "ehci_pci"
-    "ahci"
-    "xhci_pci"
-    "usb_storage"
-    "usbhid"
-  ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  # boot.initrd.availableKernelModules = [
+  #   "ehci_pci"
+  #   "ahci"
+  #   "xhci_pci"
+  #   "usb_storage"
+  #   "usbhid"
+  # ];
+  # boot.kernelModules = [ "kvm-intel" ];
+  # boot.extraModulePackages = [ ];
 
   i18n = {
     consoleKeyMap = "neo";
@@ -74,15 +77,15 @@
   services.xserver = {
     layout = "de";
     xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      # 1 should be left, 2 should be right and 3 should be middle click
-      additionalOptions = ''
-        Option "TapButton1" "1"
-        Option "TapButton2" "3"
-        Option "TapButton3" "2"
-      '';
-    };
+    # synaptics = {
+    #   enable = true;
+    #   # 1 should be left, 2 should be right and 3 should be middle click
+    #   additionalOptions = ''
+    #     Option "TapButton1" "1"
+    #     Option "TapButton2" "3"
+    #     Option "TapButton3" "2"
+    #   '';
+    # };
     videoDrivers = [ "intel" ];
 
     displayManager.slim = {
@@ -112,7 +115,7 @@
   services.openssh.enable = true;
   services.tlp.enable = true; # power management/saving for laptops
   services.cron.enable = true;
-  # udev rule for my android phone
+  # udev rule for my android phone(s)
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
