@@ -29,7 +29,7 @@ with pkgs; {
       lilyterm
       mediathekview
       mpv # much faster than big ol' vlc
-      musescore
+      # musescore # TODO is marked broken?
       redshift
       simplescreenrecorder
       tdesktop
