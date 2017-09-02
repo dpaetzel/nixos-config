@@ -16,11 +16,6 @@
   # Networking.
   networking = {
     networkmanager.enable = true;
-    extraHosts = ''
-      192.168.2.100 anaxagoras
-      192.168.2.101 heraklit
-      192.168.2.102 cleopatra
-    '';
     firewall.enable = false;
   };
 
