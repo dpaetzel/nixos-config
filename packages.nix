@@ -114,7 +114,7 @@ with pkgs; {
       curl
       dfc
       git
-      # gitAndTools.git-annex # its broken?
+      # gitAndTools.git-annex # its broken, so I installed it from master…
       ledger
       lzip # some people do use LZMA compression
       mr
