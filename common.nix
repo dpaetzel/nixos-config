@@ -16,6 +16,12 @@
   # Networking.
   networking = {
     networkmanager.enable = true;
+    extraHosts = ''
+      192.168.2.100 anaxagoras
+      192.168.2.101 heraklit
+      192.168.2.102 sokrates
+      192.168.2.110 filius
+    '';
     firewall.enable = false;
   };
 
