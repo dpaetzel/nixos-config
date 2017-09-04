@@ -85,7 +85,13 @@
     enable = true;
   };
 
-  # must be disabled for GnuPGAgent to work
+  services.redshift.enable = true;
+  services.redshift.latitude = "48.3";
+  services.redshift.longitude = "10.9";
+  services.redshift.temperature.day = 5500;
+  services.redshift.temperature.night = 2800;
+
+  # must be disabled for GnuPGAgent to work (or so someone said)
   programs.ssh.startAgent = false;
 
   i18n = {

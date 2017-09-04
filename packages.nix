@@ -30,7 +30,6 @@ with pkgs; {
       mediathekview
       mpv # much faster than big ol' vlc
       # musescore # TODO is marked broken?
-      redshift
       simplescreenrecorder
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
