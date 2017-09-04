@@ -72,6 +72,15 @@
     # export GTK2_RC_FILES=$GTK2_RC_FILES:~/.nix-profile/share/themes/oxygen-gtk/gtk-2.0/gtkrc
   # '';
 
+  environment.variables = {
+    BROWSER = "chromium";
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+
+    # Prevent Wine from changing filetype associations.
+    # https://wiki.winehq.org/FAQ#How_can_I_prevent_Wine_from_changing_the_filetype_associations_on_my_system_or_adding_unwanted_menu_entries.2Fdesktop_links.3F
+    WINEDLLOVERRIDES = "winemenubuilder.exe=d";
+  };
+
   # proper backlight management
   programs.light.enable = true;
 
