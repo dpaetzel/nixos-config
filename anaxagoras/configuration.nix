@@ -48,8 +48,8 @@
     [ { device = "/dev/disk/by-label/Linux\x20Swap"; }
     ];
 
-  # use the gummiboot efi boot loader
-  boot.loader.gummiboot.enable = true;
+  # use the systemd efi boot loader
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [
