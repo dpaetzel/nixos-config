@@ -113,6 +113,10 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
   '';
 
+  services.cron.systemCronJobs = [
+    "0 2 * * * root fstrim /"
+  ];
+
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
