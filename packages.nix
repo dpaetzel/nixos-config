@@ -128,6 +128,7 @@ with pkgs; {
       zip
     ];
     utility = [
+      cifs-utils
       dosfstools
       entr
       file
