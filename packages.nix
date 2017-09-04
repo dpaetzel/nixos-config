@@ -44,7 +44,6 @@ with pkgs; {
       feh
       pavucontrol
       scrot
-      slock
       trayer
       udiskie
       xorg.xev
