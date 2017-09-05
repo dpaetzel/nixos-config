@@ -140,7 +140,7 @@
 
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint ];
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
   };
 
   environment.systemPackages =
