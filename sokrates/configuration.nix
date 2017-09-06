@@ -69,15 +69,15 @@
   services.xserver = {
     layout = "de";
     xkbVariant = "neo";
-    # synaptics = {
-    #   enable = true;
-    #   # 1 should be left, 2 should be right and 3 should be middle click
-    #   additionalOptions = ''
-    #     Option "TapButton1" "1"
-    #     Option "TapButton2" "3"
-    #     Option "TapButton3" "2"
-    #   '';
-    # };
+    synaptics = {
+      enable = true;
+      minSpeed = "0.6";
+      maxSpeed = "1.5";
+      accelFactor = "0.015";
+      twoFingerScroll = true;
+      vertEdgeScroll = false;
+      palmDetect = true;
+    };
     videoDrivers = [ "intel" ];
 
     displayManager.slim = {
