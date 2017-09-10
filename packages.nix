@@ -167,7 +167,7 @@ with pkgs; {
     elmPackages.elm
     gcc
     gdb # sometimes you need it
-    ghc
+    haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
     gnumake
     haskellPackages.ghc-mod
     haskellPackages.hlint
