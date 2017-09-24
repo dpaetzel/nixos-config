@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -46,7 +46,8 @@
     # };
     videoDrivers = [ "mesa" ];
 
-    # displayManager.slim.defaultUser = "regine";
+    displayManager.slim.enable = lib.mkForce false;
+    windowManager.xmonad.enable = lib.mkForce false;
     displayManager.lightdm.enable = true;
     desktopManager.gnome3.enable = true;
   };

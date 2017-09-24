@@ -92,6 +92,24 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+
+    displayManager.slim = {
+      defaultUser = "david";
+      enable = true;
+      theme = pkgs.fetchurl {
+        url = "https://github.com/edwtjo/nixos-black-theme/archive/v1.0.tar.gz";
+        sha256 = "13bm7k3p6k7yq47nba08bn48cfv536k4ipnwwp1q1l2ydlp85r9d";
+      };
+    };
+
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      extraPackages = haskellPackages : [ haskellPackages.split ];
+    };
+
+    # otherwise an xterm spawns the window manager(?!?)
+    desktopManager.xterm.enable = false;
   };
 
   services.redshift.enable = true;
