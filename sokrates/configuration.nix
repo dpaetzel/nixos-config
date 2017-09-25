@@ -157,7 +157,17 @@
         (with texlive; combine {
           # inherit scheme-medium minted units collection-bibtexextra ifplatform xstring doublestroke csquotes;
           # inherit xstring doublestroke csquotes;
-          inherit scheme-full wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+          inherit
+            biblatex
+            biblatex-ieee
+            capt-of
+            inconsolata
+            logreq
+            newtx
+            scheme-full
+            wrapfig
+            xstring
+            ;
           # ieeetran?
         })
         biber
