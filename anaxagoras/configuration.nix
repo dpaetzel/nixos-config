@@ -83,15 +83,6 @@
         sleep 1
         xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
       '';
-
-    displayManager.slim.defaultUser = "david";
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-    # otherwise an xterm spawns the window manager(?!?)
-    desktopManager.xterm.enable = false;
   };
 
   # other services
