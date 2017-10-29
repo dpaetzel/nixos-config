@@ -125,6 +125,10 @@
       commandline.utility ++
       development ++
       (with pkgs; [
-      # other pkgs
+        (with texlive; combine {
+          inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+        })
       ]);
+
+        # other pkgs
 }
