@@ -109,6 +109,11 @@
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
