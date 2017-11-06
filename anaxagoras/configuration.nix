@@ -109,6 +109,11 @@
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
@@ -120,6 +125,10 @@
       commandline.utility ++
       development ++
       (with pkgs; [
-      # other pkgs
+        (with texlive; combine {
+          inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+        })
       ]);
+
+        # other pkgs
 }
