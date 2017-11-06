@@ -86,7 +86,7 @@
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
   };
 
-  # proper backlight management
+  # Proper backlight management.
   programs.light.enable = true;
 
   programs.zsh.enable = true;
@@ -122,6 +122,8 @@
   services.redshift.longitude = "10.9";
   services.redshift.temperature.day = 5500;
   services.redshift.temperature.night = 2800;
+
+  virtualisation.docker.enable = true;
 
   # must be disabled for GnuPGAgent to work (or so someone said)
   programs.ssh.startAgent = false;

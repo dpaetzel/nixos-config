@@ -18,6 +18,7 @@ with pkgs; {
       anki
       audacity lame
       chromium
+      docker
       dropbox-cli
       emacs
       geeqie
