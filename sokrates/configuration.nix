@@ -146,6 +146,7 @@
             biblatex-ieee
             capt-of
             inconsolata
+            libertine
             logreq
             newtx
             scheme-full
