@@ -129,6 +129,7 @@ with pkgs; {
     ];
     utility = [
       cifs-utils
+      coreutils
       dosfstools
       entr
       file
