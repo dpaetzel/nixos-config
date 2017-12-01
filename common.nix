@@ -1,5 +1,42 @@
 { config, pkgs, ... }:
 
+# TODO put all xmonad-startup stuff into services.xserver.desktopManager.session:
+# see https://github.com/bennofs/etc-nixos/blob/master/conf/desktop.nix
+# displayManager.logToJournal = true;
+# displayManager.lightdm.enable = true;
+# displayManager.lightdm.autoLogin = {
+#   enable = true;
+#   user = "bennofs";
+# };
+# displayManager.lightdm.greeter.enable = false;
+# desktopManager.session =
+#   [ { name = "custom";
+#       start = ''
+#         # Lock
+#         ${expr.lock}/bin/lock
+#         ${expr.lock-suspend}/bin/lock-on-suspend &
+
+#         ${pkgs.haskellPackages.xmobar}/bin/xmobar --dock --alpha 200 &
+#         ${pkgs.stalonetray}/bin/stalonetray --slot-size 22 --icon-size 20 --geometry 9x1-0 --icon-gravity NE --grow-gravity E -c /dev/null --kludges fix_window_pos,force_icons_size,use_icons_hints --transparent --tint-level 200 &> /dev/null &
+#         ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
+
+#         # Autostart
+#         ${pkgs.lib.optionalString (!buildVM) ''
+#           ${pkgs.rxvt_unicode}/bin/urxvt -title "IRC bennofs" -e ${pkgs.weechat}/bin/weechat &
+#         ''}
+#         ${pkgs.rxvt_unicode}/bin/urxvtd &
+#         ${pkgs.pasystray}/bin/pasystray &> /dev/null &
+#         ${pkgs.unclutter}/bin/unclutter -idle 3 &
+#         ${pkgs.pythonPackages.udiskie}/bin/udiskie --tray &
+#         ${pkgs.wpa_supplicant_gui}/bin/wpa_gui -q -t &
+#         ${pkgs.dunst}/bin/dunst -cto 4 -nto 2 -lto 1 -config ${./dunstrc} &
+#         syndaemon -i 1 -R -K -t -d
+#         trap 'trap - SIGINT SIGTERM EXIT && kill 0 && wait' SIGINT SIGTERM EXIT
+#         ${pkgs.lib.optionalString buildVM '' ${pkgs.rxvt_unicode}/bin/urxvt '' }
+#       '';
+#     }
+#   ];
+
 {
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
