@@ -102,6 +102,11 @@
     "0 2 * * * root fstrim /"
   ];
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
+
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
@@ -122,11 +127,6 @@
               networkmanager_pptp networkmanager_l2tp;
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
-
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
-  };
 
   environment.systemPackages =
     with (import ../packages.nix pkgs);
