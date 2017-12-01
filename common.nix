@@ -129,7 +129,10 @@
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {

@@ -88,6 +88,7 @@
   # ];
 
   # other services
+  hardware.bluetooth.enable = true;
   services.openssh.enable = true;
   services.tlp.enable = true; # power management/saving for laptops
   services.cron.enable = true;
