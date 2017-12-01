@@ -36,6 +36,7 @@ with pkgs; {
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
       vim
+      virtualbox
       vlc
       zathura
     ];

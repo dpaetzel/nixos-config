@@ -164,6 +164,7 @@
   services.redshift.temperature.night = 2800;
 
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 
   # must be disabled for GnuPGAgent to work (or so someone said)
   programs.ssh.startAgent = false;
