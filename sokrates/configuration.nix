@@ -13,6 +13,7 @@
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
+      "docker"
       "networkmanager"
       "wheel"
     ];
@@ -79,23 +80,6 @@
       palmDetect = true;
     };
     videoDrivers = [ "intel" ];
-
-    displayManager.slim = {
-      defaultUser = "david";
-      enable = true;
-      theme = pkgs.fetchurl {
-        url = "https://github.com/edwtjo/nixos-black-theme/archive/v1.0.tar.gz";
-        sha256 = "13bm7k3p6k7yq47nba08bn48cfv536k4ipnwwp1q1l2ydlp85r9d";
-      };
-    };
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      extraPackages = haskellPackages : [ haskellPackages.split ];
-    };
-    # otherwise an xterm spawns the window manager(?!?)
-    desktopManager.xterm.enable = false;
   };
 
   # seems to make stuff like Chromium go slightly bananas in terms of performance
@@ -104,6 +88,7 @@
   # ];
 
   # other services
+  hardware.bluetooth.enable = true;
   services.openssh.enable = true;
   services.tlp.enable = true; # power management/saving for laptops
   services.cron.enable = true;
@@ -116,6 +101,11 @@
   services.cron.systemCronJobs = [
     "0 2 * * * root fstrim /"
   ];
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
 
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
@@ -138,11 +128,6 @@
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
-  };
-
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
@@ -162,6 +147,7 @@
             biblatex-ieee
             capt-of
             inconsolata
+            libertine
             logreq
             newtx
             scheme-full

@@ -1,0 +1,5 @@
+* https://github.com/cstrahan/nixos-config/blob/master/configuration.nix#L115
+  environment.pathsToLink = [
+    # Needed for GTK themes.
+    "/share"
+  ];

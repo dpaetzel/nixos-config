@@ -18,6 +18,7 @@ with pkgs; {
       anki
       audacity lame
       chromium
+      docker
       dropbox-cli
       emacs
       geeqie
@@ -35,6 +36,7 @@ with pkgs; {
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
       vim
+      virtualbox
       vlc
       zathura
     ];
@@ -127,6 +129,7 @@ with pkgs; {
     ];
     utility = [
       cifs-utils
+      coreutils
       dosfstools
       entr
       file
