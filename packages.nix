@@ -177,6 +177,7 @@ with pkgs; {
     ruby
     sbt
     scala
+    shellcheck
     stack
   ];
 }
