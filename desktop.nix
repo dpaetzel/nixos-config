@@ -1,5 +1,6 @@
 # from https://github.com/bennofs/etc-nixos/blob/master/conf/desktop.nix
-{ config, pkgs, expr, buildVM, ... }:
+# { config, pkgs, expr, ... }: # TODO only if expr.lock is used below
+{ config, pkgs, ... }:
 
 let
   iconTheme = pkgs.breeze-icons.out;
@@ -45,19 +46,19 @@ imports = [];
 # Enable the X11 windowing system.
 services.xserver = {
   enable = true;
-  layout = "de";
-  synaptics.enable = true;
-  synaptics.accelFactor = "0.01";
-  synaptics.twoFingerScroll = true;
-  synaptics.additionalOptions = ''
-    Option "VertScrollDelta" "-112"
-    Option "HorizScrollDelta" "-112"
-    Option "TapButton2" "3"
-    Option "TapButton3" "2"
-  '';
-  xkbOptions = "ctrl:nocaps";
+  # layout = "de";
+  # synaptics.enable = true;
+  # synaptics.accelFactor = "0.01";
+  # synaptics.twoFingerScroll = true;
+  # synaptics.additionalOptions = ''
+  #   Option "VertScrollDelta" "-112"
+  #   Option "HorizScrollDelta" "-112"
+  #   Option "TapButton2" "3"
+  #   Option "TapButton3" "2"
+  # '';
+  # xkbOptions = "ctrl:nocaps";
 
-  displayManager.logToJournal = true;
+  displayManager.job.logToJournal = true;
   displayManager.lightdm.enable = true;
   displayManager.lightdm.autoLogin = {
     enable = true;
@@ -68,6 +69,10 @@ services.xserver = {
   desktopManager.session =
     [ { name = "custom";
         start = ''
+            # TODO do i want this?
+            # {expr.lock}/bin/lock
+            # {expr.lock-suspend}/bin/lock-on-suspend &
+
             # TODO put xresources into nixos config
             ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
 
@@ -161,12 +166,9 @@ environment.systemPackages = with pkgs; [
   iconTheme
 
   # Icons (Fallback)
-  gnome3.adwaita-icon-theme
-  hicolor_icon_theme
+  # hicolor_icon_theme
 
-  # These packages are used in autostart, they need to in systemPackages
-  # or icons won't work correctly
-  pythonPackages.udiskie skype
+  # TODO put autostart packages here b/c “otherwise icons don't work correctly”?
 ];
 
 # Make applications find files in <prefix>/share

@@ -4,6 +4,7 @@
   imports =
     [
       ../common.nix
+      ../desktop.nix
     ];
 
   networking.hostName = "anaxagoras";

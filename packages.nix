@@ -70,12 +70,12 @@ with pkgs; {
     unclutter
 
     # works
-    gnome3.adwaita-icon-theme
-    arc-icon-theme
-    paper-icon-theme
+    # gnome3.adwaita-icon-theme
+    # arc-icon-theme
+    # paper-icon-theme
 
     # works probably
-    gtk-engine-murrine
+    # gtk-engine-murrine
 
     # all(?) themes, probably not working at all
     # `command ag --nonumbers misc.themes ~/Code/nixpkgs/pkgs/top-level/all-packages.nix`
