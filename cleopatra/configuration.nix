@@ -5,6 +5,7 @@
     [ # include the results of the hardware scan
       ./hardware-configuration.nix
       ../common.nix
+      ../desktop.nix
     ];
 
   networking.hostName = "cleopatra";
@@ -38,22 +39,28 @@
 
   services.xserver = {
     layout = "de,de";
-    xkbVariant = "neo,";
+    xkbVariant = ",neo";
     xkbOptions = "grp:ctrl_shift_toggle,terminate:ctrl_alt_bksp";
     # synaptics = {
     #   enable = true;
     #   twoFingerScroll = true;
     # };
-    videoDrivers = [ "mesa" ];
+    videoDrivers = [ "intel" ];
 
-    displayManager.slim.enable = lib.mkForce false;
-    windowManager.xmonad.enable = lib.mkForce false;
-    displayManager.lightdm.enable = true;
+    displayManager.lightdm.autoLogin.user = lib.mkForce "regine";
+    # windowManager.xmonad.enable = lib.mkForce false;
+    # windowManager.default = lib.mkForce "gnome";
     desktopManager.gnome3.enable = true;
   };
 
   # breaks things
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+    HandleLidSwitch=ignore
+    HandleLidSwitchDocked=ignore
+  '';
 
   services.printing = {
     enable = true;
