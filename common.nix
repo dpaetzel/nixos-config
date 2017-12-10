@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
 
+# TODO https://gist.github.com/taohansen/d15e1fe4674a286cb9bcd8e3378a9f23
+
+# programs.adb.enable = true;
+# programs.chromium = {
+#   enable = true;
+#   extensions = [
+#   "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+#   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+#   "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+#   ];
+#  };
+# };
+
 {
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "18.03";
