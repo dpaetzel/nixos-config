@@ -64,11 +64,15 @@
     layout = "de,de";
     xkbVariant = ",neo";
     xkbOptions = "grp:ctrl_shift_toggle,terminate:ctrl_alt_bksp";
-    # TODO configure synaptics
-    # synaptics = {
-    #   enable = true;
-    #   twoFingerScroll = true;
-    # };
+    synaptics = {
+      enable = true;
+      minSpeed = "0.6";
+      maxSpeed = "1.5";
+      accelFactor = "0.015";
+      twoFingerScroll = true;
+      vertEdgeScroll = false;
+      palmDetect = true;
+    };
     videoDrivers = [ "intel" ];
 
     # displayManager.lightdm.autoLogin.user = lib.mkForce "regine";
