@@ -5,6 +5,7 @@
     [
       ../common.nix
       ../desktop.nix
+      ../workstation.nix
     ];
 
   networking.hostName = "anaxagoras";
@@ -130,6 +131,4 @@
           inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
         })
       ]);
-
-        # other pkgs
 }

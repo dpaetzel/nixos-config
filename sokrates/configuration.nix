@@ -4,6 +4,7 @@
   imports =
     [
       ../common.nix
+      ../workstation.nix
     ];
 
   networking.hostName = "sokrates";
@@ -18,14 +19,6 @@
       "wheel"
     ];
   };
-
-  # the encrypted partition
-  # boot.initrd.luks.devices = [
-  #   { name = "crypted";
-  #     device = "/dev/sda3";
-  #     preLVM = true;
-  #   }
-  # ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/root";
@@ -46,7 +39,7 @@
 
   # use the GRUB 2 boot loader
   boot.loader.systemd-boot.enable = true;
-  # define on which hard drive you want to install GRUB
+  # TODO is this needed: define on which hard drive you want to install GRUB?
   boot.loader.grub.device = "/dev/nvme0n1";
   # TODO is this needed (was generated…)?
   # boot.loader.efi.canTouchEfiVariables = true;
