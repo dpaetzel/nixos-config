@@ -38,6 +38,7 @@ with pkgs; {
       vim
       virtualbox
       vlc
+      wine winetricks # always handy to keep around; you never know x)
       zathura
     ];
     # useful esp. if there is no desktop environment
@@ -146,6 +147,7 @@ with pkgs; {
       pastebinit
       pdfgrep
       pmount
+      powertop
       psmisc
       pv
       python27Packages.goobook
