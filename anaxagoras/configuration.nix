@@ -4,7 +4,8 @@
   imports =
     [
       ../common.nix
-      ../themeddesktop.nix
+      ../desktop.nix
+      ../theme.nix
       ../workstation.nix
     ];
 

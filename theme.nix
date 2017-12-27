@@ -1,4 +1,4 @@
-# from https://github.com/bennofs/etc-nixos/blob/master/conf/desktop.nix
+# inspired by https://github.com/bennofs/etc-nixos/blob/master/conf/desktop.nix
 { config, pkgs, ... }:
 
 let
@@ -31,12 +31,6 @@ let
     export QT_STYLE_OVERRIDE=breeze
   '';
 in {
-  imports =
-    [
-      # Enable the X11 windowing system.
-      ./desktop.nix
-    ];
-
   environment.extraInit = ''
     ${themeEnv}
 
