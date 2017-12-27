@@ -4,6 +4,8 @@
   imports =
     [
       ../common.nix
+      ../desktop.nix
+      ../theme.nix
       ../workstation.nix
     ];
 
@@ -30,19 +32,12 @@
       fsType = "ext4";
     };
 
-  # fileSystems."/boot" =
-  #   { device = "/dev/disk/by-uuid/C0B8-6B10";
-  #     fsType = "vfat";
-  #   };
-
   swapDevices = [ ];
 
   # use the GRUB 2 boot loader
   boot.loader.systemd-boot.enable = true;
   # TODO is this needed: define on which hard drive you want to install GRUB?
   boot.loader.grub.device = "/dev/nvme0n1";
-  # TODO is this needed (was generated…)?
-  # boot.loader.efi.canTouchEfiVariables = true;
 
   # boot/kernel stuff
   boot.initrd.availableKernelModules = [
@@ -55,25 +50,16 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      minSpeed = "0.6";
-      maxSpeed = "1.5";
-      accelFactor = "0.015";
-      twoFingerScroll = true;
-      vertEdgeScroll = false;
-      palmDetect = true;
-    };
-    videoDrivers = [ "intel" ];
+  services.xserver.videoDrivers = lib.mkForce [ "intel" ];
+  services.xserver.synaptics = lib.mkForce {
+    enable = true;
+    minSpeed = "0.6";
+    maxSpeed = "1.5";
+    accelFactor = "0.015";
+    twoFingerScroll = true;
+    vertEdgeScroll = false;
+    palmDetect = true;
   };
-
-  # seems to make stuff like Chromium go slightly bananas in terms of performance
-  # hardware.opengl.extraPackages = with pkgs; [
-  #   vaapiIntel libvdpau-va-gl vaapiVdpau
-  # ];
 
   # other services
   hardware.bluetooth.enable = true;
@@ -127,9 +113,8 @@
       commandline.utility ++
       development ++
       (with pkgs; [
+        # TODO extract this to texlive.nix
         (with texlive; combine {
-          # inherit scheme-medium minted units collection-bibtexextra ifplatform xstring doublestroke csquotes;
-          # inherit xstring doublestroke csquotes;
           inherit
             biblatex
             biblatex-ieee
@@ -145,10 +130,6 @@
           # ieeetran?
         })
         biber
-
-        powertop
-
-        wine winetricks # always handy to keep around; you never know x)
 
         # other pkgs
         # eclipses.eclipse-sdk-442 # latest classic
