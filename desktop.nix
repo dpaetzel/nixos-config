@@ -35,18 +35,19 @@
     desktopManager.session = [
       { name = "custom";
         start = ''
+          ${pkgs.setroot}/bin/setroot --solid-color '#000000'
           ${pkgs.autocutsel}/bin/autocutsel -s PRIMARY -f
           ${pkgs.autocutsel}/bin/autocutsel -s SELECTION -f
-          ${pkgs.compton}/bin/compton
-          ${pkgs.unclutter}/bin/unclutter -idle 5 -root
+          ${pkgs.compton}/bin/compton --daemon
+          ${pkgs.unclutter}/bin/unclutter -idle 5 -root &
           ${pkgs.xlibs.xset}/bin/xset -b
           # TODO put conkyrc into nixos config
-          sleep 2 && ${pkgs.conky}/bin/conky
+          ${pkgs.conky}/bin/conky --pause 5 --daemonize
           # TODO put dunstrc into nixos config
-          sleep 5 && ${pkgs.dunst}/bin/dunst
+          sleep 5 && ${pkgs.dunst}/bin/dunst &
 
-          sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs
-          sleep 7 && ${pkgs.chromium}/bin/chromium
+          sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs &
+          sleep 7 && ${pkgs.chromium}/bin/chromium &
         '';
       }
     ];
