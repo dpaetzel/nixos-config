@@ -55,11 +55,6 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  i18n = {
-    consoleKeyMap = "neo";
-    defaultLocale = "de_DE.UTF-8";
-  };
-
   services.xserver = {
     layout = "de,de";
     xkbVariant = ",neo";
