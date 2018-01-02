@@ -4,6 +4,9 @@
   imports =
     [
       ../common.nix
+      ../desktop.nix
+      ../theme.nix
+      ../workstation.nix
     ];
 
   networking.hostName = "sokrates";
@@ -13,18 +16,11 @@
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
+      "docker"
       "networkmanager"
       "wheel"
     ];
   };
-
-  # the encrypted partition
-  # boot.initrd.luks.devices = [
-  #   { name = "crypted";
-  #     device = "/dev/sda3";
-  #     preLVM = true;
-  #   }
-  # ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/root";
@@ -36,19 +32,12 @@
       fsType = "ext4";
     };
 
-  # fileSystems."/boot" =
-  #   { device = "/dev/disk/by-uuid/C0B8-6B10";
-  #     fsType = "vfat";
-  #   };
-
   swapDevices = [ ];
 
   # use the GRUB 2 boot loader
   boot.loader.systemd-boot.enable = true;
-  # define on which hard drive you want to install GRUB
+  # TODO is this needed: define on which hard drive you want to install GRUB?
   boot.loader.grub.device = "/dev/nvme0n1";
-  # TODO is this needed (was generated…)?
-  # boot.loader.efi.canTouchEfiVariables = true;
 
   # boot/kernel stuff
   boot.initrd.availableKernelModules = [
@@ -61,49 +50,19 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  i18n = {
-    consoleKeyMap = "neo";
-    defaultLocale = "en_US.UTF-8";
+  services.xserver.videoDrivers = lib.mkForce [ "intel" ];
+  services.xserver.synaptics = lib.mkForce {
+    enable = true;
+    minSpeed = "0.6";
+    maxSpeed = "1.5";
+    accelFactor = "0.015";
+    twoFingerScroll = true;
+    vertEdgeScroll = false;
+    palmDetect = true;
   };
-
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      minSpeed = "0.6";
-      maxSpeed = "1.5";
-      accelFactor = "0.015";
-      twoFingerScroll = true;
-      vertEdgeScroll = false;
-      palmDetect = true;
-    };
-    videoDrivers = [ "intel" ];
-
-    displayManager.slim = {
-      defaultUser = "david";
-      enable = true;
-      theme = pkgs.fetchurl {
-        url = "https://github.com/edwtjo/nixos-black-theme/archive/v1.0.tar.gz";
-        sha256 = "13bm7k3p6k7yq47nba08bn48cfv536k4ipnwwp1q1l2ydlp85r9d";
-      };
-    };
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      extraPackages = haskellPackages : [ haskellPackages.split ];
-    };
-    # otherwise an xterm spawns the window manager(?!?)
-    desktopManager.xterm.enable = false;
-  };
-
-  # seems to make stuff like Chromium go slightly bananas in terms of performance
-  # hardware.opengl.extraPackages = with pkgs; [
-  #   vaapiIntel libvdpau-va-gl vaapiVdpau
-  # ];
 
   # other services
+  hardware.bluetooth.enable = true;
   services.openssh.enable = true;
   services.tlp.enable = true; # power management/saving for laptops
   services.cron.enable = true;
@@ -116,6 +75,11 @@
   services.cron.systemCronJobs = [
     "0 2 * * * root fstrim /"
   ];
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
 
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
@@ -138,11 +102,6 @@
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
-  };
-
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
@@ -154,17 +113,23 @@
       commandline.utility ++
       development ++
       (with pkgs; [
+        # TODO extract this to texlive.nix
         (with texlive; combine {
-          # inherit scheme-medium minted units collection-bibtexextra ifplatform xstring doublestroke csquotes;
-          # inherit xstring doublestroke csquotes;
-          inherit scheme-full wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+          inherit
+            biblatex
+            biblatex-ieee
+            capt-of
+            inconsolata
+            libertine
+            logreq
+            newtx
+            scheme-full
+            wrapfig
+            xstring
+            ;
           # ieeetran?
         })
         biber
-
-        powertop
-
-        wine winetricks # always handy to keep around; you never know x)
 
         # other pkgs
         # eclipses.eclipse-sdk-442 # latest classic

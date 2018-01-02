@@ -1,9 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [
       ../common.nix
+      ../desktop.nix
+      ../theme.nix
+      ../workstation.nix
     ];
 
   networking.hostName = "anaxagoras";
@@ -62,41 +65,24 @@
     "sr_mod"
   ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelParams = [ "fbcon=rotate:3" ]; # rotate console by 90 degrees
+  # boot.kernelParams = [ "fbcon=rotate:3" ]; # rotate console by 90 degrees
   boot.extraModulePackages = [ ];
 
-  i18n = {
-    consoleKeyMap = "neo";
-    defaultLocale = "en_US.UTF-8";
-  };
-
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "neo";
-
+  services.xserver.videoDrivers = lib.mkForce [ "nouveau" ];
     # not working properly (everything gets too big, setting dpi manually doesn't help a thing)
     # videoDrivers = [ "nvidia" ];
     # config = import ./monitors-nouveau.nix;
-    videoDrivers = [ "nouveau" ];
-    displayManager.sessionCommands =
-      ''
-        sleep 1
-        xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
-      '';
-
-    displayManager.slim.defaultUser = "david";
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-    # otherwise an xterm spawns the window manager(?!?)
-    desktopManager.xterm.enable = false;
-  };
+    # videoDrivers = mkForce [ "nouveau" ];
+    # displayManager.sessionCommands =
+    #   ''
+    #     sleep 1
+    #     xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
+    #   '';
+  # };
 
   # other services
+  hardware.bluetooth.enable = true;
   services.openssh.enable = true;
-  services.tlp.enable = true; # power management/saving for laptops
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
@@ -118,6 +104,11 @@
   };
   # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
@@ -129,6 +120,8 @@
       commandline.utility ++
       development ++
       (with pkgs; [
-      # other pkgs
+        (with texlive; combine {
+          inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+        })
       ]);
 }

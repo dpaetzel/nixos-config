@@ -1,8 +1,21 @@
 { config, pkgs, ... }:
 
+# TODO https://gist.github.com/taohansen/d15e1fe4674a286cb9bcd8e3378a9f23
+
+# programs.adb.enable = true;
+# programs.chromium = {
+#   enable = true;
+#   extensions = [
+#   "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+#   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+#   "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+#   ];
+#  };
+# };
+
 {
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  system.stateVersion = "18.03";
 
   # “Turn on this option if you want to enable all the firmware shipped in
   # linux-firmware.”
@@ -55,25 +68,15 @@
     allowUnfree = true;
 
     chromium.pulseSupport = true;
-    # chromium = {
-    #   enablePepperFlash = true;
-    #   enablePepperPDF = true;
-    # };
   };
-
-  # TODO fix GTK theming
-  # environment.shellInit = ''
-    # Set GTK_PATH so that GTK+ can find the Xfce theme engine.
-    # export GTK_PATH=${config.system.path}/lib/gtk-2.0
-
-    # Set GTK_DATA_PREFIX so that GTK+ can find the Xfce themes.
-    # export GTK_DATA_PREFIX=${config.system.path}
-
-    # export GTK2_RC_FILES=$GTK2_RC_FILES:~/.nix-profile/share/themes/oxygen-gtk/gtk-2.0/gtkrc
-  # '';
 
   environment.variables = {
     BROWSER = "chromium";
+
+    # Prevent DBUS.Error.ServiceUnknown: org.a11y.Bus not provided.
+    # https://github.com/NixOS/nixpkgs/issues/16327
+    NO_AT_BRIDGE = "1";
+
     SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
 
     # Prevent Wine from changing filetype associations.
@@ -81,17 +84,15 @@
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
   };
 
-  # proper backlight management
+  # Proper backlight management.
   programs.light.enable = true;
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
-  hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
+  hardware.pulseaudio = {
     enable = true;
+    package = pkgs.pulseaudioFull;
   };
 
   services.redshift.enable = true;
@@ -105,6 +106,8 @@
 
   i18n = {
     consoleFont = "lat9w-16";
+    consoleKeyMap = "neo";
+    defaultLocale = "en_US.UTF-8";
   };
   time.timeZone = "Europe/Berlin";
 }

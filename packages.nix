@@ -18,6 +18,7 @@ with pkgs; {
       anki
       audacity lame
       chromium
+      docker
       dropbox-cli
       emacs
       geeqie
@@ -35,7 +36,9 @@ with pkgs; {
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
       vim
+      virtualbox
       vlc
+      wine winetricks # always handy to keep around; you never know x)
       zathura
     ];
     # useful esp. if there is no desktop environment
@@ -68,12 +71,12 @@ with pkgs; {
     unclutter
 
     # works
-    gnome3.adwaita-icon-theme
-    arc-icon-theme
-    paper-icon-theme
+    # gnome3.adwaita-icon-theme
+    # arc-icon-theme
+    # paper-icon-theme
 
     # works probably
-    gtk-engine-murrine
+    # gtk-engine-murrine
 
     # all(?) themes, probably not working at all
     # `command ag --nonumbers misc.themes ~/Code/nixpkgs/pkgs/top-level/all-packages.nix`
@@ -127,6 +130,7 @@ with pkgs; {
     ];
     utility = [
       cifs-utils
+      coreutils
       dosfstools
       entr
       file
@@ -143,6 +147,7 @@ with pkgs; {
       pastebinit
       pdfgrep
       pmount
+      powertop
       psmisc
       pv
       python27Packages.goobook
@@ -178,6 +183,7 @@ with pkgs; {
     ruby
     sbt
     scala
+    shellcheck
     stack
   ];
 }
