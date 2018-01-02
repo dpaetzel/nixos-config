@@ -162,6 +162,7 @@ with pkgs; {
 
   development = [
     automake autoconf # always annoying when these are needed but not available
+    cabal2nix
     cabal-install
     cloc
     elmPackages.elm
