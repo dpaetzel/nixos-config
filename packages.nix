@@ -35,7 +35,8 @@ with pkgs; {
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
-      vim
+      vimHugeX # huge b/c want to have gvim around
+      # neovim-qt # qt b/c want to have nvim-qt around
       virtualbox
       vlc
       wine winetricks # always handy to keep around; you never know x)
