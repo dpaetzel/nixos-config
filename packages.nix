@@ -174,8 +174,10 @@ with pkgs; {
     elmPackages.elm
     gcc
     gdb # sometimes you need it
-    haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
     gnumake
+    # TODO this is currently not working (can't coerce function to string, even with empty list)
+    # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
+    haskellPackages.ghc
     haskellPackages.ghc-mod
     haskellPackages.hlint
     haskellPackages.lhs2tex
