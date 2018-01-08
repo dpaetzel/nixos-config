@@ -32,6 +32,7 @@ with pkgs; {
       mpv # much faster than big ol' vlc
       # musescore # TODO is marked broken?
       simplescreenrecorder
+      # spotify # TODO not yet working in stable
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
       thunderbird

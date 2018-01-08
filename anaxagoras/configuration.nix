@@ -53,7 +53,10 @@
 
   # use the systemd efi boot loader
   boot.loader.systemd-boot.enable = true;
+  # TODO is this needed?
   boot.loader.efi.canTouchEfiVariables = true;
+  # TODO is something like this needed as well?
+  # boot.loader.grub.device = "/dev/sd?";
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
