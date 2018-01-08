@@ -12,7 +12,7 @@
   networking.hostName = "anaxagoras";
 
   users.extraUsers.david = {
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
