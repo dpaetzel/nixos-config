@@ -36,8 +36,8 @@
       { name = "custom";
         start = ''
           ${pkgs.setroot}/bin/setroot --solid-color '#000000'
-          ${pkgs.autocutsel}/bin/autocutsel -s PRIMARY -f
-          ${pkgs.autocutsel}/bin/autocutsel -s SELECTION -f
+          ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s PRIMARY -f
+          ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s SELECTION -f
           ${pkgs.compton}/bin/compton --daemon
           ${pkgs.unclutter}/bin/unclutter -idle 5 -root &
           ${pkgs.xlibs.xset}/bin/xset -b
