@@ -55,6 +55,8 @@
       libertine
       lmmath
       lmodern
+      nerdfonts
+      powerline-fonts
       source-code-pro
       symbola
       terminus_font
