@@ -1,12 +1,25 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [
       ../common.nix
+      # ../desktop.nix
+      ../theme.nix
+      # ../workstation.nix
+      ../media.nix
     ];
 
   networking.hostName = "heraklit";
+
+  users.extraUsers.media = {
+    shell = "${pkgs.zsh}/bin/zsh";
+    isNormalUser = true;
+    uid = 1001;
+    extraGroups = [
+      "networkmanager"
+    ];
+  };
 
   users.extraUsers.david = {
     shell = "${pkgs.zsh}/bin/zsh";
@@ -66,20 +79,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "neo";
-    synaptics = {
-      enable = true;
-      # 1 should be left, 2 should be right and 3 should be middle click
-      additionalOptions = ''
-        Option "TapButton1" "1"
-        Option "TapButton2" "3"
-        Option "TapButton3" "2"
-      '';
-    };
-    videoDrivers = [ "intel" ];
-  };
+  services.xserver.videoDrivers = lib.mkForce [ "intel" ];
 
   # seems to make stuff like Chromium go slightly bananas in terms of performance
   # hardware.opengl.extraPackages = with pkgs; [
@@ -122,6 +122,12 @@
     drivers = [ pkgs.gutenprint ];
   };
 
+  nixpkgs.config = {
+    kodi = {
+      enableAdvancedLauncher = true;
+    };
+  };
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
@@ -130,31 +136,21 @@
       graphical-user-interface ++
       mutt ++
       commandline.main ++
-      commandline.utility ++
-      development ++
-      (with pkgs; [
-        (with texlive; combine {
-          # inherit scheme-medium minted units collection-bibtexextra ifplatform xstring doublestroke csquotes;
-          # inherit xstring doublestroke csquotes;
-          inherit scheme-full wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
-          # ieeetran?
-        })
-        biber
-
-        powertop
-
-        wine winetricks # always handy to keep around; you never know x)
-
-        # other pkgs
-        # eclipses.eclipse-sdk-442 # latest classic
-        # eclipses.eclipse-sdk-452 # latest mars
-        # eclipses.eclipse-sdk-46 # neon
-        # jdk
-
-        # sbt
-        # scala
-        # idea.idea-community
-
-        # nodejs
-      ]);
+      commandline.utility
+      ++
+      [
+      # kodi
+      # pkgs.kodiPlugins.advanced-launcher
+      pkgs.matchbox
+      pkgs.jwm
+      ]
+      # ++
+      # development
+      # ++
+      # (with pkgs; [
+      #   (with texlive; combine {
+      #     inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
+      #   })
+      # ]);
+      ;
 }
