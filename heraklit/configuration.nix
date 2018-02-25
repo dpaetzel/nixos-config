@@ -98,5 +98,9 @@
         # pkgs.kodiPlugins.advanced-launcher
         pkgs.matchbox
         pkgs.jwm
+      ] ++
+      [
+        pkgs.wineStable
+        pkgs.winetricks
       ];
 }
