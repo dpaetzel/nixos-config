@@ -77,7 +77,7 @@
 
     # Prevent DBUS.Error.ServiceUnknown: org.a11y.Bus not provided.
     # https://github.com/NixOS/nixpkgs/issues/16327
-    NO_AT_BRIDGE = "1";
+    # NO_AT_BRIDGE = "1"; # TODO not needed any more?
 
     SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
 

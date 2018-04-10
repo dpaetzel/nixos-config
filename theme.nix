@@ -63,7 +63,7 @@ in {
   environment.systemPackages = with pkgs; [
     # Qt theme
     breeze-qt5
-    breeze-qt4
+    # breeze-qt4 # TODO not working any more?
 
     # Icons (Main)
     iconTheme # TODO this seems not to work?
