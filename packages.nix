@@ -18,12 +18,13 @@ with pkgs; {
       anki
       audacity lame
       chromium
-      docker
+      docker docker_compose
       dropbox-cli
       emacs
       geeqie
       gimp
       gnupg
+      gnuplot
       google-chrome # for DRM-protected streaming
       gparted
       libreoffice
@@ -117,6 +118,7 @@ with pkgs; {
       curl
       dfc
       git
+      khal
       # gitAndTools.git-annex # its broken, so I installed it from master…
       ledger
       lzip # some people do use LZMA compression
@@ -126,7 +128,9 @@ with pkgs; {
       pandoc
       pass
       tree
+      unrar
       unzip
+      vdirsyncer
       weechat
       zip
     ];
@@ -158,6 +162,7 @@ with pkgs; {
       telnet
       tmux
       traceroute
+      usbutils
       wget
       wirelesstools
       which
@@ -184,10 +189,12 @@ with pkgs; {
     haskellPackages.lhs2tex
     patchelf # so handy
     python
+    R
     ruby
     sbt
     scala
     shellcheck
     stack
+    weka
   ];
 }
