@@ -130,7 +130,7 @@ with pkgs; {
       tree
       unrar
       unzip
-      vdirsyncer
+      # vdirsyncer python36Packages.requests_oauthlib # its broken, so I installed it in nix-env
       weechat
       zip
     ];

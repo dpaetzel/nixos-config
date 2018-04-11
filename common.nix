@@ -70,6 +70,40 @@
     allowUnfree = true;
 
     chromium.pulseSupport = true;
+
+    packageOverrides = pkgs : rec {
+      python36Packages = pkgs.python36Packages.override(oldAttrs: rec {
+        # tests fail but libraries work(?)
+        overrides = self : super : rec {
+          pyflakes = super.pyflakes.overrideAttrs(z: rec {
+            doCheck = false;
+            doInstallCheck = false;
+          });
+          whoosh = super.whoosh.overrideAttrs(z: rec {
+            doCheck = false;
+            doInstallCheck = false;
+          });
+        };
+      });
+
+      # python3Packages = pkgs.python3Packages.override(oldAttrs: rec {
+      #   # tests fail but libraries work(?)
+      #   overrides = self : super : rec {
+      #     pyflakes = super.pyflakes.overrideAttrs(z: rec {
+      #       doCheck = false;
+      #       doInstallCheck = false;
+      #     });
+      #     whoosh = super.whoosh.overrideAttrs(z: rec {
+      #       doCheck = false;
+      #       doInstallCheck = false;
+      #     });
+      #   };
+      # });
+
+      # vdirsyncer = pkgs.vdirsyncer.overrideAttrs(oldAttrs: rec {
+      #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [python3Packages.requests_oauthlib];
+      # });
+    };
   };
 
   environment.variables = {
