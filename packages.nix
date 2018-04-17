@@ -177,14 +177,16 @@ with pkgs; {
     cabal2nix
     cabal-install
     cloc
-    elmPackages.elm
+    # TODO currently not working
+    # elmPackages.elm
     gcc
     gdb # sometimes you need it
     gnumake
     # TODO this is currently not working (can't coerce function to string, even with empty list)
     # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
     haskellPackages.ghc
-    haskellPackages.ghc-mod
+    # TODO currently not working
+    # haskellPackages.ghc-mod
     haskellPackages.hlint
     haskellPackages.lhs2tex
     patchelf # so handy
