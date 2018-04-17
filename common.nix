@@ -108,6 +108,7 @@
 
   environment.variables = {
     BROWSER = "chromium";
+    EDITOR = "emacsclient -c -a emacs";
 
     # Prevent DBUS.Error.ServiceUnknown: org.a11y.Bus not provided.
     # https://github.com/NixOS/nixpkgs/issues/16327
@@ -118,6 +119,15 @@
     # Prevent Wine from changing filetype associations.
     # https://wiki.winehq.org/FAQ#How_can_I_prevent_Wine_from_changing_the_filetype_associations_on_my_system_or_adding_unwanted_menu_entries.2Fdesktop_links.3F
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
+
+    GTK_IM_MODULE = "xim";
+    QT_IM_MODULE = "xim";
+    QT_STYLE_OVERRIDE = "GTK+";
+
+    "_JAVA_AWT_WM_NONREPARENTING" = "1";
+    "_JAVA_OPTIONS" = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
+
+    "_selected_drivers" = "ath9k";
   };
 
   # Proper backlight management.
