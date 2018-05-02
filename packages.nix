@@ -21,6 +21,7 @@ with pkgs; {
       docker docker_compose
       dropbox-cli
       emacs
+      firefox
       geeqie
       gimp
       gnupg
@@ -153,10 +154,12 @@ with pkgs; {
       pastebinit
       pdfgrep
       pmount
+      poppler_utils
       powertop
       psmisc
       pv
       python27Packages.goobook
+      python36Packages.pygments
       quvi # flash video scraper/getter/…
       silver-searcher
       telnet
