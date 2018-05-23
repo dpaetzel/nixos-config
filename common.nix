@@ -15,7 +15,7 @@
 
 {
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.03";
+  system.nixos.stateVersion = "18.03";
 
   # “Turn on this option if you want to enable all the firmware shipped in
   # linux-firmware.”
