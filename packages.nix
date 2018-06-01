@@ -28,6 +28,7 @@ with pkgs; {
       gnuplot
       google-chrome # for DRM-protected streaming
       gparted
+      inkscape
       libreoffice
       lilyterm
       mediathekview
