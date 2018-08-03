@@ -47,7 +47,7 @@
           sleep 5 && ${pkgs.dunst}/bin/dunst &
 
           # sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs &
-          sleep 7 && ${pkgs.chromium}/bin/chromium &
+          sleep 7 && ${pkgs.firefox}/bin/firefox &
         '';
       }
     ];

@@ -39,6 +39,7 @@ with pkgs; {
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
+      tor-browser-bundle-bin
       vimHugeX # huge b/c want to have gvim around
       # neovim-qt # qt b/c want to have nvim-qt around
       virtualbox

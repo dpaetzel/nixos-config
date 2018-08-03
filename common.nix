@@ -108,7 +108,7 @@
   };
 
   environment.variables = {
-    BROWSER = "chromium";
+    BROWSER = "firefox";
     EDITOR = "emacsclient -c -a emacs";
 
     # Prevent DBUS.Error.ServiceUnknown: org.a11y.Bus not provided.
