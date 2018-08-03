@@ -120,8 +120,11 @@ with pkgs; {
       atool
       curl
       dfc
+      droopy # browser-based file sharing
+      fzf # fuzzy file finder
       git
       khal
+      # khard # TODO not building
       # gitAndTools.git-annex # its broken, so I installed it from master…
       ledger
       lzip # some people do use LZMA compression
