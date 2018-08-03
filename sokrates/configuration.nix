@@ -66,6 +66,10 @@
   services.cron.systemCronJobs = [
     "0 2 * * * root fstrim /"
   ];
+  services.smartd.enable = true;
+  services.smartd.devices = [
+    { device = "/dev/nvme0"; }
+  ];
 
   services.printing = {
     enable = true;
