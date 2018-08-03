@@ -49,7 +49,7 @@
       dejavu_fonts
       fira
       fira-code
-      fira-mono
+      fira-code-symbols
       inconsolata
       # ipafont
       kochi-substitute
