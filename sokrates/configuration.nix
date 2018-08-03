@@ -51,15 +51,6 @@
   boot.extraModulePackages = [ ];
 
   services.xserver.videoDrivers = lib.mkForce [ "intel" ];
-  services.xserver.synaptics = lib.mkForce {
-    enable = true;
-    minSpeed = "0.6";
-    maxSpeed = "1.5";
-    accelFactor = "0.015";
-    twoFingerScroll = true;
-    vertEdgeScroll = false;
-    palmDetect = true;
-  };
 
   # other services
   hardware.bluetooth.enable = true;

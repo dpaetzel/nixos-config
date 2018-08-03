@@ -10,14 +10,10 @@
     videoDrivers = [ "intel" ];
 
     # TODO only laptops needs this
-    synaptics = {
+    libinput = {
       enable = true;
-      minSpeed = "0.6";
-      maxSpeed = "1.5";
-      accelFactor = "0.015";
-      twoFingerScroll = true;
-      vertEdgeScroll = false;
-      palmDetect = true;
+      disableWhileTyping = true;
+      scrollMethod = "twofinger";
     };
 
     # TODO autologin if hard drive is encrypted (thus device-dependent)
