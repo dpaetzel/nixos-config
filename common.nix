@@ -30,10 +30,11 @@
   networking = {
     networkmanager.enable = true;
     extraHosts = ''
-      192.168.2.100 anaxagoras
-      192.168.2.101 heraklit
-      192.168.2.102 sokrates
-      192.168.2.110 filius
+      192.168.178.100 anaxagoras
+      192.168.178.101 heraklit
+      192.168.178.102 sokrates
+      192.168.178.103 leukipp
+      192.168.178.110 filius
     '';
     firewall.enable = false;
   };
