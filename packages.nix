@@ -33,7 +33,7 @@ with pkgs; {
       lilyterm
       mediathekview
       mpv # much faster than big ol' vlc
-      # musescore # TODO is marked broken?
+      musescore
       simplescreenrecorder
       # spotify # TODO not yet working in stable
       tdesktop
