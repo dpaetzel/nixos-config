@@ -78,7 +78,10 @@
 
   # “Auto-detect the connect display hardware and load the appropiate X11 setup
   # using xrandr or disper.” – https://github.com/wertarbyte/autorandr
-  services.autorandr.enable = true;
+  # TODO These problems need to be solved:
+  # - does not respect my dzen/conky setup (needs postswitch-script)
+  # - does only work (exactly) every 2nd time when putting the laptop into the docking station
+  # services.autorandr.enable = true;
 
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
