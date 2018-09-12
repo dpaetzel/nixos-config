@@ -34,8 +34,10 @@ with pkgs; {
       mediathekview
       mpv # much faster than big ol' vlc
       musescore
+      # openshot-qt # if I should ever want to edit video
       simplescreenrecorder
-      # spotify # TODO not yet working in stable
+      skype # too many people use this -.-
+      # spotify # TODO not yet working in unstable
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
@@ -112,7 +114,7 @@ with pkgs; {
     neomutt
     notmuch
     offlineimap
-    # python3Packages.urlscan # not yet there?
+    urlscan
   ];
 
   commandline = {
@@ -121,6 +123,7 @@ with pkgs; {
       curl
       dfc
       droopy # browser-based file sharing
+      fd # fast and user-friendly alternative to `find`
       fzf # fuzzy file finder
       git
       khal
@@ -150,10 +153,10 @@ with pkgs; {
       htop
       imagemagick
       ffmpeg
+      lm_sensors
       lsof
       manpages
       nix-prefetch-git
-      nix-repl
       nix-zsh-completions
       (nmap.override { graphicalSupport = true; })
       pastebinit
@@ -188,7 +191,7 @@ with pkgs; {
     # TODO currently not working
     # elmPackages.elm
     gcc
-    gdb # sometimes you need it
+    gdb # sometimes you just need it
     gnumake
     # TODO this is currently not working (can't coerce function to string, even with empty list)
     # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
@@ -196,11 +199,14 @@ with pkgs; {
     # TODO currently not working
     # haskellPackages.ghc-mod
     haskellPackages.hlint
-    haskellPackages.lhs2tex
+    # TODO not working
+    # haskellPackages.lhs2tex
+    # nodejs
     patchelf # so handy
     python
     R
     ruby
+    # rust cargo # to be able to run `mates`
     sbt
     scala
     shellcheck
