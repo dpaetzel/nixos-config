@@ -121,8 +121,11 @@
     # https://wiki.winehq.org/FAQ#How_can_I_prevent_Wine_from_changing_the_filetype_associations_on_my_system_or_adding_unwanted_menu_entries.2Fdesktop_links.3F
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
 
-    GTK_IM_MODULE = "xim";
-    QT_IM_MODULE = "xim";
+    # don't know why this was here, but it got overriden by my ibus/uniemoji
+    # setup anyway
+    # GTK_IM_MODULE = "xim";
+    # QT_IM_MODULE = "xim";
+
     QT_STYLE_OVERRIDE = "GTK+";
 
     "_JAVA_AWT_WM_NONREPARENTING" = "1";
@@ -155,6 +158,8 @@
     consoleFont = "lat9w-16";
     consoleKeyMap = "neo";
     defaultLocale = "en_US.UTF-8";
+    inputMethod.ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
+    inputMethod.enabled = "ibus";
   };
   time.timeZone = "Europe/Berlin";
 }
