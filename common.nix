@@ -68,6 +68,8 @@
   };
 
   nixpkgs.config = {
+    android_sdk.accept_license = true;
+
     allowUnfree = true;
 
     chromium.pulseSupport = true;
