@@ -125,10 +125,7 @@
       inherit networkmanager modemmanager wpa_supplicant
               networkmanager_openvpn networkmanager_vpnc
               networkmanager_l2tp;
-              # TODO pptp not existing any more
-              # networkmanager_pptp
   };
-  # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
 
   environment.systemPackages =
