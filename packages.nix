@@ -9,7 +9,7 @@ with pkgs; {
     main = [
       abcde # for occasionally ripping CDs
       adobe-reader # for occasionally having to read comments in PDFs
-      androidsdk # for getting files from android phones
+      # androidenv.androidPkgs_9_0.android-tools # for getting files from android phones # TODO not working (2019-01-09)
       # anki # TODO currently broken?
       audacity lame
       chromium
