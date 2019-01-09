@@ -20,6 +20,7 @@
     extraGroups = [
       "docker"
       "networkmanager"
+      "video" # to be able to use `light`
       "wheel"
     ];
   };
