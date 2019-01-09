@@ -117,6 +117,13 @@
   nix.maxJobs = lib.mkDefault 4;
 
 
+  # “Sandboxing is not enabled by default in Nix due to a small performance hit
+  # on each build. In pull requests for nixpkgs people are asked to test builds
+  # with sandboxing enabled (see Tested using sandboxing in the pull request
+  # template) because in https://nixos.org/hydra/ sandboxing is also used.”
+  nix.useSandbox = true;
+
+
   networking.networkmanager.basePackages =
     with pkgs; {
       # needed for university vpn; thanks Profpatsch!
