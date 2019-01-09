@@ -91,12 +91,6 @@
   };
 
 
-  services.smartd.enable = true;
-  services.smartd.devices = [
-    { device = "/dev/nvme0"; }
-  ];
-
-
   services.printing = {
     enable = true;
     drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
