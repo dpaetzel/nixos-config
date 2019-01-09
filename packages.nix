@@ -2,12 +2,7 @@ pkgs :
 
 with pkgs; {
   system = [
-    # needed e.g. for accessing gmail from offlineimap (enable using
-    # security.pki.certificateFiles = ["${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"])
-    cacert
     cryptsetup
-    # kbd
-    # networkmanager_openconnect
     ntfs3g
   ];
   applications = {
@@ -15,12 +10,13 @@ with pkgs; {
       abcde # for occasionally ripping CDs
       adobe-reader # for occasionally having to read comments in PDFs
       androidsdk # for getting files from android phones
-      anki
+      # anki # TODO currently broken?
       audacity lame
       chromium
       docker docker_compose
       dropbox-cli
       emacs
+      evince
       firefox
       geeqie
       gimp
@@ -29,7 +25,7 @@ with pkgs; {
       google-chrome # for DRM-protected streaming
       gparted
       inkscape
-      libreoffice
+      # libreoffice # TODO currently broken?
       lilyterm
       mediathekview
       mpv # much faster than big ol' vlc
@@ -37,17 +33,17 @@ with pkgs; {
       # openshot-qt # if I should ever want to edit video
       simplescreenrecorder
       skype # too many people use this -.-
-      # spotify # TODO not yet working in unstable
+      # spotify # TODO currently broken?
+      tabula # for extracting tables from PDFs
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
       thunderbird
       tor-browser-bundle-bin
       vimHugeX # huge b/c want to have gvim around
-      # neovim-qt # qt b/c want to have nvim-qt around
       virtualbox
-      vlc
+      vlc # wow, much simple to use, much support
       wine winetricks # always handy to keep around; you never know x)
-      zathura
+      (zathura.override { synctexSupport = false; }) # synctex makes the build fail
     ];
     # useful esp. if there is no desktop environment
     utility = [
@@ -120,9 +116,11 @@ with pkgs; {
   commandline = {
     main = [
       atool
+      bup # backup solution
       curl
       dfc
       droopy # browser-based file sharing
+      exa # a better `ls`
       fd # fast and user-friendly alternative to `find`
       fzf # fuzzy file finder
       git
@@ -132,6 +130,7 @@ with pkgs; {
       ledger
       lzip # some people do use LZMA compression
       mr
+      nix-index # builds an index for `nix-locate` which helps me to search my nix-store
       rcm
       p7zip
       pandoc
@@ -144,6 +143,7 @@ with pkgs; {
       zip
     ];
     utility = [
+      acpi # needed for more nicely formatted battery status in conky
       cifs-utils
       coreutils
       dosfstools
@@ -166,7 +166,7 @@ with pkgs; {
       powertop
       psmisc
       pv
-      python27Packages.goobook
+      # pythonPackages.goobook # TODO currently not working (but I don't need it anymore anyway)
       python36Packages.pygments
       quvi # flash video scraper/getter/…
       silver-searcher
