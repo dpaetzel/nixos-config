@@ -6,9 +6,6 @@
     layout = "de";
     xkbVariant = "neo";
 
-    # TODO hardware-dependent
-    videoDrivers = [ "intel" ];
-
     # TODO only laptops needs this
     libinput = {
       enable = true;

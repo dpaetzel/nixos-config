@@ -63,9 +63,6 @@
   boot.extraModulePackages = [ ];
 
 
-  services.xserver.videoDrivers = lib.mkForce [ "intel" ];
-
-
   # other services
   hardware.bluetooth.enable = true;
 
