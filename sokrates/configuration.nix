@@ -27,13 +27,19 @@
 
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/root";
+    { device = "/dev/vg/root";
       fsType = "ext4";
     };
 
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-label/home";
+    { device = "/dev/vg/home";
+      fsType = "ext4";
+    };
+
+
+  fileSystems."/home2" =
+    { device = "/dev/disk/by-uuid/269e80d9-7625-4d4e-ac63-38b935ff7b68";
       fsType = "ext4";
     };
 
@@ -43,12 +49,7 @@
 
   # use the GRUB 2 boot loader
   boot.loader.systemd-boot.enable = true;
-  # TODO is this needed: define on which hard drive you want to install GRUB?
-  boot.loader.grub.device = "/dev/nvme0n1";
-  # TODO Dominik says that I should do this (b/c using grub.device is the legacy method)
-  # boot.loader.grub.device = "nodev";
-  # boot.loader.efi.canTouchEfiVariables = true;
-  # … etc.
+  boot.loader.efi.canTouchEfiVariables = true;
 
 
   # boot/kernel stuff
@@ -107,6 +108,10 @@
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
 
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.stateVersion = "18.09";
+
+
   # “This option defines the maximum number of jobs that Nix will try to build
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
@@ -157,20 +162,7 @@
             wrapfig
             xstring
             ;
-          # ieeetran?
         })
         biber
-
-        # other pkgs
-        # eclipses.eclipse-sdk-442 # latest classic
-        # eclipses.eclipse-sdk-452 # latest mars
-        # eclipses.eclipse-sdk-46 # neon
-        # jdk
-
-        # sbt
-        # scala
-        # idea.idea-community
-
-        # nodejs
       ]);
 }

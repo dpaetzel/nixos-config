@@ -24,53 +24,38 @@
     };
 
     desktopManager.xterm.enable = false;
-    desktopManager.default = "custom";
-    desktopManager.session = [
-      { name = "custom";
-        start = ''
-          ${pkgs.setroot}/bin/setroot --solid-color '#000000'
-          ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s PRIMARY -f
-          ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s SELECTION -f
-          ${pkgs.compton}/bin/compton --daemon
-          ${pkgs.unclutter}/bin/unclutter -idle 5 -root &
-          ${pkgs.xlibs.xset}/bin/xset -b
-          # TODO put conkyrc into nixos config
-          ${pkgs.conky}/bin/conky --pause 5 --daemonize
-          # TODO put dunstrc into nixos config
-          sleep 5 && ${pkgs.dunst}/bin/dunst &
+    # desktopManager.default = "custom";
+    # TODO this might need to be commented out (x did not start with it and {desktop,window}Manager.default)
+    # NOTE I have to run slay w m each time anyway
+    # desktopManager.session = [
+    #   { name = "custom";
+    #     start = ''
+    #       ${pkgs.setroot}/bin/setroot --solid-color '#000000'
+    #       ${pkgs.unclutter}/bin/unclutter -idle 5 -root &
+    #       ${pkgs.xlibs.xset}/bin/xset -b
+    #       # ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s PRIMARY -f
+    #       # ${pkgs.autocutsel}/bin/autocutsel -pause 5000 -s SELECTION -f
+    #       # ${pkgs.compton}/bin/compton --daemon
+    #       # TODO put conkyrc into nixos config
+    #       # ${pkgs.conky}/bin/conky --pause 5 --daemonize
+    #       # TODO put dunstrc into nixos config
+    #       # sleep 5 && ${pkgs.dunst}/bin/dunst &
 
-          # sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs &
-          sleep 7 && ${pkgs.firefox}/bin/firefox &
-        '';
-      }
-    ];
+    #       # sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs &
+    #       # sleep 7 && ${pkgs.firefox}/bin/firefox &
+    #     '';
+    #   }
+    # ];
 
-    # TODO is this needed?
-    windowManager.default = "xmonad";
+    # # TODO is this needed?
+    # windowManager.default = "xmonad";
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
       extraPackages = haskellPackages : [ haskellPackages.split ];
     };
 
-    # TODO put xresources etc directly into nixos config
+    # TODO put xresources etc directly into nixos config?
     # ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
-    #       ${pkgs.haskellPackages.xmobar}/bin/xmobar --dock --alpha 200 &
-    #       # Autostart
-    #       ${pkgs.lib.optionalString (!buildVM) ''
-    #         ${pkgs.rxvt_unicode}/bin/urxvt -title "IRC bennofs" -e ${pkgs.weechat}/bin/weechat &
-    #       ''}
-    #       ${pkgs.rxvt_unicode}/bin/urxvtd &
-    #       ${pkgs.pasystray}/bin/pasystray &> /dev/null &
-    #       ${pkgs.unclutter}/bin/unclutter -idle 3 &
-    #       ${pkgs.pythonPackages.udiskie}/bin/udiskie --tray &
-    #       ${pkgs.wpa_supplicant_gui}/bin/wpa_gui -q -t &
-    #       ${pkgs.dunst}/bin/dunst -cto 4 -nto 2 -lto 1 -config ${./dunstrc} &
-    #       syndaemon -i 1 -R -K -t -d
-    #       trap 'trap - SIGINT SIGTERM EXIT && kill 0 && wait' SIGINT SIGTERM EXIT
-    #       ${pkgs.lib.optionalString buildVM '' ${pkgs.rxvt_unicode}/bin/urxvt '' }
-    #     '';
-    #   }
-    # ];
   };
 }
