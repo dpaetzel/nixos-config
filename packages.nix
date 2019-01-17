@@ -9,7 +9,7 @@ with pkgs; {
     main = [
       abcde # for occasionally ripping CDs
       adobe-reader # for occasionally having to read comments in PDFs
-      # androidenv.androidPkgs_9_0.android-tools # for getting files from android phones # TODO not working (2019-01-09)
+      androidenv.androidPkgs_9_0.androidsdk
       # anki # TODO currently broken?
       audacity lame
       chromium
@@ -25,15 +25,16 @@ with pkgs; {
       google-chrome # for DRM-protected streaming
       gparted
       inkscape
-      # libreoffice # TODO currently broken?
+      libreoffice
       lilyterm
       mediathekview
       mpv # much faster than big ol' vlc
       musescore
       # openshot-qt # if I should ever want to edit video
+      signal-desktop
       simplescreenrecorder
       skype # too many people use this -.-
-      # spotify # TODO currently broken?
+      spotify
       tabula # for extracting tables from PDFs
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
@@ -125,8 +126,8 @@ with pkgs; {
       fzf # fuzzy file finder
       git
       khal
-      # khard # TODO not building
-      # gitAndTools.git-annex # its broken, so I installed it from master…
+      khard
+      gitAndTools.git-annex
       ledger
       lzip # some people do use LZMA compression
       mr
@@ -134,7 +135,7 @@ with pkgs; {
       rcm
       p7zip
       pandoc
-      pass
+      (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
       tree
       unrar
       unzip
@@ -144,6 +145,7 @@ with pkgs; {
     ];
     utility = [
       acpi # needed for more nicely formatted battery status in conky
+      bind # needed for the occasional `dig`
       cifs-utils
       coreutils
       dosfstools
@@ -166,7 +168,6 @@ with pkgs; {
       powertop
       psmisc
       pv
-      # pythonPackages.goobook # TODO currently not working (but I don't need it anymore anyway)
       python36Packages.pygments
       quvi # flash video scraper/getter/…
       silver-searcher
@@ -188,25 +189,20 @@ with pkgs; {
     cabal2nix
     cabal-install
     cloc
-    # TODO currently not working
-    # elmPackages.elm
+    # elmPackages.elm # TODO currently not working
     gcc
     gdb # sometimes you just need it
     gnumake
-    # TODO this is currently not working (can't coerce function to string, even with empty list)
-    # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle])
+    # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle]) # TODO this is currently not working (can't coerce function to string, even with empty list)
     haskellPackages.ghc
-    # TODO currently not working
-    # haskellPackages.ghc-mod
+    # haskellPackages.ghc-mod # TODO currently not working
     haskellPackages.hlint
-    # TODO not working
-    # haskellPackages.lhs2tex
+    # haskellPackages.lhs2tex # TODO not working
     # nodejs
     patchelf # so handy
     python
     R
     ruby
-    # rust cargo # to be able to run `mates`
     sbt
     scala
     shellcheck
