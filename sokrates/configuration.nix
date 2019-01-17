@@ -7,6 +7,7 @@
       ../desktop.nix
       ../theme.nix
       ../workstation.nix
+      ./uni-mounts.nix
     ];
 
 
