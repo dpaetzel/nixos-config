@@ -156,6 +156,7 @@
       commandline.utility ++
       development ++
       (with pkgs; [
+        netlogo
         # TODO extract this to texlive.nix
         (with texlive; combine {
           inherit

@@ -13,6 +13,7 @@ with pkgs; {
       # anki # TODO currently broken?
       audacity lame
       chromium
+      diffpdf
       docker docker_compose
       dropbox-cli
       emacs
@@ -139,7 +140,7 @@ with pkgs; {
       tree
       unrar
       unzip
-      # vdirsyncer python36Packages.requests_oauthlib # its broken, so I installed it in nix-env
+      vdirsyncer # for fetching my calendars
       weechat
       zip
     ];
