@@ -66,13 +66,49 @@
 
   nixpkgs.config = {
     android_sdk.accept_license = true;
-
+    oraclejdk.accept_license = true;
     allowUnfree = true;
 
     chromium.pulseSupport = true;
 
-    packageOverrides = pkgs : rec {
-      python36Packages = pkgs.python36Packages.override(oldAttrs: rec {
+
+    # The variable super refers to the Nixpkgs set before the overrides are
+    # applied and self refers to it after the overrides are applied.
+    # (https://stackoverflow.com/a/36011540/6936216)
+    packageOverrides = super: let self = super.pkgs; in {
+      alsaLib116 = super.alsaLib.overrideAttrs (oldAttrs: rec {
+        name = "alsa-lib-1.1.6";
+        src = self.fetchurl {
+          url = "mirror://alsa/lib/${name}.tar.bz2";
+          sha256 = "096pwrnhj36yndldvs2pj4r871zhcgisks0is78f1jkjn9sd4b2z";
+        };
+      });
+      # audacity is broken because of ALSA lib
+      audacity221 = (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs (oldAttrs: rec {
+        version = "2.2.1";
+        name = "audacity-${version}";
+        src = self.fetchurl {
+          url = "https://github.com/audacity/audacity/archive/Audacity-${version}.tar.gz";
+          sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
+        };
+      });
+      # dmenu-4.9 is broken
+      dmenu48 = super.dmenu.overrideAttrs (oldAttrs: rec {
+        name = "dmenu-4.8";
+        src = self.fetchurl {
+          url = "https://dl.suckless.org/tools/${name}.tar.gz";
+          sha256 = "0qfvfrj10xlwd9hkvb57wshryan65bl6423h0qhiw1h76rf5lqgy";
+        };
+      });
+      pass = super.pass.override { dmenu = self.dmenu48; };
+      profiledHaskellPackages = self.haskellPackages.override {
+        overrides = self: super: {
+          mkDerivation = args: super.mkDerivation (args // {
+            enableLibraryProfiling = true;
+          });
+        };
+      };
+      python36Packages = super.python36Packages.override(oldAttrs: rec {
         # tests fail but libraries work(?)
         overrides = self : super : rec {
           pyflakes = super.pyflakes.overrideAttrs(z: rec {
@@ -85,24 +121,6 @@
           });
         };
       });
-
-      # python3Packages = pkgs.python3Packages.override(oldAttrs: rec {
-      #   # tests fail but libraries work(?)
-      #   overrides = self : super : rec {
-      #     pyflakes = super.pyflakes.overrideAttrs(z: rec {
-      #       doCheck = false;
-      #       doInstallCheck = false;
-      #     });
-      #     whoosh = super.whoosh.overrideAttrs(z: rec {
-      #       doCheck = false;
-      #       doInstallCheck = false;
-      #     });
-      #   };
-      # });
-
-      # vdirsyncer = pkgs.vdirsyncer.overrideAttrs(oldAttrs: rec {
-      #   propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [python3Packages.requests_oauthlib];
-      # });
     };
   };
 
