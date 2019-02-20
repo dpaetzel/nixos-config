@@ -39,11 +39,11 @@
     };
 
 
-  fileSystems."/home2" =
-    { device = "/dev/disk/by-uuid/269e80d9-7625-4d4e-ac63-38b935ff7b68";
-      fsType = "ext4";
-    };
-
+  # fileSystems."/home2" =
+  #   { device = "/dev/disk/by-uuid/269e80d9-7625-4d4e-ac63-38b935ff7b68";
+  #     fsType = "ext4";
+  #     noCheck = true;
+  #   };
 
   swapDevices = [ ];
 
@@ -93,6 +93,13 @@
   services.printing = {
     enable = true;
     drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
+
+
+  # required for color printer at work
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
   };
 
 
