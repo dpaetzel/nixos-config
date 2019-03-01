@@ -76,7 +76,7 @@
     # applied and self refers to it after the overrides are applied.
     # (https://stackoverflow.com/a/36011540/6936216)
     packageOverrides = super: let self = super.pkgs; in {
-      alsaLib116 = super.alsaLib.overrideAttrs (oldAttrs: rec {
+      alsaLib116 = super.alsaLib.overrideAttrs(oldAttrs: rec {
         name = "alsa-lib-1.1.6";
         src = self.fetchurl {
           url = "mirror://alsa/lib/${name}.tar.bz2";
@@ -84,7 +84,7 @@
         };
       });
       # audacity is broken because of ALSA lib
-      audacity221 = (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs (oldAttrs: rec {
+      audacity221 = (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs(oldAttrs: rec {
         version = "2.2.1";
         name = "audacity-${version}";
         src = self.fetchurl {
@@ -93,7 +93,7 @@
         };
       });
       # dmenu-4.9 is broken
-      dmenu48 = super.dmenu.overrideAttrs (oldAttrs: rec {
+      dmenu48 = super.dmenu.overrideAttrs(oldAttrs: rec {
         name = "dmenu-4.8";
         src = self.fetchurl {
           url = "https://dl.suckless.org/tools/${name}.tar.gz";
@@ -103,7 +103,7 @@
       pass = super.pass.override { dmenu = self.dmenu48; };
       profiledHaskellPackages = self.haskellPackages.override {
         overrides = self: super: {
-          mkDerivation = args: super.mkDerivation (args // {
+          mkDerivation = args: super.mkDerivation(args // {
             enableLibraryProfiling = true;
           });
         };
@@ -121,6 +121,14 @@
           });
         };
       });
+      vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
+        patches = oldAttrs.patches ++
+          [(self.fetchpatch {
+            url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
+            sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
+          })];
+        }
+      );
     };
   };
 
