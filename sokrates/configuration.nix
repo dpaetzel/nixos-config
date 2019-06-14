@@ -97,13 +97,6 @@
   };
 
 
-  # required for color printer at work
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-
   # “Auto-detect the connect display hardware and load the appropiate X11 setup
   # using xrandr or disper.” – https://github.com/wertarbyte/autorandr
   # TODO These problems need to be solved:
