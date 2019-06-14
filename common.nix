@@ -134,7 +134,7 @@
 
   environment.variables = {
     BROWSER = "firefox";
-    EDITOR = "emacsclient -c -a emacs";
+    EDITOR = "v";
 
     # Prevent DBUS.Error.ServiceUnknown: org.a11y.Bus not provided.
     # https://github.com/NixOS/nixpkgs/issues/16327
@@ -146,10 +146,10 @@
     # https://wiki.winehq.org/FAQ#How_can_I_prevent_Wine_from_changing_the_filetype_associations_on_my_system_or_adding_unwanted_menu_entries.2Fdesktop_links.3F
     WINEDLLOVERRIDES = "winemenubuilder.exe=d";
 
-    # don't know why this was here, but it got overriden by my ibus/uniemoji
-    # setup anyway
-    # GTK_IM_MODULE = "xim";
-    # QT_IM_MODULE = "xim";
+    # this is set by ibus package already
+    # GTK_IM_MODULE = lib.mkForce "ibus";
+    # QT_IM_MODULE = lib.mkForce "ibus";
+    # XMODIFIERS = lib.mkForce "@im=ibus";
 
     QT_STYLE_OVERRIDE = "GTK+";
 
