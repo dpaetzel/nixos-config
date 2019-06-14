@@ -58,4 +58,12 @@
     # TODO put xresources etc directly into nixos config?
     # ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
   };
+
+
+  services.compton = {
+    enable = true;
+    fade = true;
+    inactiveOpacity = "0.7";
+    opacityRules = ["100:class_g = 'dmenu'"];
+  };
 }
