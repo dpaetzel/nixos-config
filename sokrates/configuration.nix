@@ -78,6 +78,9 @@
   };
 
 
+  services.logind.lidSwitch = "ignore";
+
+
   services.openssh.enable = true;
 
 
