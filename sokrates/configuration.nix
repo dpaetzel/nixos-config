@@ -70,7 +70,21 @@
   hardware.bluetooth.enable = true;
 
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * 5 root fstrim /"
+    ];
+  };
+
+
   services.openssh.enable = true;
+
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
 
 
   services.tlp.enable = true; # power management/saving for laptops
@@ -81,20 +95,6 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
   '';
-
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "* * * * 5 root fstrim /"
-    ];
-  };
-
-
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
-  };
 
 
   # “Auto-detect the connect display hardware and load the appropiate X11 setup
