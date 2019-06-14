@@ -20,6 +20,7 @@
     uid = 1000;
     extraGroups = [
       "docker"
+      "lxd"
       "networkmanager"
       "video" # to be able to use `light`
       "wheel"
