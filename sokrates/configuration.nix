@@ -22,6 +22,7 @@
       "docker"
       "lxd"
       "networkmanager"
+      "vboxusers"
       "video" # to be able to use `light`
       "wheel"
     ];
