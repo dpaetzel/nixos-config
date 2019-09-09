@@ -91,15 +91,6 @@
           sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
         };
       });
-      # dmenu-4.9 is broken
-      dmenu48 = super.dmenu.overrideAttrs(oldAttrs: rec {
-        name = "dmenu-4.8";
-        src = self.fetchurl {
-          url = "https://dl.suckless.org/tools/${name}.tar.gz";
-          sha256 = "0qfvfrj10xlwd9hkvb57wshryan65bl6423h0qhiw1h76rf5lqgy";
-        };
-      });
-      pass = super.pass.override { dmenu = self.dmenu48; };
       profiledHaskellPackages = self.haskellPackages.override {
         overrides = self: super: {
           mkDerivation = args: super.mkDerivation(args // {
