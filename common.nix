@@ -170,8 +170,8 @@
   };
 
   services.redshift.enable = true;
-  services.redshift.latitude = "48.3";
-  services.redshift.longitude = "10.9";
+  location.latitude = 48.3;
+  location.longitude = 10.9;
   services.redshift.temperature.day = 5500;
   services.redshift.temperature.night = 2800;
 
