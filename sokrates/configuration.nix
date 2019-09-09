@@ -132,17 +132,6 @@
   nix.useSandbox = true;
 
 
-  networking.networkmanager.basePackages =
-    with pkgs; {
-      # needed for university vpn; thanks Profpatsch!
-      networkmanager_openconnect =
-        pkgs.networkmanager_openconnect.override { openconnect = pkgs.openconnect_gnutls; };
-      inherit networkmanager modemmanager wpa_supplicant
-              networkmanager_openvpn networkmanager_vpnc
-              networkmanager_l2tp;
-  };
-
-
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
