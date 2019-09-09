@@ -125,6 +125,7 @@ with pkgs; {
       droopy # browser-based file sharing
       exa # a better `ls`
       fd # fast and user-friendly alternative to `find`
+      ffmpeg
       fzf # fuzzy file finder
       git
       khal
@@ -132,12 +133,14 @@ with pkgs; {
       gitAndTools.git-annex
       ledger
       lzip # some people do use LZMA compression
+      magic-wormhole
       mr
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
       rcm
       p7zip
       pandoc
       (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+      transmission
       tree
       unrar
       unzip
@@ -201,8 +204,10 @@ with pkgs; {
     haskellPackages.hlint
     # haskellPackages.lhs2tex # TODO not working
     # nodejs
+    openjdk
     patchelf # so handy
     python
+    python37Packages.yapf
     R
     ruby
     sbt
