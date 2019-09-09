@@ -65,7 +65,8 @@ with pkgs; {
     autocutsel # the only sane(?) clipboard management
     conky
     compton
-    dmenu2
+    # dmenu2 # not maintained by upstream anymore
+    dmenu
     dunst
     dzen2
     libnotify
