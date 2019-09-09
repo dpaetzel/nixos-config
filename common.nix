@@ -60,7 +60,6 @@
       terminus_font
       ubuntu_font_family
       unifont
-      vistafonts
     ];
   };
 
