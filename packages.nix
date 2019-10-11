@@ -10,7 +10,6 @@ with pkgs; {
       abcde # for occasionally ripping CDs
       adobe-reader # for occasionally having to read comments in PDFs
       androidenv.androidPkgs_9_0.androidsdk
-      # anki # TODO currently broken?
       audacity lame
       chromium
       diffpdf
@@ -28,7 +27,7 @@ with pkgs; {
       inkscape
       libreoffice
       lilyterm
-      mediathekview
+      # mediathekview # TODO broken
       mpv # much faster than big ol' vlc
       musescore
       # openshot-qt # if I should ever want to edit video
@@ -42,10 +41,10 @@ with pkgs; {
       thunderbird
       tor-browser-bundle-bin
       vimHugeX # huge b/c want to have gvim around
-      virtualbox
       vlc # wow, much simple to use, much support
-      wine winetricks # always handy to keep around; you never know x)
-      (zathura.override { synctexSupport = false; }) # synctex makes the build fail
+      # NOTE broken due to "error: undefined reference to '__divmoddi4'"
+      # wine winetricks # always handy to keep around; you never know x)
+      zathura
     ];
     # useful esp. if there is no desktop environment
     utility = [
@@ -65,14 +64,12 @@ with pkgs; {
     autocutsel # the only sane(?) clipboard management
     conky
     compton
-    # dmenu2 # not maintained by upstream anymore
     dmenu
     dunst
     dzen2
     libnotify
     lxappearance
     networkmanagerapplet
-    # parcellite
     setroot
     xfce.thunar
     unclutter
@@ -128,7 +125,7 @@ with pkgs; {
       ffmpeg
       fzf # fuzzy file finder
       git
-      khal
+      # khal # TODO broken, install from master
       khard
       gitAndTools.git-annex
       ledger
@@ -144,7 +141,7 @@ with pkgs; {
       tree
       unrar
       unzip
-      vdirsyncer # for fetching my calendars
+      # vdirsyncer # for fetching my calendars # TODO broken, install from master
       weechat
       zip
     ];
@@ -191,7 +188,7 @@ with pkgs; {
 
   development = [
     automake autoconf # always annoying when these are needed but not available
-    cabal2nix
+    # cabal2nix # TODO currently broken, install from master
     cabal-install
     cloc
     # elmPackages.elm # TODO currently not working

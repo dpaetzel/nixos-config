@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stdenv, ... }:
 
 # TODO https://gist.github.com/taohansen/d15e1fe4674a286cb9bcd8e3378a9f23
 
@@ -111,14 +111,14 @@
           });
         };
       });
-      vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
-        patches = oldAttrs.patches ++
-          [(self.fetchpatch {
-            url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
-            sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
-          })];
-        }
-      );
+      # vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
+      #   patches = # oldAttrs.patches ++
+      #     [(self.fetchpatch {
+      #       url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
+      #       sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
+      #     })];
+      #   }
+      # );
     };
   };
 

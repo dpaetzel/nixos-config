@@ -26,25 +26,21 @@ services.xserver = {
   desktopManager.session =
     [ { name = "custom";
         start = ''
-            # TODO do i want this?
-            # {expr.lock}/bin/lock
-            # {expr.lock-suspend}/bin/lock-on-suspend &
+          # TODO put xresources into nixos config
+          ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
 
-            # TODO put xresources into nixos config
-            ${pkgs.xlibs.xrdb}/bin/xrdb -load ${./Xresources}
+          ${pkgs.autocutsel}/bin/autocutsel -s PRIMARY -f
+          ${pkgs.autocutsel}/bin/autocutsel -s SELECTION -f
+          ${pkgs.compton}/bin/compton
+          ${pkgs.unclutter}/bin/unclutter -idle 5 -root
+          ${pkgs.xlibs.xset}/bin/xset -b
+          # TODO put conkyrc into nixos config
+          sleep 2 && ${pkgs.conky}/bin/conky
+          # TODO put dunstrc into nixos config
+          sleep 5 && ${pkgs.dunst}/bin/dunst
 
-            ${pkgs.autocutsel}/bin/autocutsel -s PRIMARY -f
-            ${pkgs.autocutsel}/bin/autocutsel -s SELECTION -f
-            ${pkgs.compton}/bin/compton
-            ${pkgs.unclutter}/bin/unclutter -idle 5 -root
-            ${pkgs.xlibs.xset}/bin/xset -b
-            # TODO put conkyrc into nixos config
-            sleep 2 && ${pkgs.conky}/bin/conky
-            # TODO put dunstrc into nixos config
-            sleep 5 && ${pkgs.dunst}/bin/dunst
-
-            sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs
-            sleep 7 && ${pkgs.chromium}/bin/chromium
+          sleep 7 && ${pkgs.emacs}/bin/emacsclient -c -a emacs
+          sleep 7 && ${pkgs.chromium}/bin/chromium
         '';
       }
     ];
