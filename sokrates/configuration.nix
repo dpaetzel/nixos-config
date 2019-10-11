@@ -132,6 +132,12 @@
   nix.useSandbox = true;
 
 
+  # It's a different problem but in
+  # https://github.com/NixOS/nixpkgs/issues/36172, something similar got fixed
+  # by using a newer kernel so we try that.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+
   environment.systemPackages =
     with (import ../packages.nix pkgs);
       system ++
