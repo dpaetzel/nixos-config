@@ -22,6 +22,7 @@ with pkgs; {
       androidenv.androidPkgs_9_0.androidsdk
       audacity lame
       chromium
+      cura # for the occasional 3D-print
       diffpdf
       docker docker_compose
       dropbox-cli
@@ -125,35 +126,41 @@ with pkgs; {
 
   commandline = {
     main = [
+      aqbanking
       atool
       bup # backup solution
       curl
       dfc
+      dbacl
       droopy # browser-based file sharing
       exa # a better `ls`
       fd # fast and user-friendly alternative to `find`
+      feedgnuplot # stream data to gnu plot for live graphs
       ffmpeg
       fzf # fuzzy file finder
       git
-      # khal # TODO broken, install from master
-      khard
       gitAndTools.git-annex
+      gitstats
       nixpkgs20191003.hugo
       nixpkgs20191003.khal # calendar
+      khard # contacts
       ledger
       lzip # some people do use LZMA compression
       magic-wormhole
       mr
+      nixpkgs20191003.newsboat # fetches RSS feeds
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
       rcm
       p7zip
       pandoc
       (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+      pdftk
+      timidity # for playing the occasional MIDI file
       transmission
       tree
       unrar
       unzip
-      # vdirsyncer # for fetching my calendars # TODO broken, install from master
+      # vdirsyncer # TODO need to overwrite stuff (see user config.nix)
       weechat
       zip
     ];
@@ -200,7 +207,7 @@ with pkgs; {
 
   development = [
     automake autoconf # always annoying when these are needed but not available
-    # cabal2nix # TODO currently broken, install from master
+    cabal2nix
     cabal-install
     cloc
     # elmPackages.elm # TODO currently not working
@@ -215,7 +222,7 @@ with pkgs; {
     # nodejs
     openjdk
     patchelf # so handy
-    python
+    python37
     python37Packages.yapf
     R
     ruby
