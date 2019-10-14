@@ -1,5 +1,15 @@
 pkgs :
 
+
+let
+  nixpkgs20191003 = import (builtins.fetchGit {
+    name = "nixpkgs-2019-10-03";
+    url = https://github.com/nixos/nixpkgs/;
+    rev = "406335aeb139ca5510c724c730e4f5ea83ad8cf3";
+  }) {};
+in
+
+
 with pkgs; {
   system = [
     cryptsetup
@@ -128,6 +138,8 @@ with pkgs; {
       # khal # TODO broken, install from master
       khard
       gitAndTools.git-annex
+      nixpkgs20191003.hugo
+      nixpkgs20191003.khal # calendar
       ledger
       lzip # some people do use LZMA compression
       magic-wormhole
