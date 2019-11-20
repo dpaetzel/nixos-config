@@ -149,6 +149,7 @@ with pkgs; {
       magic-wormhole
       mr
       nixpkgs20191003.newsboat # fetches RSS feeds
+      nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
       rcm
       p7zip
