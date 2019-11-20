@@ -152,6 +152,9 @@
   # Proper backlight management.
   programs.light.enable = true;
 
+  # Screen locking.
+  programs.slock.enable = true;
+
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
