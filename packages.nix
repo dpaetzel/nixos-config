@@ -31,7 +31,6 @@ with pkgs; {
       firefox
       geeqie
       gimp
-      gnupg
       gnuplot
       google-chrome # for DRM-protected streaming
       gparted
@@ -116,7 +115,6 @@ with pkgs; {
 
   mutt = [
     elinks
-    gnupg
     msmtp
     neomutt
     notmuch
