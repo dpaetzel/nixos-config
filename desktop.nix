@@ -13,13 +13,7 @@
       scrollMethod = "twofinger";
     };
 
-    displayManager.lightdm = {
-      enable = true;
-      autoLogin = {
-        enable = true;
-        user = "david";
-      };
-    };
+    displayManager.lightdm.enable = true;
 
     # desktopManager.default = "custom";
     desktopManager.xterm.enable = false;
@@ -28,15 +22,14 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      extraPackages = haskellPackages : [ haskellPackages.split ];
+      extraPackages = haskellPackages: [ haskellPackages.split ];
     };
   };
-
 
   services.compton = {
     enable = true;
     fade = true;
     inactiveOpacity = "0.7";
-    opacityRules = ["100:class_g = 'dmenu'"];
+    opacityRules = [ "100:class_g = 'dmenu'" ];
   };
 }

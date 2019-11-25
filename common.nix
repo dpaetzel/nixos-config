@@ -152,8 +152,6 @@
   # Proper backlight management.
   programs.light.enable = true;
 
-  programs.gnupg.agent.enable = true;
-
   # Screen locking.
   programs.slock.enable = true;
 
