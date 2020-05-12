@@ -178,11 +178,13 @@
   programs.ssh.startAgent = false;
 
   i18n = {
-    consoleFont = "lat9w-16";
-    consoleKeyMap = "neo";
     defaultLocale = "en_US.UTF-8";
     inputMethod.ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
     inputMethod.enabled = "ibus";
+  };
+  console = {
+    font = "lat9w-16";
+    keyMap = "neo";
   };
   time.timeZone = "Europe/Berlin";
 }
