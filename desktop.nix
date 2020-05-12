@@ -29,7 +29,7 @@
   services.compton = {
     enable = true;
     fade = true;
-    inactiveOpacity = "0.7";
+    inactiveOpacity = 0.7;
     opacityRules = [ "100:class_g = 'dmenu'" ];
   };
 }
