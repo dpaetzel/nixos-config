@@ -205,30 +205,36 @@ with pkgs; {
   };
 
   development = [
-    automake autoconf # always annoying when these are needed but not available
+    # Haskell development
+    binutils # I sometimes need `ar` for building Haskell stuff
     cabal2nix
     cabal-install
+    (haskellPackages.ghcWithPackages(ps: [ps.turtle]))
+    # haskellPackages.ghc-mod # TODO currently not working
+    haskellPackages.hlint
+    # haskellPackages.lhs2tex # TODO not working
+    stack
+
+    # Python development
+    autoflake
+    python37
+    python37Packages.isort
+    python37Packages.yapf
+
+    # Everything else
+    automake autoconf # always annoying when these are needed but not available
     cloc
     # elmPackages.elm # TODO currently not working
     gcc
     gdb # sometimes you just need it
     gnumake
-    # haskellPackages.ghcWithPackages (pkgs: [pkgs.turtle]) # TODO this is currently not working (can't coerce function to string, even with empty list)
-    haskellPackages.ghc
-    # haskellPackages.ghc-mod # TODO currently not working
-    haskellPackages.hlint
-    # haskellPackages.lhs2tex # TODO not working
-    # nodejs
     openjdk
     patchelf # so handy
-    python37
-    python37Packages.yapf
     R
     ruby
     sbt
     scala
     shellcheck
-    stack
     weka
   ];
 }
