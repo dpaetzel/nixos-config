@@ -53,7 +53,7 @@ with pkgs; {
       vimHugeX # huge b/c want to have gvim around
       vlc # wow, much simple to use, much support
       # NOTE broken due to "error: undefined reference to '__divmoddi4'"
-      # wine winetricks # always handy to keep around; you never know x)
+      wine winetricks # always handy to keep around; you never know x)
       zathura
     ];
     # useful esp. if there is no desktop environment
