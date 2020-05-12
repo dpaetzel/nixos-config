@@ -190,7 +190,7 @@ with pkgs; {
       pv
       python36Packages.pygments
       quvi # flash video scraper/getter/…
-      silver-searcher
+      ripgrep
       telnet
       tmux
       traceroute
