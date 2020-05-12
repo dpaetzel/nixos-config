@@ -97,6 +97,11 @@
             enableLibraryProfiling = true;
           });
         };
+        # TODO 2020-05-12 p7zip is marked as insecure but I'm not sure whether
+        # winetricks really always needs it?
+        winetricks = super.winetricks.override (oldAttrs : rec {
+          p7zip = "";
+        });
       };
       python36Packages = super.python36Packages.override(oldAttrs: rec {
         # tests fail but libraries work(?)

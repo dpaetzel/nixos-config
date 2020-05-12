@@ -150,7 +150,7 @@ with pkgs; {
       nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
       rcm
-      p7zip
+      # p7zip # TODO as of 2020-05-12 marked as insecure
       pandoc
       (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
       pdftk
