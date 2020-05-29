@@ -40,7 +40,7 @@ with pkgs; {
       # mediathekview # TODO broken
       mpv # much faster than big ol' vlc
       musescore
-      # openshot-qt # if I should ever want to edit video
+      openshot-qt # if I ever need to quickly edit video
       signal-desktop
       simplescreenrecorder
       skype # too many people use this -.-
