@@ -225,7 +225,16 @@ with pkgs; {
 
     # Python development
     autoflake
-    python37
+    (python37.withPackages(ps:
+      with ps; [
+        click
+        matplotlib
+        numpy
+        seaborn
+        pandas
+        scikitlearn
+      ]
+    ))
     python37Packages.isort
     python37Packages.yapf
 
