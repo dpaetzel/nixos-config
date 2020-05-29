@@ -209,7 +209,15 @@ with pkgs; {
     binutils # I sometimes need `ar` for building Haskell stuff
     cabal2nix
     cabal-install
-    (haskellPackages.ghcWithPackages(ps: [ps.turtle]))
+    (haskellPackages.ghcWithPackages(ps:
+      with ps; [
+        protolude
+        optparse-applicative
+        random-fu
+        text
+        turtle
+      ]
+    ))
     # haskellPackages.ghc-mod # TODO currently not working
     haskellPackages.hlint
     # haskellPackages.lhs2tex # TODO not working
