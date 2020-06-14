@@ -219,6 +219,7 @@ with nixpkgs; {
       aqbanking
       atool
       bup # backup solution
+      cachix # another Nix cache, originally required for installing neuron
       curl
       dfc
       dbacl
@@ -238,6 +239,9 @@ with nixpkgs; {
       lzip # some people do use LZMA compression
       magic-wormhole
       mr
+      (let neuronRev = "3dd9567febed0e56db38993644258070dc9b1053"; # 2020-06-14
+           neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
+        in import neuronSrc)
       nixpkgs20191003.newsboat # fetches RSS feeds
       nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
