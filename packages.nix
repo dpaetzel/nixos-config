@@ -129,6 +129,7 @@ with nixpkgs; {
       inkscape
       libreoffice
       lilyterm
+      lingot # guitar tuner
       # mediathekview # TODO broken
       mpv # much faster than big ol' vlc
       musescore
