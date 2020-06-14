@@ -113,7 +113,7 @@ with nixpkgs; {
       adobe-reader # for occasionally having to read comments in PDFs
       androidenv.androidPkgs_9_0.androidsdk
       audacity lame
-      chromium
+      # chromium
       cura # for the occasional 3D-print
       diffpdf
       docker docker_compose
@@ -140,7 +140,7 @@ with nixpkgs; {
       tabula # for extracting tables from PDFs
       tdesktop
       teamviewer # sometimes needed, happy when its already installed
-      thunderbird
+      # thunderbird
       tor-browser-bundle-bin
       vimHugeX # huge b/c want to have gvim around
       vlc # wow, much simple to use, much support
