@@ -3,11 +3,12 @@
 {
   imports =
     [
+      ./cachix.nix
       ../common.nix
       ../desktop.nix
       ../theme.nix
-      ../workstation.nix
       ./uni-mounts.nix
+      ../workstation.nix
     ];
 
 
