@@ -7,12 +7,38 @@ let
     url = https://github.com/NixOS/nixpkgs/;
     rev = "406335aeb139ca5510c724c730e4f5ea83ad8cf3";
   }) {};
-  # Pinned on 2020-06-14.
-  nixpkgs = import (builtins.fetchGit {
-    name = "nixpkgs-2019-10-03";
+  # nixpkgs = import (builtins.fetchGit {
+  #   # dunst doesn't seem to work
+  #   name = "nixpkgs-2020-06-14";
+  #   url = https://github.com/NixOS/nixpkgs/;
+  #   rev = "c6c5c927ec48ec4c3fedaafc50bb9234abbe2039";
+  # }) {
+  nixpkgs20200702 = import (builtins.fetchGit {
+    name = "nixpkgs-2020-07-02";
     url = https://github.com/NixOS/nixpkgs/;
-    rev = "c6c5c927ec48ec4c3fedaafc50bb9234abbe2039";
+    rev = "57568628beff33868e38ef7d17387a5a70075960";
   }) {
+    config = {
+      # The variable super refers to the Nixpkgs set before the overrides are
+      # applied and self refers to it after the overrides are applied.
+      # (https://stackoverflow.com/a/36011540/6936216)
+      packageOverrides = super:
+        let self = super.pkgs;
+        in {
+          # TODO 2020-05-12 p7zip is marked as insecure but I'm not sure whether
+          # winetricks really always needs it?
+          winetricks = super.winetricks.override (oldAttrs : rec {
+            p7zip = "";
+          });
+        };
+    };
+  };
+  nixpkgs = import (builtins.fetchGit {
+    name = "nixpkgs-2020-08-11";
+    url = https://github.com/NixOS/nixpkgs/;
+    rev = "f9eba87bf03318587df8356a933f20cfbc81c6ee";
+  }) {
+  # TODO Pin winetricks and wine!
     config = {
       android_sdk.accept_license = true;
       oraclejdk.accept_license = true;
@@ -146,8 +172,9 @@ with nixpkgs; {
       vimHugeX # huge b/c want to have gvim around
       vlc # wow, much simple to use, much support
       # NOTE broken due to "error: undefined reference to '__divmoddi4'"
-      wine winetricks # always handy to keep around; you never know x)
+      (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
       zathura
+      zoom-us # people make me use this >.<
     ];
     # useful esp. if there is no desktop environment
     utility = [
@@ -240,9 +267,10 @@ with nixpkgs; {
       lzip # some people do use LZMA compression
       magic-wormhole
       mr
-      (let neuronRev = "3dd9567febed0e56db38993644258070dc9b1053"; # 2020-06-14
+      # (let neuronRev = "3dd9567febed0e56db38993644258070dc9b1053"; # 2020-06-14
+      (let neuronRev = "0b15fdf2a65eccb257423192eb248bfb8eb915a3"; # 2020-08-01
            neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
-        in import neuronSrc)
+        in import neuronSrc {})
       nixpkgs20191003.newsboat # fetches RSS feeds
       nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
@@ -261,8 +289,8 @@ with nixpkgs; {
       zip
     ];
     utility = [
-      acpi # needed for more nicely formatted battery status in conky
-      bind # needed for the occasional `dig`
+      acpi # for a more nicely formatted battery status in conky
+      bind # for the occasional `dig`
       cifs-utils
       coreutils
       dosfstools
@@ -306,11 +334,24 @@ with nixpkgs; {
     binutils # I sometimes need `ar` for building Haskell stuff
     cabal2nix
     cabal-install
-    (haskellPackages.ghcWithPackages(ps:
+    # (haskellPackages.ghcWithPackages(ps:
+    #   with ps; [
+    #     protolude
+    #     optparse-applicative
+    #     # this does not work
+    #     nixpkgs20200702.haskellPackages.random-fu # [2020-08-11] broken in master
+    #     random
+    #     text
+    #     turtle
+    #   ]
+    # ))
+    (nixpkgs20200702.haskellPackages.ghcWithPackages(ps: # [2020-08-11] random-fu broken in master
       with ps; [
         protolude
         optparse-applicative
         random-fu
+        # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
+        random
         text
         turtle
       ]
