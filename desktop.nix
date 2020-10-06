@@ -15,10 +15,8 @@
 
     displayManager.lightdm.enable = true;
 
-    # desktopManager.default = "custom";
     desktopManager.xterm.enable = false;
 
-    windowManager.default = "xmonad";
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
