@@ -70,61 +70,83 @@
 
     chromium.pulseSupport = true;
 
-
     # The variable super refers to the Nixpkgs set before the overrides are
     # applied and self refers to it after the overrides are applied.
     # (https://stackoverflow.com/a/36011540/6936216)
-    packageOverrides = super: let self = super.pkgs; in {
-      alsaLib116 = super.alsaLib.overrideAttrs(oldAttrs: rec {
-        name = "alsa-lib-1.1.6";
-        src = self.fetchurl {
-          url = "mirror://alsa/lib/${name}.tar.bz2";
-          sha256 = "096pwrnhj36yndldvs2pj4r871zhcgisks0is78f1jkjn9sd4b2z";
-        };
-      });
-      # audacity is broken because of ALSA lib
-      audacity221 = (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs(oldAttrs: rec {
-        version = "2.2.1";
-        name = "audacity-${version}";
-        src = self.fetchurl {
-          url = "https://github.com/audacity/audacity/archive/Audacity-${version}.tar.gz";
-          sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
-        };
-      });
-      profiledHaskellPackages = self.haskellPackages.override {
-        overrides = self: super: {
-          mkDerivation = args: super.mkDerivation(args // {
-            enableLibraryProfiling = true;
+    packageOverrides = super:
+      let self = super.pkgs;
+      in {
+        alsaLib116 = super.alsaLib.overrideAttrs (oldAttrs: rec {
+          name = "alsa-lib-1.1.6";
+          src = self.fetchurl {
+            url = "mirror://alsa/lib/${name}.tar.bz2";
+            sha256 = "096pwrnhj36yndldvs2pj4r871zhcgisks0is78f1jkjn9sd4b2z";
+          };
+        });
+        # audacity is broken because of ALSA lib
+        audacity221 =
+          (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs
+          (oldAttrs: rec {
+            version = "2.2.1";
+            name = "audacity-${version}";
+            src = self.fetchurl {
+              url =
+                "https://github.com/audacity/audacity/archive/Audacity-${version}.tar.gz";
+              sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
+            };
           });
+        # TODO use this in latex distribution, too
+        # biberFixed = super.biber.overrideAttrs(oldAttrs: rec {
+        #   patches = stdenv.lib.optionals (stdenv.lib.versionAtLeast pkgs.perlPackages.perl.version "5.30") [
+        #     (pkgs.fetchpatch {
+        #       name = "biber-fix-tests.patch";
+        #       url = "https://git.archlinux.org/svntogit/community.git/plain/trunk/biber-fix-tests.patch?h=5d0fffd493550e28b2fb81ad114d62a7c9403812";
+        #       sha256 = "1ninf46bxf4hm0p5arqbxqyv8r98xdwab34vvp467q1v23kfbhya";
+        #     })
+
+        #     (pkgs.fetchpatch {
+        #       name = "biber-fix-tests-2.patch";
+        #       url = "https://git.archlinux.org/svntogit/community.git/plain/trunk/biber-fix-tests-2.patch?h=5d0fffd493550e28b2fb81ad114d62a7c9403812";
+        #       sha256 = "1l8pk454kkm0szxrv9rv9m2a0llw1jm7ffhgpyg4zfiw246n62x0";
+        #     })
+        #   ];
+        # });
+        profiledHaskellPackages = self.haskellPackages.override {
+          overrides = self: super: {
+            mkDerivation = args:
+              super.mkDerivation (args // { enableLibraryProfiling = true; });
+          };
         };
+        # Disable suspending my Bluetooth headset. Combine two things to do this:
+        # – https://nixos.wiki/wiki/PulseAudio#Clicking_and_Garbled_Audio_for_Creative_Sound_Cards
+        # – https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Bluetooth_headset_replay_problems
+        # This does not work because Bluetooth support is disabled that way.
+        # hardware.pulseaudio.configFile = pkgs.runCommand "default.pa" {} ''
+        #   sed 's/^load-module module-suspend-on-idle/#\0/' \
+        #     ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
+        # '';
+        # I think we need an overlay instead:
+        # pulseaudio = self.pulseaudio.overrideAttrs {
+        # }
+        python36Packages = super.python36Packages.override (oldAttrs: rec {
+          # tests fail but libraries work(?)
+          overrides = self: super: rec {
+            pyflakes = super.pyflakes.overrideAttrs (z: rec {
+              doCheck = false;
+              doInstallCheck = false;
+            });
+            whoosh = super.whoosh.overrideAttrs (z: rec {
+              doCheck = false;
+              doInstallCheck = false;
+            });
+          };
+        });
         # TODO 2020-05-12 p7zip is marked as insecure but I'm not sure whether
         # winetricks really always needs it?
         winetricks = super.winetricks.override (oldAttrs : rec {
           p7zip = "";
         });
       };
-      python36Packages = super.python36Packages.override(oldAttrs: rec {
-        # tests fail but libraries work(?)
-        overrides = self : super : rec {
-          pyflakes = super.pyflakes.overrideAttrs(z: rec {
-            doCheck = false;
-            doInstallCheck = false;
-          });
-          whoosh = super.whoosh.overrideAttrs(z: rec {
-            doCheck = false;
-            doInstallCheck = false;
-          });
-        };
-      });
-      # vdirsyncer = super.vdirsyncer.overrideAttrs(oldAttrs: rec {
-      #   patches = # oldAttrs.patches ++
-      #     [(self.fetchpatch {
-      #       url = https://github.com/pimutils/vdirsyncer/pull/788.patch;
-      #       sha256 = "0vl942ii5iad47y63v0ngmhfp37n30nxyk4j7h64b95fk38vfwx9";
-      #     })];
-      #   }
-      # );
-    };
   };
 
   environment.variables = {
