@@ -7,12 +7,6 @@ let
     url = https://github.com/NixOS/nixpkgs/;
     rev = "406335aeb139ca5510c724c730e4f5ea83ad8cf3";
   }) {};
-  # nixpkgs = import (builtins.fetchGit {
-  #   # dunst doesn't seem to work
-  #   name = "nixpkgs-2020-06-14";
-  #   url = https://github.com/NixOS/nixpkgs/;
-  #   rev = "c6c5c927ec48ec4c3fedaafc50bb9234abbe2039";
-  # }) {
   nixpkgs20200702 = import (builtins.fetchGit {
     name = "nixpkgs-2020-07-02";
     url = https://github.com/NixOS/nixpkgs/;
@@ -33,10 +27,15 @@ let
         };
     };
   };
+  # nixpkgs20200811 = import (builtins.fetchGit {
+  #   name = "nixpkgs-2020-08-11";
+  #   url = https://github.com/NixOS/nixpkgs/;
+  #   rev = "f9eba87bf03318587df8356a933f20cfbc81c6ee";
+  # }) {
   nixpkgs = import (builtins.fetchGit {
-    name = "nixpkgs-2020-08-11";
+    name = "nixpkgs-2020-10-02";
     url = https://github.com/NixOS/nixpkgs/;
-    rev = "f9eba87bf03318587df8356a933f20cfbc81c6ee";
+    rev = "c04277eb1ef39bda9d36fec489d86a5b833516d4";
   }) {
   # TODO Pin winetricks and wine!
     config = {
@@ -46,6 +45,11 @@ let
 
       chromium.pulseSupport = true;
 
+      permittedInsecurePackages = [
+        # TODO I'm not sure yet which package requires this, we probably just
+        # want to remove that then
+        "spidermonkey-38.8.0"
+      ];
       # The variable super refers to the Nixpkgs set before the overrides are
       # applied and self refers to it after the overrides are applied.
       # (https://stackoverflow.com/a/36011540/6936216)
@@ -136,7 +140,7 @@ with nixpkgs; {
   applications = {
     main = [
       abcde # for occasionally ripping CDs
-      adobe-reader # for occasionally having to read comments in PDFs
+      # adobe-reader # for occasionally having to read comments in PDFs [2020-10-02] marked as insecure
       androidenv.androidPkgs_9_0.androidsdk
       audacity lame
       # chromium
