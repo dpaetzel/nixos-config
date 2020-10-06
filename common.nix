@@ -1,6 +1,4 @@
-{ config, pkgs, stdenv, ... }:
-
-# TODO https://gist.github.com/taohansen/d15e1fe4674a286cb9bcd8e3378a9f23
+{ config, pkgs, stdenv, lib, ... }:
 
 # programs.adb.enable = true;
 # programs.chromium = {
@@ -63,6 +61,7 @@
     ];
   };
 
+  # TODO Should probably be part of the config in packages.nix?
   nixpkgs.config = {
     android_sdk.accept_license = true;
     oraclejdk.accept_license = true;
@@ -95,39 +94,12 @@
               sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
             };
           });
-        # TODO use this in latex distribution, too
-        # biberFixed = super.biber.overrideAttrs(oldAttrs: rec {
-        #   patches = stdenv.lib.optionals (stdenv.lib.versionAtLeast pkgs.perlPackages.perl.version "5.30") [
-        #     (pkgs.fetchpatch {
-        #       name = "biber-fix-tests.patch";
-        #       url = "https://git.archlinux.org/svntogit/community.git/plain/trunk/biber-fix-tests.patch?h=5d0fffd493550e28b2fb81ad114d62a7c9403812";
-        #       sha256 = "1ninf46bxf4hm0p5arqbxqyv8r98xdwab34vvp467q1v23kfbhya";
-        #     })
-
-        #     (pkgs.fetchpatch {
-        #       name = "biber-fix-tests-2.patch";
-        #       url = "https://git.archlinux.org/svntogit/community.git/plain/trunk/biber-fix-tests-2.patch?h=5d0fffd493550e28b2fb81ad114d62a7c9403812";
-        #       sha256 = "1l8pk454kkm0szxrv9rv9m2a0llw1jm7ffhgpyg4zfiw246n62x0";
-        #     })
-        #   ];
-        # });
         profiledHaskellPackages = self.haskellPackages.override {
           overrides = self: super: {
             mkDerivation = args:
               super.mkDerivation (args // { enableLibraryProfiling = true; });
           };
         };
-        # Disable suspending my Bluetooth headset. Combine two things to do this:
-        # – https://nixos.wiki/wiki/PulseAudio#Clicking_and_Garbled_Audio_for_Creative_Sound_Cards
-        # – https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Bluetooth_headset_replay_problems
-        # This does not work because Bluetooth support is disabled that way.
-        # hardware.pulseaudio.configFile = pkgs.runCommand "default.pa" {} ''
-        #   sed 's/^load-module module-suspend-on-idle/#\0/' \
-        #     ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
-        # '';
-        # I think we need an overlay instead:
-        # pulseaudio = self.pulseaudio.overrideAttrs {
-        # }
         python36Packages = super.python36Packages.override (oldAttrs: rec {
           # tests fail but libraries work(?)
           overrides = self: super: rec {
