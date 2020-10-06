@@ -72,6 +72,9 @@
   hardware.bluetooth.enable = true;
 
 
+  programs.singularity.enable = true;
+
+
   services.cron = {
     enable = true;
     systemCronJobs = [
