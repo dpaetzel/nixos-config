@@ -9,8 +9,10 @@
     # TODO only laptops need this
     libinput = {
       enable = true;
-      disableWhileTyping = true;
-      scrollMethod = "twofinger";
+      touchpad = {
+        scrollMethod = "twofinger";
+        disableWhileTyping = true;
+      };
     };
 
     displayManager.lightdm.enable = true;
