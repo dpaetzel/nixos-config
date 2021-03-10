@@ -36,7 +36,7 @@
 
   # Installed fonts.
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       cm_unicode
