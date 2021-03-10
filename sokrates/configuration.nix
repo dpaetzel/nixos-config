@@ -87,7 +87,11 @@
   };
 
 
-  services.logind.lidSwitch = "ignore";
+  services.logind = {
+    lidSwitch = "suspend";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
 
 
   services.openssh.enable = true;
