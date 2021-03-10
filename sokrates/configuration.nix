@@ -23,6 +23,7 @@
       "docker"
       "lxd"
       "networkmanager"
+      "plugdev"
       "vboxusers"
       "video" # to be able to use `light`
       "wheel"
@@ -70,6 +71,9 @@
 
   # other services
   hardware.bluetooth.enable = true;
+
+
+  hardware.keyboard.zsa.enable = true;
 
 
   programs.singularity.enable = true;
