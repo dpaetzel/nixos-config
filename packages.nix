@@ -27,15 +27,15 @@ let
         };
     };
   };
-  # nixpkgs20200811 = import (builtins.fetchGit {
-  #   name = "nixpkgs-2020-08-11";
+  # nixpkgs = import (builtins.fetchGit {
+  #   name = "nixpkgs-2020-03-10";
   #   url = https://github.com/NixOS/nixpkgs/;
-  #   rev = "f9eba87bf03318587df8356a933f20cfbc81c6ee";
+  #   rev = "cabe2e2e55f9e5220c99b424d23800605cfa5f17";
   # }) {
   nixpkgs = import (builtins.fetchGit {
-    name = "nixpkgs-2020-10-02";
+    name = "nixpkgs-2021-05-30";
     url = https://github.com/NixOS/nixpkgs/;
-    rev = "c04277eb1ef39bda9d36fec489d86a5b833516d4";
+    rev = "774fe1878b045411e6bdd0dd90d8581e82b10993";
   }) {
   # TODO Pin winetricks and wine!
     config = {
@@ -146,6 +146,7 @@ with nixpkgs; {
       # chromium
       cura # for the occasional 3D-print
       diffpdf
+      discord # some people force me to use this
       docker docker_compose
       dropbox-cli
       emacs
@@ -177,6 +178,7 @@ with nixpkgs; {
       vlc # wow, much simple to use, much support
       # NOTE broken due to "error: undefined reference to '__divmoddi4'"
       (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
+      xournal # for annotating PDFs (e.g. for signing stuff)
       zathura
       zoom-us # people make me use this >.<
     ];
@@ -271,10 +273,15 @@ with nixpkgs; {
       lzip # some people do use LZMA compression
       magic-wormhole
       mr
+      mosh # less laggy than SSH
       # (let neuronRev = "3dd9567febed0e56db38993644258070dc9b1053"; # 2020-06-14
-      (let neuronRev = "0b15fdf2a65eccb257423192eb248bfb8eb915a3"; # 2020-08-01
+      # (let neuronRev = "0b15fdf2a65eccb257423192eb248bfb8eb915a3"; # 2020-08-01
+      # (let neuronRev = "8d9bc7341422a2346d8fd6dc35624723c6525f40"; # 2021-01-13
+      # (let neuronRev = "24cf8eb5e23776645afc036efc9c660fd4c60fdb"; # 2021-03-10
+      (let neuronRev = "164956fdab8242b78e6c51753aa3d2f0b3fdc2fc"; # 2021-05-31
            neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
-        in import neuronSrc {})
+           neuronPkg = import neuronSrc;
+        in neuronPkg.default)
       nixpkgs20191003.newsboat # fetches RSS feeds
       nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
@@ -283,12 +290,15 @@ with nixpkgs; {
       pandoc
       (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
       pdftk
+      qrencode # for creating the occasional QR code
+      tigervnc # somehow this works best for me
       timidity # for playing the occasional MIDI file
       transmission
       tree
       unrar
       unzip
       # vdirsyncer # TODO need to overwrite stuff (see user config.nix)
+      wally-cli
       weechat
       zip
     ];
