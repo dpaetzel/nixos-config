@@ -89,6 +89,7 @@
     enable = true;
     systemCronJobs = [
       "* * * * 5 root fstrim /"
+      "*/5 7-16 * * * david /home/david/Bin/sync-mail"
     ];
   };
 
