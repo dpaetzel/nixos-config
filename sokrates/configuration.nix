@@ -79,6 +79,12 @@
   programs.singularity.enable = true;
 
 
+  services.arbtt = {
+    enable = true;
+    sampleRate = 30;
+  };
+
+
   services.cron = {
     enable = true;
     systemCronJobs = [
