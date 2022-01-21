@@ -61,6 +61,14 @@
     ];
   };
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    autoOptimiseStore = true;
+  };
+
   # TODO Should probably be part of the config in packages.nix?
   nixpkgs.config = {
     android_sdk.accept_license = true;
