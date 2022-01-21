@@ -32,12 +32,30 @@ let
   #   url = https://github.com/NixOS/nixpkgs/;
   #   rev = "cabe2e2e55f9e5220c99b424d23800605cfa5f17";
   # }) {
+  # nixpkgs = import (builtins.fetchGit {
+  #   name = "nixpkgs-2021-05-30";
+  #   url = https://github.com/NixOS/nixpkgs/;
+  #   rev = "774fe1878b045411e6bdd0dd90d8581e82b10993";
+  # }) {
+  # never got to use this version due to space problems
+  # nixpkgs = import (builtins.fetchGit {
+  #   name = "nixpkgs-2021-08-04";
+  #   url = https://github.com/NixOS/nixpkgs/;
+  #   rev = "5310ebc9d2cf5046af495738f49bc384d6065800";
+  # }) {
   nixpkgs = import (builtins.fetchGit {
-    name = "nixpkgs-2021-05-30";
+    name = "nixpkgs-2021-12-09";
     url = https://github.com/NixOS/nixpkgs/;
-    rev = "774fe1878b045411e6bdd0dd90d8581e82b10993";
+    rev = "9244ce07fe088c226ab693c4cf2641f50aaf25bb";
   }) {
-  # TODO Pin winetricks and wine!
+    overlays = [
+      (final: prev: {
+        myyapf = prev.python3Packages.yapf.overridePythonAttrs( old : rec {
+          propagatedBuildInputs = [ prev.python3Packages.toml ];
+        });
+      })
+    ];
+
     config = {
       android_sdk.accept_license = true;
       oraclejdk.accept_license = true;
@@ -50,6 +68,7 @@ let
         # want to remove that then
         "spidermonkey-38.8.0"
       ];
+
       # The variable super refers to the Nixpkgs set before the overrides are
       # applied and self refers to it after the overrides are applied.
       # (https://stackoverflow.com/a/36011540/6936216)
@@ -108,19 +127,6 @@ let
           # I think we need an overlay instead:
           # pulseaudio = self.pulseaudio.overrideAttrs {
           # }
-          python36Packages = super.python36Packages.override (oldAttrs: rec {
-            # tests fail but libraries work(?)
-            overrides = self: super: rec {
-              pyflakes = super.pyflakes.overrideAttrs (z: rec {
-                doCheck = false;
-                doInstallCheck = false;
-              });
-              whoosh = super.whoosh.overrideAttrs (z: rec {
-                doCheck = false;
-                doInstallCheck = false;
-              });
-            };
-          });
           # TODO 2020-05-12 p7zip is marked as insecure but I'm not sure whether
           # winetricks really always needs it?
           winetricks = super.winetricks.override (oldAttrs : rec {
@@ -139,16 +145,16 @@ with nixpkgs; {
   ];
   applications = {
     main = [
-      abcde # for occasionally ripping CDs
+      # abcde # for occasionally ripping CDs
       # adobe-reader # for occasionally having to read comments in PDFs [2020-10-02] marked as insecure
       androidenv.androidPkgs_9_0.androidsdk
       audacity lame
       # chromium
-      cura # for the occasional 3D-print
+      # cura # for the occasional 3D-print
       diffpdf
-      discord # some people force me to use this
-      docker docker_compose
-      dropbox-cli
+      # discord # some people force me to use this
+      # docker docker_compose
+      # dropbox-cli
       emacs
       evince
       firefox
@@ -164,20 +170,21 @@ with nixpkgs; {
       # mediathekview # TODO broken
       mpv # much faster than big ol' vlc
       musescore
-      openshot-qt # if I ever need to quickly edit video
+      # openshot-qt # if I ever need to quickly edit video
       signal-desktop
       simplescreenrecorder
       skype # too many people use this -.-
       spotify
       tabula # for extracting tables from PDFs
       tdesktop
-      teamviewer # sometimes needed, happy when its already installed
+      # teamviewer # sometimes needed, happy when its already installed
       # thunderbird
-      tor-browser-bundle-bin
+      # tor-browser-bundle-bin
       vimHugeX # huge b/c want to have gvim around
       vlc # wow, much simple to use, much support
       # NOTE broken due to "error: undefined reference to '__divmoddi4'"
-      (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
+      # (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
+      # (nixpkgs20200702.wine.override { wineBuild = "wine64"; }) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
       xournal # for annotating PDFs (e.g. for signing stuff)
       zathura
       zoom-us # people make me use this >.<
@@ -190,8 +197,9 @@ with nixpkgs; {
       scrot
       trayer
       udiskie
-      xorg.xev
       xdotool
+      xvkbd # required for my version of passmenu
+      xorg.xev
     ];
   };
 
@@ -252,13 +260,16 @@ with nixpkgs; {
     main = [
       aqbanking
       atool
+      (haskellPackages.arbtt)
       bup # backup solution
       cachix # another Nix cache, originally required for installing neuron
       curl
       dfc
       dbacl
-      droopy # browser-based file sharing
+      # droopy # browser-based file sharing
+      dos2unix # people sometimes send me bad files
       exa # a better `ls`
+      fdupes # finding duplicates
       fd # fast and user-friendly alternative to `find`
       feedgnuplot # stream data to gnu plot for live graphs
       ffmpeg
@@ -282,6 +293,10 @@ with nixpkgs; {
            neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
            neuronPkg = import neuronSrc;
         in neuronPkg.default)
+      # (let emanoteRev = "158fda842134bab25ee15eda239cc599b0982e7b"; # 2021-08-08
+      #      emanoteSrc = builtins.fetchTarball "https://github.com/srid/emanote/archive/${emanoteRev}.tar.gz";
+      #      emanotePkg = import emanoteSrc;
+      #   in emanotePkg.default)
       nixpkgs20191003.newsboat # fetches RSS feeds
       nixfmt
       nix-index # builds an index for `nix-locate` which helps me to search my nix-store
@@ -291,6 +306,7 @@ with nixpkgs; {
       (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
       pdftk
       qrencode # for creating the occasional QR code
+      # teamspeak_client
       tigervnc # somehow this works best for me
       timidity # for playing the occasional MIDI file
       transmission
@@ -298,8 +314,8 @@ with nixpkgs; {
       unrar
       unzip
       # vdirsyncer # TODO need to overwrite stuff (see user config.nix)
-      wally-cli
-      weechat
+      wally-cli # for flashing my flashy keyboard
+      # weechat
       zip
     ];
     utility = [
@@ -320,22 +336,23 @@ with nixpkgs; {
       nix-prefetch-git
       nix-zsh-completions
       (nmap.override { graphicalSupport = true; })
-      pastebinit
+      # pastebinit
       pdfgrep
       pmount
       poppler_utils
-      powertop
+      # powertop
       psmisc
       pv
-      python36Packages.pygments
+      python3Packages.pygments
       quvi # flash video scraper/getter/…
       ripgrep
       telnet
       tmux
       traceroute
       usbutils
+      veracrypt
       wget
-      wirelesstools
+      # wirelesstools
       which
       whois
       youtube-dl
@@ -361,49 +378,60 @@ with nixpkgs; {
     # ))
     (nixpkgs20200702.haskellPackages.ghcWithPackages(ps: # [2020-08-11] random-fu broken in master
       with ps; [
-        protolude
+        # protolude
         optparse-applicative
         random-fu
         # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
         random
         text
-        turtle
+        # turtle
       ]
     ))
+    ormolu
     # haskellPackages.ghc-mod # TODO currently not working
     haskellPackages.hlint
     # haskellPackages.lhs2tex # TODO not working
-    stack
+    # stack
 
     # Python development
     autoflake
-    (python37.withPackages(ps:
-      with ps; [
-        click
-        matplotlib
-        numpy
-        seaborn
-        pandas
-        scikitlearn
-      ]
-    ))
-    python37Packages.isort
-    python37Packages.yapf
+    python3
+    # (python3.withPackages(ps:
+    #   with ps; [
+    #     click
+    #     ipython
+    #     matplotlib
+    #     numpy
+    #     pandas
+    #     scikitlearn
+    #     seaborn
+    #   ]
+    # ))
+    python3Packages.isort
+    python3Packages.mypy
+    python3Packages.pyflakes
+    myyapf
+
+    # Purescript development
+    nodejs
+    nodePackages.parcel-bundler
+    pscid
+    purescript
+    spago
 
     # Everything else
     automake autoconf # always annoying when these are needed but not available
     cloc
-    # elmPackages.elm # TODO currently not working
     gcc
     gdb # sometimes you just need it
     gnumake
-    openjdk
+    # openjdk
     patchelf # so handy
-    R
-    ruby
-    sbt
-    scala
+    # R
+    # ruby
+    # sbt
+    # scala
     shellcheck
-    weka
+    # weka
   ];
 }
