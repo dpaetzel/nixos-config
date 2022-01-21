@@ -76,9 +76,6 @@
   hardware.keyboard.zsa.enable = true;
 
 
-  programs.singularity.enable = true;
-
-
   services.arbtt = {
     enable = true;
     sampleRate = 30;
