@@ -1,20 +1,8 @@
-{ config, pkgs, stdenv, lib, ... }:
-
-# programs.adb.enable = true;
-# programs.chromium = {
-#   enable = true;
-#   extensions = [
-#   "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
-#   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-#   "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-#   ];
-#  };
-# };
+{ self, config, pkgs, stdenv, lib, ... }:
 
 {
-  # “Turn on this option if you want to enable all the firmware shipped in
-  # linux-firmware.”
-  hardware.enableAllFirmware = true;
+  # Required for ThinkPad T470 Wifi and Bluetooth drivers.
+  hardware.enableRedistributableFirmware = true;
 
   # „On 64-bit systems, whether to support Direct Rendering for 32-bit
   # applications (such as Wine). This is currently only supported for the nvidia
@@ -67,66 +55,6 @@
       experimental-features = nix-command flakes
     '';
     autoOptimiseStore = true;
-  };
-
-  # TODO Should probably be part of the config in packages.nix?
-  nixpkgs.config = {
-    android_sdk.accept_license = true;
-    oraclejdk.accept_license = true;
-    allowUnfree = true;
-
-    chromium.pulseSupport = true;
-
-    # The variable super refers to the Nixpkgs set before the overrides are
-    # applied and self refers to it after the overrides are applied.
-    # (https://stackoverflow.com/a/36011540/6936216)
-    packageOverrides = super:
-      let self = super.pkgs;
-      in {
-        alsaLib116 = super.alsaLib.overrideAttrs (oldAttrs: rec {
-          name = "alsa-lib-1.1.6";
-          src = self.fetchurl {
-            url = "mirror://alsa/lib/${name}.tar.bz2";
-            sha256 = "096pwrnhj36yndldvs2pj4r871zhcgisks0is78f1jkjn9sd4b2z";
-          };
-        });
-        # audacity is broken because of ALSA lib
-        audacity221 =
-          (super.audacity.override { alsaLib = self.alsaLib116; }).overrideAttrs
-          (oldAttrs: rec {
-            version = "2.2.1";
-            name = "audacity-${version}";
-            src = self.fetchurl {
-              url =
-                "https://github.com/audacity/audacity/archive/Audacity-${version}.tar.gz";
-              sha256 = "1n05r8b4rnf9fas0py0is8cm97s3h65dgvqkk040aym5d1x6wd7z";
-            };
-          });
-        profiledHaskellPackages = self.haskellPackages.override {
-          overrides = self: super: {
-            mkDerivation = args:
-              super.mkDerivation (args // { enableLibraryProfiling = true; });
-          };
-        };
-        python36Packages = super.python36Packages.override (oldAttrs: rec {
-          # tests fail but libraries work(?)
-          overrides = self: super: rec {
-            pyflakes = super.pyflakes.overrideAttrs (z: rec {
-              doCheck = false;
-              doInstallCheck = false;
-            });
-            whoosh = super.whoosh.overrideAttrs (z: rec {
-              doCheck = false;
-              doInstallCheck = false;
-            });
-          };
-        });
-        # TODO 2020-05-12 p7zip is marked as insecure but I'm not sure whether
-        # winetricks really always needs it?
-        winetricks = super.winetricks.override (oldAttrs : rec {
-          p7zip = "";
-        });
-      };
   };
 
   environment.variables = {

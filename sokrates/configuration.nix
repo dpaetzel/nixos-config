@@ -1,17 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, lib, inputs, ... }:
+
 
 {
-  imports =
-    [
-      ./cachix.nix
-      ../common.nix
-      ../desktop.nix
-      ../theme.nix
-      ./uni-mounts.nix
-      ../workstation.nix
-    ];
-
-
   networking.hostName = "sokrates";
 
 
@@ -42,12 +32,6 @@
       fsType = "ext4";
     };
 
-
-  # fileSystems."/home2" =
-  #   { device = "/dev/disk/by-uuid/269e80d9-7625-4d4e-ac63-38b935ff7b68";
-  #     fsType = "ext4";
-  #     noCheck = true;
-  #   };
 
   swapDevices = [ ];
 
@@ -118,14 +102,6 @@
   '';
 
 
-  # “Auto-detect the connect display hardware and load the appropiate X11 setup
-  # using xrandr or disper.” – https://github.com/wertarbyte/autorandr
-  # TODO These problems need to be solved:
-  # - does not respect my dzen/conky setup (needs postswitch-script)
-  # - does only work (exactly) every 2nd time when putting the laptop into the docking station
-  # services.autorandr.enable = true;
-
-
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
@@ -153,35 +129,4 @@
   # https://github.com/NixOS/nixpkgs/issues/36172, something similar got fixed
   # by using a newer kernel so we try that.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-
-  environment.systemPackages =
-    with (import ../packages.nix pkgs);
-      system ++
-      applications.main ++
-      applications.utility ++
-      graphical-user-interface ++
-      mutt ++
-      commandline.main ++
-      commandline.utility ++
-      development ++
-      (with pkgs; [
-        netlogo
-        # TODO extract this to texlive.nix
-        (with texlive; combine {
-          inherit
-            biblatex
-            biblatex-ieee
-            capt-of
-            inconsolata
-            libertine
-            logreq
-            newtx
-            scheme-full
-            wrapfig
-            xstring
-            ;
-        })
-        biber
-      ]);
 }
