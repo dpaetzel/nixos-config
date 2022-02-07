@@ -10,7 +10,7 @@
     neuron.url = "github:srid/neuron/master";
     nixpkgs.url =
       "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
-    nixos-hardware.url = github:NixOS/nixos-hardware/master;
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     overlays.url = "github:dpaetzel/overlays/master";
 
     # TODO Maybe use these
