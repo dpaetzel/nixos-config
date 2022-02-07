@@ -39,7 +39,10 @@
           #   "spidermonkey-38.8.0"
           # ];
         };
-        overlays = with overlays; [ yapfToml ];
+        overlays = with overlays; [
+          khal
+          yapfToml
+        ];
       };
     in {
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
