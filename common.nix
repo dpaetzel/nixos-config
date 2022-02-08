@@ -31,19 +31,19 @@
       corefonts
       dejavu_fonts
       fira
-      fira-code
-      fira-code-symbols
+      # fira-code
+      # fira-code-symbols
       inconsolata
       # ipafont
       kochi-substitute
       libertine
       lmmath
       lmodern
-      nerdfonts
+      (nerdfonts.override { fonts = ["FiraCode"]; })
       powerline-fonts
       source-code-pro
       symbola
-      terminus_font
+      # terminus_font
       ubuntu_font_family
       unifont
     ];
