@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, pkgs, system, ... }:
 
 {
 
@@ -13,7 +13,7 @@
 
   environment.systemPackages = with pkgs;
     let
-      system = [ cryptsetup ntfs3g ];
+      sys = [ cryptsetup ntfs3g ];
       applications = {
         main = [
           androidenv.androidPkgs_9_0.androidsdk
@@ -149,19 +149,7 @@
           magic-wormhole
           mr
           mosh # less laggy than SSH
-          # (let neuronRev = "3dd9567febed0e56db38993644258070dc9b1053"; # 2020-06-14
-          # (let neuronRev = "0b15fdf2a65eccb257423192eb248bfb8eb915a3"; # 2020-08-01
-          # (let neuronRev = "8d9bc7341422a2346d8fd6dc35624723c6525f40"; # 2021-01-13
-          # (let neuronRev = "24cf8eb5e23776645afc036efc9c660fd4c60fdb"; # 2021-03-10
-          # (let neuronRev = "164956fdab8242b78e6c51753aa3d2f0b3fdc2fc"; # 2021-05-31
-          #      neuronSrc = builtins.fetchTarball "https://github.com/srid/neuron/archive/${neuronRev}.tar.gz";
-          #      neuronPkg = import neuronSrc;
-          #   in neuronPkg.default)
-          neuron
-          # (let emanoteRev = "158fda842134bab25ee15eda239cc599b0982e7b"; # 2021-08-08
-          #      emanoteSrc = builtins.fetchTarball "https://github.com/srid/emanote/archive/${emanoteRev}.tar.gz";
-          #      emanotePkg = import emanoteSrc;
-          #   in emanotePkg.default)
+          inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
           newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
@@ -312,7 +300,7 @@
         # weka
       ];
 
-    in system ++ applications.main ++ applications.utility
+    in sys ++ applications.main ++ applications.utility
     ++ graphical-user-interface ++ mutt ++ commandline.main
     ++ commandline.utility ++ development;
 }
