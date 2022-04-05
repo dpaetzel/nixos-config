@@ -93,6 +93,10 @@
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
+  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  # Must be disabled for GnuPGAgent to work (or so someone said once).
+  programs.ssh.startAgent = false;
+
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
@@ -103,9 +107,6 @@
   location.longitude = 10.9;
   services.redshift.temperature.day = 5500;
   services.redshift.temperature.night = 2800;
-
-  # must be disabled for GnuPGAgent to work (or so someone said)
-  programs.ssh.startAgent = false;
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
