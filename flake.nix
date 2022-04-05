@@ -7,9 +7,13 @@
   # cache.”
   # inputs.nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
   inputs = {
+    # TODO add deploy
+    # deploy.url = "github:serokell/deploy-rs";
     neuron.url = "github:srid/neuron/master";
     nixpkgs.url =
-      "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
+      # "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
+      # 2022-04-05
+      "github:NixOS/nixpkgs/bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     overlays.url = "github:dpaetzel/overlays/master";
 

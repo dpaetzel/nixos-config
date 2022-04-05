@@ -42,7 +42,7 @@
           # openshot-qt # if I ever need to quickly edit video
           signal-desktop
           simplescreenrecorder
-          skype # too many people use this -.-
+          skypeforlinux # too many people use this -.-
           spotify
           tabula # for extracting tables from PDFs
           tdesktop
@@ -83,7 +83,7 @@
         libnotify
         lxappearance
         networkmanagerapplet
-        setroot
+        # setroot # build broken as of 2022-04-05
         xfce.thunar
         unclutter
 
@@ -184,10 +184,11 @@
           ghostscript
           htop
           imagemagick
+          inetutils # telnet and friends
           ffmpeg
           lm_sensors
           lsof
-          manpages
+          man-pages
           nix-prefetch-git
           nix-zsh-completions
           (nmap.override { graphicalSupport = true; })
@@ -201,7 +202,6 @@
           python3Packages.pygments
           quvi # flash video scraper/getter/…
           ripgrep
-          telnet
           tmux
           traceroute
           usbutils
@@ -272,7 +272,7 @@
         nodePackages.parcel-bundler
         pscid
         purescript
-        spago
+        # spago # build broken as of 2022-04-05
 
         # LaTeX
         (with texlive;
