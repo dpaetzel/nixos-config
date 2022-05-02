@@ -45,7 +45,8 @@
           skypeforlinux # too many people use this -.-
           spotify
           tabula # for extracting tables from PDFs
-          tdesktop
+          tdesktop # some people still use Telegram
+          threema-desktop # Threema is OK I guess
           # teamviewer # sometimes needed, happy when its already installed
           # thunderbird
           # tor-browser-bundle-bin
