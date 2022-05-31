@@ -60,10 +60,12 @@
   hardware.keyboard.zsa.enable = true;
 
 
-  services.arbtt = {
-    enable = true;
-    sampleRate = 30;
-  };
+  # This is broken somehow as of 2022-05-31 (I always get an index too large
+  # error when doing arbtt-stats on the file this creates).
+  # services.arbtt = {
+  #   enable = true;
+  #   sampleRate = 30;
+  # };
 
 
   services.cron = {
