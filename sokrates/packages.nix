@@ -151,6 +151,7 @@
           mr
           mosh # less laggy than SSH
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
+          inputs.emanote.outputs.defaultPackage."${system}" # Zettelkasten ftw
           newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store

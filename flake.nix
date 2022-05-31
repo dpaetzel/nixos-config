@@ -10,6 +10,7 @@
     # TODO add deploy
     # deploy.url = "github:serokell/deploy-rs";
     neuron.url = "github:srid/neuron/master";
+    emanote.url = "github:srid/emanote/master";
     nixpkgs.url =
       # "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
       # 2022-04-05
