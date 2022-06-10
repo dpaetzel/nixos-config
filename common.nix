@@ -52,11 +52,18 @@
 
   nix = {
     package = pkgs.nixFlakes;
+    # keep-* is recommended for nix-direnv.
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
     autoOptimiseStore = true;
   };
+
+  environment.pathsToLink = [
+    "/share/nix-direnv"
+  ];
 
   environment.variables = {
     BROWSER = "firefox";

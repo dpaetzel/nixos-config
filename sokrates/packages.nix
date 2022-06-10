@@ -127,8 +127,9 @@
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
-          dfc
+          direnv nix-direnv
           dbacl
+          dfc
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
           exa # a better `ls`
