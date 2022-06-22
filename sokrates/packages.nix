@@ -194,7 +194,7 @@
           man-pages
           nix-prefetch-git
           nix-zsh-completions
-          (nmap.override { graphicalSupport = true; })
+          nmap
           # pastebinit
           pdfgrep
           pmount
