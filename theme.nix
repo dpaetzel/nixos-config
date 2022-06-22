@@ -11,15 +11,14 @@ let
     rm -f ~/.config/gtk-3.0/settings.ini
 
     # GTK3: add breeze theme to search path for themes
-    # (currently, we need to use gnome-breeze because the GTK3 version of kde5.breeze is broken)
-    export XDG_DATA_DIRS="${pkgs.gnome-breeze}/share:$XDG_DATA_DIRS"
+    export XDG_DATA_DIRS="${pkgs.libsForQt5.breeze-gtk}/share:$XDG_DATA_DIRS"
 
     # GTK3: add /etc/xdg/gtk-3.0 to search path for settings.ini
     # We use /etc/xdg/gtk-3.0/settings.ini to set the icon and theme name for GTK 3
     export XDG_CONFIG_DIRS="/etc/xdg:$XDG_CONFIG_DIRS"
 
     # GTK2 theme + icon theme
-    export GTK2_RC_FILES=${pkgs.writeText "iconrc" ''gtk-icon-theme-name="breeze"''}:${pkgs.breeze-gtk}/share/themes/Breeze/gtk-2.0/gtkrc:$GTK2_RC_FILES
+    export GTK2_RC_FILES=${pkgs.writeText "iconrc" ''gtk-icon-theme-name="breeze"''}:${pkgs.libsForQt5.breeze-gtk}/share/themes/Breeze/gtk-2.0/gtkrc:$GTK2_RC_FILES
 
     # SVG loader for pixbuf (needed for GTK svg icon themes)
     export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)
