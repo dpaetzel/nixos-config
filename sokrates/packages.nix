@@ -203,7 +203,6 @@
           psmisc
           pv
           python3Packages.pygments
-          quvi # flash video scraper/getter/…
           ripgrep
           tmux
           traceroute
