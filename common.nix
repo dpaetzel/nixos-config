@@ -34,6 +34,7 @@
       # fira-code
       # fira-code-symbols
       font-awesome
+      google-fonts
       inconsolata
       # ipafont
       kochi-substitute
