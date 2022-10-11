@@ -9,6 +9,7 @@
   inputs = {
     # TODO add deploy
     # deploy.url = "github:serokell/deploy-rs";
+    mach-nix.url = "github:DavHau/mach-nix/master";
     neuron.url = "github:srid/neuron/master";
     emanote.url = "github:srid/emanote/master";
     nixpkgs.url =
