@@ -47,7 +47,7 @@
           # ];
         };
         overlays = with overlays; [
-          khal
+          # khal
           yapfToml
           (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; })
         ];
