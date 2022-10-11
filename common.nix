@@ -43,7 +43,7 @@
       (nerdfonts.override { fonts = ["FiraCode"]; })
       powerline-fonts
       source-code-pro
-      symbola
+      # symbola # Cannot download 2022-06-22
       # terminus_font
       ubuntu_font_family
       unifont

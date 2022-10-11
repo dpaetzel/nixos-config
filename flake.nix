@@ -14,7 +14,9 @@
     nixpkgs.url =
       # "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
       # 2022-04-05
-      "github:NixOS/nixpkgs/bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13";
+      # "github:NixOS/nixpkgs/bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13";
+      # 2022-06-22
+      "github:NixOS/nixpkgs/0d68d7c857fe301d49cdcd56130e0beea4ecd5aa";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     overlays.url = "github:dpaetzel/overlays/master";
 
