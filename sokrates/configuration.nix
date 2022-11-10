@@ -112,19 +112,20 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "18.09";
 
+  nix.settings = {
+    # “This option defines the maximum number of jobs that Nix will try to build
+    # in parallel. The default is 1. You should generally set it to the total
+    # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
+    # each and hyper-threading).”
+    max-jobs = lib.mkDefault 4;
 
-  # “This option defines the maximum number of jobs that Nix will try to build
-  # in parallel. The default is 1. You should generally set it to the total
-  # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
-  # each and hyper-threading).”
-  nix.maxJobs = lib.mkDefault 4;
 
-
-  # “Sandboxing is not enabled by default in Nix due to a small performance hit
-  # on each build. In pull requests for nixpkgs people are asked to test builds
-  # with sandboxing enabled (see Tested using sandboxing in the pull request
-  # template) because in https://nixos.org/hydra/ sandboxing is also used.”
-  nix.useSandbox = true;
+    # “Sandboxing is not enabled by default in Nix due to a small performance hit
+    # on each build. In pull requests for nixpkgs people are asked to test builds
+    # with sandboxing enabled (see Tested using sandboxing in the pull request
+    # template) because in https://nixos.org/hydra/ sandboxing is also used.”
+    sandbox = true;
+  };
 
 
   # It's a different problem but in

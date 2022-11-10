@@ -59,7 +59,7 @@
       keep-outputs = true
       keep-derivations = true
     '';
-    autoOptimiseStore = true;
+    settings.auto-optimise-store = true;
   };
 
   environment.pathsToLink = [
