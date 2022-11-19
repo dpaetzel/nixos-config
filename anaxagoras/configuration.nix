@@ -1,9 +1,7 @@
 { pkgs, lib, inputs, ... }:
 
-
 {
   networking.hostName = "anaxagoras";
-
 
   users.extraUsers.david = {
     shell = "${pkgs.fish}/bin/fish";
@@ -20,17 +18,13 @@
     ];
   };
 
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/befdf9b2-9ba8-45ce-a0e6-5d25e03dcaaf";
-      fsType = "ext4";
-    };
-
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/befdf9b2-9ba8-45ce-a0e6-5d25e03dcaaf";
+    fsType = "ext4";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }
-    ];
-
+    [{ device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
@@ -38,12 +32,19 @@
   # installed.
   # boot.loader.grub.useOSProber = true;
 
-
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ehci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
-
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -52,14 +53,11 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
-
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
-
   # High-resolution display (enabled in initial generated config).
   hardware.video.hidpi.enable = lib.mkDefault true;
-
 
   # https://github.com/musnix/musnix#base-options
   musnix = {
@@ -70,18 +68,14 @@
     # TODO Maybe use rtirq options https://github.com/musnix/musnix#base-options
   };
 
-
   hardware.keyboard.zsa.enable = true;
 
-
   services.openssh.enable = true;
-
 
   services.printing = {
     enable = true;
     drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
   };
-
 
   # udev rule for my android phone(s)
   services.udev.extraRules = ''
@@ -89,22 +83,19 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
   '';
 
-
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
-  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
-
+  security.pki.certificateFiles =
+    [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "22.05";
-
 
   # “This option defines the maximum number of jobs that Nix will try to build
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
   # each and hyper-threading).”
   nix.maxJobs = lib.mkDefault 8;
-
 
   # “Sandboxing is not enabled by default in Nix due to a small performance hit
   # on each build. In pull requests for nixpkgs people are asked to test builds
