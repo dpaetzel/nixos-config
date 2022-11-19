@@ -34,6 +34,7 @@
 
     # mach-nix.url = "github:DavHau/mach-nix/master";
     # mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+    musnix.url = "github:musnix/musnix";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
@@ -48,7 +49,7 @@
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-hardware, overlays, ... }:
+  outputs = inputs@{ self, nixpkgs, musnix, nixos-hardware, overlays, ... }:
 
     let
       system = "x86_64-linux";
@@ -140,6 +141,8 @@
           ./common.nix
           ./desktop.nix
           ./theme.nix
+
+          musnix.nixosModules.musnix
         ];
       };
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {

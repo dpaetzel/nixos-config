@@ -21,19 +21,29 @@
   };
 
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/befdf9b2-9ba8-45ce-a0e6-5d25e03dcaaf";
       fsType = "ext4";
     };
 
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }
     ];
+
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/nvme0n1";
+  # os-prober takes *very* long due to an empty drive I have currently
+  # installed.
+  # boot.loader.grub.useOSProber = true;
+
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -42,14 +52,23 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
+
+  # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
-  # high-resolution display
+
+
+  # High-resolution display (enabled in initial generated config).
   hardware.video.hidpi.enable = lib.mkDefault true;
 
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/nvme0n1";
-  # boot.loader.grub.useOSProber = true;
+  # https://github.com/musnix/musnix#base-options
+  musnix = {
+    enable = true;
+    kernel.realtime = true;
+    # There seems to be a typo in musnix (underscore instead of dash)?
+    kernel.packages = pkgs.linuxPackages-rt;
+    # TODO Maybe use rtirq options https://github.com/musnix/musnix#base-options
+  };
 
 
   hardware.keyboard.zsa.enable = true;
@@ -84,7 +103,7 @@
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
   # each and hyper-threading).”
-  nix.maxJobs = lib.mkDefault 4;
+  nix.maxJobs = lib.mkDefault 8;
 
 
   # “Sandboxing is not enabled by default in Nix due to a small performance hit
