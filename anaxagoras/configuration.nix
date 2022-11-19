@@ -1,130 +1,95 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
+
 
 {
-  imports =
-    [
-      ../common.nix
-      ../desktop.nix
-      ../theme.nix
-      ../workstation.nix
-    ];
-
   networking.hostName = "anaxagoras";
+
 
   users.extraUsers.david = {
     shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
+      # "docker"
+      # "lxd"
       "networkmanager"
+      "plugdev"
+      # "vboxusers"
+      # "video" # to be able to use `light`
       "wheel"
     ];
   };
 
-  # the encrypted partition
-  boot.initrd.luks.devices = [
-    { name = "DecryptedHome";
-      device = "/dev/LinuxData/Home";
-      preLVM = false;
-    }
-  ];
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NixOSRoot";
-      fsType = "ext4";
-      options = [ "discard" ];
-    };
-
-  fileSystems."/home" =
-    # { device = "/dev/disk/by-uuid/69465e01-04a9-4d43-8a0b-eb980ea23c86";
-    { device = "/dev/mapper/DecryptedHome";
-      fsType = "ext4";
-    };
-
-  fileSystems."/nix/store" =
-    { device = "/dev/LinuxData/NixStore";
+    { device = "/dev/disk/by-uuid/befdf9b2-9ba8-45ce-a0e6-5d25e03dcaaf";
       fsType = "ext4";
     };
 
   swapDevices =
-    # [ { device = "/dev/disk/by-uuid/e78ecb48-f1d0-49e9-9ab8-d0fcad961085"; }
-    [ { device = "/dev/disk/by-label/Linux\x20Swap"; }
+    [ { device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }
     ];
 
-  # use the systemd efi boot loader
-  boot.loader.systemd-boot.enable = true;
-  # TODO is this needed?
-  boot.loader.efi.canTouchEfiVariables = true;
-  # TODO is something like this needed as well?
-  # boot.loader.grub.device = "/dev/sd?";
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ehci_pci"
-    "ahci"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-    "sr_mod"
-  ];
-  boot.kernelModules = [ "kvm-intel" ];
-  # boot.kernelParams = [ "fbcon=rotate:3" ]; # rotate console by 90 degrees
-  boot.extraModulePackages = [ ];
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
+  # high-resolution display
+  hardware.video.hidpi.enable = lib.mkDefault true;
 
-  services.xserver.videoDrivers = lib.mkForce [ "nouveau" ];
-    # not working properly (everything gets too big, setting dpi manually doesn't help a thing)
-    # videoDrivers = [ "nvidia" ];
-    # config = import ./monitors-nouveau.nix;
-    # videoDrivers = mkForce [ "nouveau" ];
-    # displayManager.sessionCommands =
-    #   ''
-    #     sleep 1
-    #     xrandr --output DP-1 --off --output DVI-I-1 --mode 1280x1024 --pos 0x400 --rotate left --output DVI-D-1 --mode 1680x1050 --pos 2944x0 --rotate right --output HDMI-1 --mode 1920x1080 --pos 1024x400 --rotate normal --primary
-    #   '';
-  # };
 
-  # other services
-  hardware.bluetooth.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/nvme0n1";
+  # boot.loader.grub.useOSProber = true;
+
+
+  hardware.keyboard.zsa.enable = true;
+
+
   services.openssh.enable = true;
+
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+  };
+
+
+  # udev rule for my android phone(s)
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
+  '';
+
+
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+
+
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.stateVersion = "22.05";
+
 
   # “This option defines the maximum number of jobs that Nix will try to build
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
   # each and hyper-threading).”
-  nix.maxJobs = 8;
+  nix.maxJobs = lib.mkDefault 4;
 
-  networking.networkmanager.basePackages =
-    with pkgs; {
-      # needed for university vpn; thanks Profpatsch!
-      networkmanager_openconnect =
-        pkgs.networkmanager_openconnect.override { openconnect = pkgs.openconnect_gnutls; };
-      inherit networkmanager modemmanager wpa_supplicant
-              networkmanager_openvpn networkmanager_vpnc
-              networkmanager_pptp networkmanager_l2tp;
-  };
-  # networking.wireless.enable = true;  # wireless support via wpa_supplicant
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.gutenprint ];
-  };
-
-  environment.systemPackages =
-    with (import ../packages.nix pkgs);
-      system ++
-      applications.main ++
-      applications.utility ++
-      graphical-user-interface ++
-      mutt ++
-      commandline.main ++
-      commandline.utility ++
-      development ++
-      (with pkgs; [
-        (with texlive; combine {
-          inherit scheme-full; # wrapfig capt-of biblatex biblatex-ieee logreq xstring newtx;
-        })
-      ]);
+  # “Sandboxing is not enabled by default in Nix due to a small performance hit
+  # on each build. In pull requests for nixpkgs people are asked to test builds
+  # with sandboxing enabled (see Tested using sandboxing in the pull request
+  # template) because in https://nixos.org/hydra/ sandboxing is also used.”
+  nix.useSandbox = true;
 }

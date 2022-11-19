@@ -130,6 +130,18 @@
           xlrd
         ]);
     in {
+      nixosConfigurations.anaxagoras = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        specialArgs = { inherit pkgs system inputs; };
+        modules = [
+          ./anaxagoras/configuration.nix
+          ./sokrates/packages.nix
+
+          ./common.nix
+          ./desktop.nix
+          ./theme.nix
+        ];
+      };
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         specialArgs = { inherit pkgs system inputs pythonEnv; };
