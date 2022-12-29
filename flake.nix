@@ -7,19 +7,33 @@
   # cache.”
   # inputs.nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
   inputs = {
-    # TODO add deploy
-    # deploy.url = "github:serokell/deploy-rs";
-    mach-nix.url = "github:DavHau/mach-nix/master";
-    neuron.url = "github:srid/neuron/master";
-    emanote.url = "github:srid/emanote/master";
     nixpkgs.url =
       # "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
       # 2022-04-05
       # "github:NixOS/nixpkgs/bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13";
       # 2022-06-22
-      "github:NixOS/nixpkgs/0d68d7c857fe301d49cdcd56130e0beea4ecd5aa";
+      # "github:NixOS/nixpkgs/0d68d7c857fe301d49cdcd56130e0beea4ecd5aa";
+      # 2022-11-10
+      "github:NixOS/nixpkgs/093268502280540a7f5bf1e2a6330a598ba3b7d0";
+      # 2022-12-29
+      # e182da8622a354d44c39b3d7a542dc12cd7baa5f
+
+    emanote.url = "github:srid/emanote/master";
+    # This leads to a very long compile.
+    # emanote.inputs.nixpkgs.follows = "nixpkgs";
+
+    neuron.url = "github:srid/neuron/master";
+    # This seems to be broken?
+    # neuron.inputs.nixpkgs.follows = "nixpkgs";
+
+    mach-nix.url = "github:DavHau/mach-nix/master";
+    mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+
     overlays.url = "github:dpaetzel/overlays/master";
+    overlays.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO Maybe use these
     # home-manager.url = "github:nix-community/home-manager";
@@ -50,7 +64,9 @@
         overlays = with overlays; [
           # khal
           yapfToml
-          (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; })
+          (self: super: {
+            nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+          })
         ];
       };
     in {

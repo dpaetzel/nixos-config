@@ -44,7 +44,7 @@
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
           spotify
-          tabula # for extracting tables from PDFs
+          # tabula # for extracting tables from PDFs
           tdesktop # some people still use Telegram
           threema-desktop # Threema is OK I guess
           # teamviewer # sometimes needed, happy when its already installed
@@ -121,14 +121,14 @@
 
       commandline = {
         main = [
-          aqbanking
+          # aqbanking
           atool
-          (haskellPackages.arbtt)
+          # (haskellPackages.arbtt)
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
           direnv nix-direnv
-          dbacl
+          # dbacl
           dfc
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
@@ -152,8 +152,8 @@
           mr
           mosh # less laggy than SSH
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
-          inputs.emanote.outputs.defaultPackage."${system}" # Zettelkasten ftw
-          newsboat # fetches RSS feeds
+          inputs.emanote.packages."${system}".default # Zettelkasten ftw
+          # newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
           rcm
@@ -164,9 +164,9 @@
           qrencode # for creating the occasional QR code
           # signal-cli
           # teamspeak_client
-          tigervnc # somehow this works best for me
+          # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
-          transmission
+          # transmission
           tree
           unison
           unrar
@@ -188,7 +188,6 @@
           htop
           imagemagick
           inetutils # telnet and friends
-          ffmpeg
           lm_sensors
           lsof
           man-pages
@@ -197,7 +196,7 @@
           nmap
           # pastebinit
           pdfgrep
-          pmount
+          # pmount
           poppler_utils
           # powertop
           psmisc
@@ -219,36 +218,36 @@
 
       development = [
         # Haskell development
-        binutils # I sometimes need `ar` for building Haskell stuff
-        cabal2nix
-        cabal-install
-        # (haskellPackages.ghcWithPackages(ps:
-        #   with ps; [
-        #     protolude
-        #     optparse-applicative
-        #     # this does not work
-        #     nixpkgs20200702.haskellPackages.random-fu # [2020-08-11] broken in master
-        #     random
-        #     text
-        #     turtle
-        #   ]
-        # ))
-        (haskellPackages.ghcWithPackages
-          (ps: # [2020-08-11] random-fu broken in master
-            with ps; [
-              # protolude
-              optparse-applicative
-              random-fu
-              # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
-              random
-              text
-              # turtle
-            ]))
-        ormolu
-        # haskellPackages.ghc-mod # TODO currently not working
-        haskellPackages.hlint
-        # haskellPackages.lhs2tex # TODO not working
-        # stack
+        # binutils # I sometimes need `ar` for building Haskell stuff
+        # cabal2nix
+        # cabal-install
+        # # (haskellPackages.ghcWithPackages(ps:
+        # #   with ps; [
+        # #     protolude
+        # #     optparse-applicative
+        # #     # this does not work
+        # #     nixpkgs20200702.haskellPackages.random-fu # [2020-08-11] broken in master
+        # #     random
+        # #     text
+        # #     turtle
+        # #   ]
+        # # ))
+        # (haskellPackages.ghcWithPackages
+        #   (ps: # [2020-08-11] random-fu broken in master
+        #     with ps; [
+        #       # protolude
+        #       optparse-applicative
+        #       random-fu
+        #       # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
+        #       random
+        #       text
+        #       # turtle
+        #     ]))
+        # ormolu
+        # # haskellPackages.ghc-mod # TODO currently not working
+        # haskellPackages.hlint
+        # # haskellPackages.lhs2tex # TODO not working
+        # # stack
 
         # Python development
         autoflake
@@ -269,7 +268,7 @@
         python3Packages.pyflakes
         python3Packages.poetry
         python39Packages.yapfToml
-        inputs.mach-nix.defaultPackage."${system}"
+        # inputs.mach-nix.defaultPackage."${system}"
 
         # Purescript development
         nodejs
@@ -293,7 +292,7 @@
         gcc
         gdb # sometimes you just need it
         gnumake
-        netlogo
+        # netlogo
         # openjdk
         patchelf # so handy
         # R
