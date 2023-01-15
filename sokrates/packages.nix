@@ -268,7 +268,7 @@
         python3Packages.isort
         python3Packages.mypy
         python3Packages.pyflakes
-        python3Packages.poetry
+        # python3Packages.poetry
         python39Packages.yapfToml
         # inputs.mach-nix.defaultPackage."${system}"
 
