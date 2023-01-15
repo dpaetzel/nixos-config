@@ -86,5 +86,26 @@
           ./workstation.nix
         ];
       };
+
+      # General purpose Python shell I use everyday (I have an alias that runs
+      # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
+      apps.${system}.pythonShell = let
+        python = pkgs.python310.withPackages (ps: with ps; [
+          deap
+          graphviz
+          ipython
+          matplotlib
+          numpy
+          pandas
+          scikit-learn
+          scipy
+          seaborn
+          toolz
+          tqdm
+        ]);
+      in {
+        type = "app";
+        program = "${python}/bin/ipython";
+      };
     };
 }
