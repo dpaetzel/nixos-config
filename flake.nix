@@ -1,4 +1,5 @@
 {
+  # TODO Maybe setup cachix for this
   description = "dpaetzel's NixOS configuration";
 
   # From: https://github.com/srid/nixos-config/blob/master/flake.nix
@@ -14,9 +15,9 @@
       # 2022-06-22
       # "github:NixOS/nixpkgs/0d68d7c857fe301d49cdcd56130e0beea4ecd5aa";
       # 2022-11-10
-      "github:NixOS/nixpkgs/093268502280540a7f5bf1e2a6330a598ba3b7d0";
-      # 2022-12-29
-      # e182da8622a354d44c39b3d7a542dc12cd7baa5f
+      # "github:NixOS/nixpkgs/093268502280540a7f5bf1e2a6330a598ba3b7d0";
+      # 2023-01-15
+      "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
 
     emanote.url = "github:srid/emanote/master";
     # This leads to a very long compile.
