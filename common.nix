@@ -119,8 +119,8 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    inputMethod.ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
-    inputMethod.enabled = "ibus";
+    # inputMethod.ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
+    # inputMethod.enabled = "ibus";
   };
   console = {
     font = "lat9w-16";
