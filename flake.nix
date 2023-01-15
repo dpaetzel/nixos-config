@@ -19,9 +19,9 @@
       # 2023-01-15
       "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
 
-    emanote.url = "github:srid/emanote/master";
+    emanote.url = "github:srid/emanote";
     # This leads to a very long compile.
-    # emanote.inputs.nixpkgs.follows = "nixpkgs";
+    emanote.inputs.nixpkgs.follows = "nixpkgs";
 
     neuron.url = "github:srid/neuron/master";
     # This seems to be broken?
