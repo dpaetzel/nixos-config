@@ -132,6 +132,7 @@
           dfc
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
+          espeak # for when I can't speak
           exa # a better `ls`
           fdupes # finding duplicates
           fd # fast and user-friendly alternative to `find`
@@ -144,6 +145,7 @@
           hledger # accounting made nicer
           hugo
           inotify-tools
+          jq # command line json query tool
           khal # calendar
           khard # contacts
           ledger # accounting made nice
