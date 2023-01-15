@@ -27,8 +27,8 @@
     # This seems to be broken?
     # neuron.inputs.nixpkgs.follows = "nixpkgs";
 
-    mach-nix.url = "github:DavHau/mach-nix/master";
-    mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # mach-nix.url = "github:DavHau/mach-nix/master";
+    # mach-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +43,8 @@
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-hardware, overlays, ... }:
+  outputs =
+    inputs@{ self, nixpkgs, nixos-hardware, overlays, ... }:
 
     let
       system = "x86_64-linux";
