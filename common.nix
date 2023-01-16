@@ -1,4 +1,4 @@
-{ self, config, pkgs, stdenv, lib, ... }:
+{ self, config, pkgs, stdenv, lib, pythonEnv, ... }:
 
 {
   # Required for ThinkPad T470 Wifi and Bluetooth drivers.
@@ -100,7 +100,17 @@
   programs.slock.enable = true;
 
   programs.zsh.enable = true;
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      p = "${pythonEnv}/bin/ipython --profile=p";
+      pplot="${pythonEnv}/bin/ipython --profile=p --matplotlib=auto";
+      # Local shell in case I changed something but did not push yet.
+      pl="nix run path:/home/david/NixOS#pythonShell -- --profile=p";
+      # No profile.
+      pn = "${pythonEnv}/bin/ipython";
+    };
+  };
 
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
   # Must be disabled for GnuPGAgent to work (or so someone said once).

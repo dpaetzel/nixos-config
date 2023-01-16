@@ -43,8 +43,7 @@
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, nixos-hardware, overlays, ... }:
+  outputs = inputs@{ self, nixpkgs, nixos-hardware, overlays, ... }:
 
     let
       system = "x86_64-linux";
@@ -71,10 +70,27 @@
           })
         ];
       };
+
+      # General purpose Python shell I use everyday (I have an alias that runs
+      # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
+      pythonEnv = pkgs.python310.withPackages (ps:
+          with ps; [
+            deap
+            graphviz
+            ipython
+            matplotlib
+            numpy
+            pandas
+            scikit-learn
+            scipy
+            seaborn
+            toolz
+            tqdm
+          ]);
     in {
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs system inputs; };
+        specialArgs = { inherit pkgs system inputs pythonEnv; };
         modules = [
           # Not quite my t470 but close enough.
           nixos-hardware.nixosModules.lenovo-thinkpad-t470s
@@ -89,25 +105,10 @@
         ];
       };
 
-      # General purpose Python shell I use everyday (I have an alias that runs
-      # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
-      apps.${system}.pythonShell = let
-        python = pkgs.python310.withPackages (ps: with ps; [
-          deap
-          graphviz
-          ipython
-          matplotlib
-          numpy
-          pandas
-          scikit-learn
-          scipy
-          seaborn
-          toolz
-          tqdm
-        ]);
-      in {
+      # Expose the Python shell.
+      apps.${system}.pythonShell = {
         type = "app";
-        program = "${python}/bin/ipython";
+        program = "${pythonEnv}/bin/ipython";
       };
     };
 }
