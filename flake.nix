@@ -75,6 +75,7 @@
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
       pythonEnv = pkgs.python310.withPackages (ps:
           with ps; [
+            click
             deap
             graphviz
             ipython
