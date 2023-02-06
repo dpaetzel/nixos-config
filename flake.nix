@@ -85,6 +85,7 @@
             scikit-learn
             scipy
             seaborn
+            tabulate # For to_markdown of pandas DataFrames.
             toolz
             tqdm
           ]);
