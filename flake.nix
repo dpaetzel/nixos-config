@@ -63,7 +63,10 @@
           # ];
         };
         overlays = with overlays; [
-          # khal
+          # https://github.com/NixOS/nixpkgs/issues/205014#issuecomment-1402380175
+          (self: super: {
+            khal = super.khal.overridePythonAttrs (_ : { doCheck = false; });
+          })
           yapfToml
           (self: super: {
             nix-direnv = super.nix-direnv.override { enableFlakes = true; };

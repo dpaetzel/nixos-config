@@ -41,6 +41,8 @@
       libertine
       lmmath
       lmodern
+      noto-fonts-emoji # seems to be broken as of 2023-02
+      twitter-color-emoji
       (nerdfonts.override { fonts = ["FiraCode"]; })
       powerline-fonts
       source-code-pro
@@ -49,6 +51,9 @@
       ubuntu_font_family
       unifont
     ];
+    fontconfig.defaultFonts = {
+      emoji = ["Twitter Color Emoji"];
+    };
   };
 
   nix = {
