@@ -17,7 +17,11 @@
       # 2022-11-10
       # "github:NixOS/nixpkgs/093268502280540a7f5bf1e2a6330a598ba3b7d0";
       # 2023-01-15
-      "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
+      # "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
+      # 2023-02-09
+      # "github:NixOS/nixpkgs/fab09085df1b60d6a0870c8a89ce26d5a4a708c2";
+      # 2023-03-10
+      "github:NixOS/nixpkgs/1e2590679d0ed2cee2736e8b80373178d085d263";
 
     emanote.url = "github:srid/emanote";
     # This leads to a very long compile.
