@@ -27,13 +27,14 @@
           # dropbox-cli
           emacs
           evince
-          firefox
+          # firefox # installed via programs.firefox.enable
+          # tridactyl-native
           geeqie
           gimp
           gnuplot
           google-chrome # for DRM-protected streaming
           gparted
-          inkscape
+          inkscape # vector graphics
           libreoffice
           lingot # guitar tuner
           kitty # terminal emulator
@@ -42,15 +43,17 @@
           # openshot-qt # if I ever need to quickly edit video
           signal-desktop
           simplescreenrecorder
-          skypeforlinux # too many people use this -.-
+          # skypeforlinux # too many people use this -.-
           spotify
           # tabula # for extracting tables from PDFs
           tdesktop # some people still use Telegram
-          threema-desktop # Threema is OK I guess
+          # threema-desktop # Threema is OK I guess # installed in user env
           # teamviewer # sometimes needed, happy when its already installed
           # thunderbird
           # tor-browser-bundle-bin
-          vimHugeX # huge b/c want to have gvim around
+          # vimHugeX # huge b/c want to have gvim around
+          vim # huge b/c want to have gvim around
+          virt-manager # replacement for VirtualBox, more lightweight
           vlc # wow, much simple to use, much support
           # NOTE broken due to "error: undefined reference to '__divmoddi4'"
           # (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
@@ -153,6 +156,7 @@
           magic-wormhole
           mr
           mosh # less laggy than SSH
+          # While I started using emanote my Emacs stuff still relies on neuron
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
           inputs.emanote.packages."${system}".default # Zettelkasten ftw
           # newsboat # fetches RSS feeds
@@ -165,6 +169,7 @@
           pdftk
           qrencode # for creating the occasional QR code
           # signal-cli
+          socat
           # teamspeak_client
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file

@@ -11,6 +11,7 @@
     uid = 1000;
     extraGroups = [
       "docker"
+      "libvirtd"
       "lxd"
       "networkmanager"
       "plugdev"
@@ -58,6 +59,32 @@
 
 
   hardware.keyboard.zsa.enable = true;
+
+
+  programs.firefox = {
+    enable = true;
+    # This doesn't seem to work out of the box?
+    # nativeMessagingHosts.tridactyl = true;
+    # TODO This does not work yet, need to investigate
+    package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+      # https://github.com/openlab-aux/vuizvui/blob/fc26d6ac90386bb8b5630fee569db17e7cffa882/pkgs/aszlig/firefox/default.nix#L43
+      extraNativeMessagingHosts = [
+        (lib.writeTextFile {
+          name = "tridactyl-native";
+          destination = "/lib/mozilla/native-messaging-hosts/tridactyl.json";
+          text = builtins.toJSON {
+            name = "tridactyl";
+            description = "Tridactyl native command handler";
+            path = "${pkgs.tridactyl-native}/bin/native_main";
+            type = "stdio";
+            # allowed_extensions = [ extensions.tridactyl-vim.extid ];
+            allowed_extensions = [ ];
+          };
+        })
+      ];
+    };
+    # TODO nativeMessagingHosts.passff.enable = true;
+  };
 
 
   # This is broken somehow as of 2022-05-31 (I always get an index too large
