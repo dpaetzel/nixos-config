@@ -170,6 +170,7 @@
           qrencode # for creating the occasional QR code
           # signal-cli
           socat
+          sshfs
           # teamspeak_client
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
@@ -184,6 +185,7 @@
           zip
         ];
         utility = [
+          abduco # Detach from commands and reattach later.
           acpi # for a more nicely formatted battery status in conky
           bind # for the occasional `dig`
           cifs-utils
@@ -210,7 +212,7 @@
           pv
           python3Packages.pygments
           ripgrep
-          tmux
+          tmux # Probably suboptimal, use abduco instead?
           traceroute
           usbutils
           veracrypt
@@ -270,6 +272,7 @@
         #     seaborn
         #   ]
         # ))
+        python3Packages.black
         python3Packages.isort
         python3Packages.mypy
         python3Packages.pyflakes
