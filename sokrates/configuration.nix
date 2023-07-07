@@ -34,7 +34,7 @@
     };
 
 
-  swapDevices = [ ];
+  swapDevices = [{device = "/dev/vg/swap";}];
 
 
   # use the GRUB 2 boot loader
