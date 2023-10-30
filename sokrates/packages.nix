@@ -80,13 +80,13 @@
       graphical-user-interface = [
         autocutsel # the only sane(?) clipboard management
         conky
-        compton
         dmenu
         dunst
         dzen2
         libnotify
         lxappearance
         networkmanagerapplet
+        picom
         # setroot # build broken as of 2022-04-05
         xfce.thunar
         unclutter
@@ -136,7 +136,7 @@
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
           espeak # for when I can't speak
-          exa # a better `ls`
+          eza # a better `ls`
           fdupes # finding duplicates
           fd # fast and user-friendly alternative to `find`
           feedgnuplot # stream data to gnu plot for live graphs
