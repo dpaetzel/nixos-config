@@ -1,19 +1,30 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, config, ... }:
 
 {
   networking.hostName = "anaxagoras";
+
+  # NVidia GeForce GTX 760 TI OEM
+  # Linux x64 (AMD64/EM64T) Display Driver
+  # Version: 	470.161.03
+  # Release Date: 	2022.11.22
+  # Operating System: 	Linux 64-bit
+  # Language: 	English (US)
+  # File Size: 	259.78 MB
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.opengl.enable = true;
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
   users.extraUsers.david = {
     shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
-      # "docker"
-      # "lxd"
+      "audio"
+      "cdrom"
+      "jackaudio"
       "networkmanager"
       "plugdev"
-      # "vboxusers"
-      # "video" # to be able to use `light`
       "wheel"
     ];
   };
@@ -66,7 +77,35 @@
     # There seems to be a typo in musnix (underscore instead of dash)?
     kernel.packages = pkgs.linuxPackages-rt;
     # TODO Maybe use rtirq options https://github.com/musnix/musnix#base-options
+    # https://nixos.wiki/wiki/JACK
+    # “magic to me” — To me as well.
+    # rtirq = {
+    #   # highList = "snd_hrtimer";
+    #   resetAll = 1;
+    #   prioLow = 0;
+    #   enable = true;
+    #   nameList = "rtc0 snd";
+    # };
   };
+
+  # services.jack = {
+  #   jackd.enable = true;
+  #   alsa.enable = true;
+  # };
+
+  # I'm a big noob and can't jack get to work with ardour somehow.
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+    pulse.enable = true;
+  };
+  hardware.pulseaudio.enable = false;
+  # Acc. to NixOS wiki, rtkit is optional but recommended for using PipeWire.
+  security.rtkit.enable = true;
 
   hardware.keyboard.zsa.enable = true;
 

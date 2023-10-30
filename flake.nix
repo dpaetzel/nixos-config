@@ -136,7 +136,7 @@
         specialArgs = { inherit pkgs system inputs; };
         modules = [
           ./anaxagoras/configuration.nix
-          ./sokrates/packages.nix
+          ./anaxagoras/packages.nix
 
           ./common.nix
           ./desktop.nix

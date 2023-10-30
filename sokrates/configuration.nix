@@ -55,6 +55,14 @@
 
 
   # other services
+
+
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
+
+
   hardware.bluetooth.enable = true;
 
 
