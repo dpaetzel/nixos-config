@@ -76,27 +76,58 @@
           (self: super: {
             nix-direnv = super.nix-direnv.override { enableFlakes = true; };
           })
+          # (self: super: {
+          #   steam = super.steam.override { extraPkgs = pkgs: with pkgs; [ super.openssl ]; };
+          # })
         ];
       };
 
       # General purpose Python shell I use everyday (I have an alias that runs
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
-      pythonEnv = pkgs.python310.withPackages (ps:
-          with ps; [
-            click
-            deap
-            graphviz
-            ipython
-            matplotlib
-            numpy
-            pandas
-            scikit-learn
-            scipy
-            seaborn
-            tabulate # For to_markdown of pandas DataFrames.
-            toolz
-            tqdm
-          ]);
+      pythonEnv = let
+        cmdstanpy = pkgs.python.pkgs.buildPythonPackage rec {
+          pname = "cmdstanpy";
+          version = "1.0.7";
+
+          propagatedBuildInputs = with pkgs.python.pkgs; [ numpy pandas tqdm ujson ];
+
+          patches =
+            [ "${self}/0001-Remove-dynamic-cmdstan-version-selection.patch" ];
+
+          postPatch = ''
+            sed -i \
+              "s|\(cmdstan = \)\.\.\.|\1\"${pkgs.cmdstan}/opt/cmdstan\"|" \
+              cmdstanpy/utils/cmdstan.py
+          '';
+
+          doCheck = false;
+
+          src = pkgs.python.pkgs.fetchPypi {
+            inherit pname version;
+            sha256 = "sha256-AyzbqfVKup4pLl/JgDcoNKFi5te4QfO7KKt3pCNe4N8=";
+          };
+        };
+
+      in pkgs.python310.withPackages (ps:
+        with ps; [
+          # pkgs.cmdstan # Rather large.
+          # cmdstanpy
+          click
+          deap
+          graphviz
+          ipython
+          matplotlib
+          numpy
+          pandas
+          requests
+          scikit-learn
+          scipy
+          seaborn
+          tabulate # For to_markdown of pandas DataFrames.
+          toolz
+          tqdm
+          xlrd
+        ]);
     in {
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
