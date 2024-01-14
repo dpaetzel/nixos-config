@@ -96,6 +96,8 @@
 
   services.openssh.enable = true;
 
+  services.clipmenu.enable = true;
+
   services.printing = {
     enable = true;
     drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
