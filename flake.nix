@@ -58,11 +58,12 @@
         # Add nixpkgs overlays and config here. They apply to system and
         # home-manager builds.
         config = {
-          android_sdk.accept_license = true;
-          oraclejdk.accept_license = true;
           allowUnfree = true;
           allowBroken = true;
+          android_sdk.accept_license = true;
           chromium.pulseSupport = true;
+          nvidia.acceptLicense = true;
+          oraclejdk.accept_license = true;
           # permittedInsecurePackages = [
           #   # TODO I'm not sure yet which package requires this, we probably just
           #   # want to remove that then
@@ -137,6 +138,7 @@
         modules = [
           ./anaxagoras/configuration.nix
           ./anaxagoras/packages.nix
+          ./anaxagoras/audio.nix
 
           ./common.nix
           ./desktop.nix

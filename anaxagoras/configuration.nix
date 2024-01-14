@@ -64,29 +64,14 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
-
-  # High-resolution display (enabled in initial generated config).
-  hardware.video.hidpi.enable = lib.mkDefault true;
-
-  # https://github.com/musnix/musnix#base-options
-  musnix = {
-    enable = true;
-    kernel.realtime = true;
-    # There seems to be a typo in musnix (underscore instead of dash)?
-    kernel.packages = pkgs.linuxPackages-rt;
-    # TODO Maybe use rtirq options https://github.com/musnix/musnix#base-options
-    # https://nixos.wiki/wiki/JACK
-    # “magic to me” — To me as well.
-    # rtirq = {
-    #   # highList = "snd_hrtimer";
-    #   resetAll = 1;
-    #   prioLow = 0;
-    #   enable = true;
-    #   nameList = "rtc0 snd";
-    # };
-  };
 
   # services.jack = {
   #   jackd.enable = true;
@@ -134,11 +119,11 @@
   # in parallel. The default is 1. You should generally set it to the total
   # number of logical cores in your system (e.g., 16 for two CPUs with 4 cores
   # each and hyper-threading).”
-  nix.maxJobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkDefault 8;
 
   # “Sandboxing is not enabled by default in Nix due to a small performance hit
   # on each build. In pull requests for nixpkgs people are asked to test builds
   # with sandboxing enabled (see Tested using sandboxing in the pull request
   # template) because in https://nixos.org/hydra/ sandboxing is also used.”
-  nix.useSandbox = true;
+  nix.settings.sandbox = true;
 }

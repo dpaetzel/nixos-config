@@ -7,10 +7,11 @@
   # TODO Why do I have to do this here as well? Why doesn't it suffice to do
   # this when I `import nixpkgs` in flake.nix?
   nixpkgs.config = {
-    android_sdk.accept_license = true;
-    oraclejdk.accept_license = true;
     allowUnfree = true;
     chromium.pulseSupport = true;
+    android_sdk.accept_license = true;
+    oraclejdk.accept_license = true;
+    nvidia.acceptLicense = true;
   };
 
   environment.systemPackages = with pkgs;
