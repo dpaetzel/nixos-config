@@ -43,12 +43,14 @@
           makemkv
           mpv # much faster than big ol' vlc
           musescore
-          # openshot-qt # if I ever need to quickly edit video
+          openshot-qt # if I ever need to quickly edit video
           signal-desktop
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
           spotify
-          tabula # for extracting tables from PDFs
+          steamcmd
+          steam-tui
+          # tabula # for extracting tables from PDFs
           tdesktop # some people still use Telegram
           threema-desktop # Threema is OK I guess
           # teamviewer # sometimes needed, happy when its already installed
@@ -81,13 +83,13 @@
       graphical-user-interface = [
         autocutsel # the only sane(?) clipboard management
         conky
-        compton
         dmenu
         dunst
         dzen2
         libnotify
         lxappearance
         networkmanagerapplet
+        picom
         # setroot # build broken as of 2022-04-05
         xfce.thunar
         unclutter
@@ -136,7 +138,7 @@
           dfc
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
-          exa # a better `ls`
+          eza # a better `ls`
           fdupes # finding duplicates
           fd # fast and user-friendly alternative to `find`
           feedgnuplot # stream data to gnu plot for live graphs
@@ -156,7 +158,7 @@
           mr
           mosh # less laggy than SSH
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
-          inputs.emanote.outputs.defaultPackage."${system}" # Zettelkasten ftw
+          inputs.emanote.packages."${system}".default # Zettelkasten ftw
           newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
@@ -164,6 +166,7 @@
           p7zip
           pandoc
           (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+          pciutils
           pdftk
           qrencode # for creating the occasional QR code
           # signal-cli
@@ -271,9 +274,9 @@
         python3Packages.isort
         python3Packages.mypy
         python3Packages.pyflakes
-        python3Packages.poetry
-        python39Packages.yapfToml
-        inputs.mach-nix.defaultPackage."${system}"
+        # python3Packages.poetry
+        # python39Packages.yapfToml
+        # inputs.mach-nix.defaultPackage."${system}"
 
         # Purescript development
         nodejs
@@ -313,7 +316,14 @@
         # (and we don't need to start a new jack server).
         # patchage
         # PipeWire graph stuff.
+        helvum # Acc. to the pipewire repository, this should be the patchbay of choice.
         qpwgraph
+        pulseaudio # For pactl and other sound debugging equipment.
+        alsa-utils # For aplay and other sound debugging equipment.
+
+        kdenlive # openshot-qt is super buggy but we still want to edit videos sometimes.
+        # flowblade # Maybe flowblade > kdenlive? However, flowblade segfaults
+        # upon startup on 2023-11-03.
 
         # daw
         ardour

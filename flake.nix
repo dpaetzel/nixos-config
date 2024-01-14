@@ -134,7 +134,7 @@
     in {
       nixosConfigurations.anaxagoras = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs system inputs; };
+        specialArgs = { inherit pkgs system inputs pythonEnv; };
         modules = [
           ./anaxagoras/configuration.nix
           ./anaxagoras/packages.nix
