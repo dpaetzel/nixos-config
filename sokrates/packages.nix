@@ -180,8 +180,10 @@
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
           # transmission
+          todoman # Manage todos synced via CalDAV/vdirsyncer.
           tree
           unison
+          units
           unrar
           unzip
           vdirsyncer
@@ -262,6 +264,10 @@
         # haskellPackages.hlint
         # # haskellPackages.lhs2tex # TODO not working
         # # stack
+
+        # Julia development
+        julia-bin
+        pprof # View profiling data in Google's pprof format (e.g. using PProf.jl).
 
         # Python development
         autoflake
