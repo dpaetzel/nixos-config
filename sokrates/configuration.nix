@@ -117,7 +117,7 @@
 
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint pkgs.postscript-lexmark ];
+    drivers = [ pkgs.gutenprint pkgs.hplip pkgs.postscript-lexmark ];
   };
 
 

@@ -34,6 +34,7 @@
           gnuplot
           google-chrome # for DRM-protected streaming
           gparted
+          # hplipWithPlugin # not working for us as of 2024-01
           inkscape # vector graphics
           libreoffice
           lingot # guitar tuner
