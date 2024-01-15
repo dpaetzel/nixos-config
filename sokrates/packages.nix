@@ -41,7 +41,10 @@
           kitty # terminal emulator
           mpv # much faster than big ol' vlc
           musescore
-          # openshot-qt # if I ever need to quickly edit video
+          obs-studio
+          openshot-qt # if I ever need to quickly edit video # Somehow no audio gets exported
+          portfolio # aka Portfolio Performance.
+          pympress # giving talks with beamer slides was never more pleasant
           signal-desktop
           simplescreenrecorder
           # skypeforlinux # too many people use this -.-
@@ -60,7 +63,7 @@
           # (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
           # (nixpkgs20200702.wine.override { wineBuild = "wine64"; }) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
           xournal # for annotating PDFs (e.g. for signing stuff)
-          zathura
+          zathura # for viewing PDFs
           zoom-us # people make me use this >.<
         ];
         # useful esp. if there is no desktop environment
