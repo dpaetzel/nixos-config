@@ -87,6 +87,9 @@
   };
 
 
+  programs.starship.enable = true;
+
+
   # This is broken somehow as of 2022-05-31 (I always get an index too large
   # error when doing arbtt-stats on the file this creates).
   # services.arbtt = {

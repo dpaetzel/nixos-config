@@ -175,6 +175,7 @@
           # signal-cli
           socat
           sshfs
+          starship # Better prompts.
           # teamspeak_client
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
