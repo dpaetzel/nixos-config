@@ -139,6 +139,7 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "18.09";
 
+
   nix.settings = {
     # “This option defines the maximum number of jobs that Nix will try to build
     # in parallel. The default is 1. You should generally set it to the total
@@ -152,6 +153,13 @@
     # with sandboxing enabled (see Tested using sandboxing in the pull request
     # template) because in https://nixos.org/hydra/ sandboxing is also used.”
     sandbox = true;
+
+
+    # “A list of names of users that have additional rights when connecting to the
+    # Nix daemon, such as the ability to specify additional binary caches, or to
+    # import unsigned NARs.” The default only contains `"root"` but I may want
+    # to use devenvs with custom caches.
+    trusted-users = [ "root" "david" ];
   };
 
 
