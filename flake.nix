@@ -146,6 +146,16 @@
         ];
       };
 
+      nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ({ pkgs, ... }: {
+            environment.systemPackages = [ pkgs.inxi pkgs.hwinfo ];
+          })
+        ];
+      };
+
       # Expose the Python shell.
       apps.${system}.pythonShell = {
         type = "app";
