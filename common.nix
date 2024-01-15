@@ -1,4 +1,4 @@
-{ self, config, pkgs, stdenv, lib, pythonEnv, ... }:
+{ self, config, pkgs, stdenv, lib, pythonEnv, inputs, ... }:
 
 {
   # Required for ThinkPad T470 Wifi and Bluetooth drivers.
@@ -65,7 +65,30 @@
       keep-derivations = true
     '';
     settings.auto-optimise-store = true;
+
+    # I want `nix run nixpkgs#nixpkgs` to use the commit of this Flake.
+    # registry.nixpkgs.flake = nixpkgs;
+    # I don't want to use channels b/c Flakes are the way to go.
+    channel.enable = false;
   };
+
+  # https://github.com/Saethox/nixos-config/blob/main/nixos/default.nix#L35-L36
+  # Add each flake input as a registry to make Nix commands consistent with
+  # this flake.
+  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+
+  # https://github.com/Saethox/nixos-config/blob/main/nixos/default.nix#L38
+  # Add the inputs to the system's legacy channels, making legacy nix commands
+  # consistent as well.
+  # https://github.com/NixOS/nix/issues/9574
+  nix.nixPath = ["/etc/nix/path"];
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   environment.pathsToLink = [
     "/share/nix-direnv"
