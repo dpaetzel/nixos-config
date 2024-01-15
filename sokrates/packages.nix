@@ -146,6 +146,11 @@
           fd # fast and user-friendly alternative to `find`
           feedgnuplot # stream data to gnu plot for live graphs
           ffmpeg
+          fishPlugins.done # notify me of long-running jobs
+          fishPlugins.fzf-fish
+          fishPlugins.autopair # add a ) when you type (
+          fishPlugins.puffer # auto expand ... etc.
+          fishPlugins.grc grc # colorize output
           fzf # fuzzy file finder
           git
           gitAndTools.git-annex
@@ -314,6 +319,7 @@
         gcc
         gdb # sometimes you just need it
         gnumake
+        just
         # netlogo
         # openjdk
         patchelf # so handy
