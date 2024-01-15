@@ -8,6 +8,7 @@
     android_sdk.accept_license = true;
     oraclejdk.accept_license = true;
     allowUnfree = true;
+    allowBroken = true;
     chromium.pulseSupport = true;
   };
 
@@ -50,7 +51,7 @@
           # skypeforlinux # too many people use this -.-
           spotify
           # tabula # for extracting tables from PDFs
-          tdesktop # some people still use Telegram
+          # tdesktop # some people still use Telegram
           # threema-desktop # Threema is OK I guess # installed in user env
           # teamviewer # sometimes needed, happy when its already installed
           # thunderbird
@@ -134,9 +135,9 @@
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
-          direnv nix-direnv
           # dbacl
           dfc
+          direnv nix-direnv
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
           espeak # for when I can't speak
@@ -288,7 +289,7 @@
         python3Packages.mypy
         python3Packages.pyflakes
         # python3Packages.poetry
-        python39Packages.yapfToml
+        # python39Packages.yapfToml
         # inputs.mach-nix.defaultPackage."${system}"
 
         # Purescript development
