@@ -147,6 +147,10 @@
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
+    daemon.config = {
+      default-sample-format = "s24";
+      default-sample-rate = 48000;
+    };
   };
 
   services.redshift.enable = true;
