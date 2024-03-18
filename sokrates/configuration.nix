@@ -64,30 +64,32 @@
   programs.firefox = {
     enable = true;
     # This doesn't seem to work out of the box?
-    # nativeMessagingHosts.tridactyl = true;
+    nativeMessagingHosts.tridactyl = true;
     # TODO This does not work yet, need to investigate
-    package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-      # https://github.com/openlab-aux/vuizvui/blob/fc26d6ac90386bb8b5630fee569db17e7cffa882/pkgs/aszlig/firefox/default.nix#L43
-      extraNativeMessagingHosts = [
-        (lib.writeTextFile {
-          name = "tridactyl-native";
-          destination = "/lib/mozilla/native-messaging-hosts/tridactyl.json";
-          text = builtins.toJSON {
-            name = "tridactyl";
-            description = "Tridactyl native command handler";
-            path = "${pkgs.tridactyl-native}/bin/native_main";
-            type = "stdio";
-            # allowed_extensions = [ extensions.tridactyl-vim.extid ];
-            allowed_extensions = [ ];
-          };
-        })
-      ];
-    };
+    # package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+    #   # https://github.com/openlab-aux/vuizvui/blob/fc26d6ac90386bb8b5630fee569db17e7cffa882/pkgs/aszlig/firefox/default.nix#L43
+    #   extraNativeMessagingHosts = [
+    #     (lib.writeTextFile {
+    #       name = "tridactyl-native";
+    #       destination = "/lib/mozilla/native-messaging-hosts/tridactyl.json";
+    #       text = builtins.toJSON {
+    #         name = "tridactyl";
+    #         description = "Tridactyl native command handler";
+    #         path = "${pkgs.tridactyl-native}/bin/native_main";
+    #         type = "stdio";
+    #         # allowed_extensions = [ extensions.tridactyl-vim.extid ];
+    #         allowed_extensions = [ ];
+    #       };
+    #     })
+    #   ];
+    # };
     # TODO nativeMessagingHosts.passff.enable = true;
   };
 
 
   programs.starship.enable = true;
+
+  # TODO starship, eza have more options if i use home-manager
 
 
   # This is broken somehow as of 2022-05-31 (I always get an index too large
@@ -96,6 +98,15 @@
   #   enable = true;
   #   sampleRate = 30;
   # };
+
+
+  # For Gnome calendar to work.
+  #
+  # See https://nixos.wiki/wiki/GNOME/Calendar .
+  # programs.dconf.enable = true;
+  # services.gnome.evolution-data-server.enable = true;
+  # services.gnome.gnome-online-accounts.enable = true;
+  # services.gnome.gnome-keyring.enable = true;
 
 
   services.cron = {
@@ -112,6 +123,17 @@
     lidSwitch = "suspend";
     lidSwitchDocked = "ignore";
     lidSwitchExternalPower = "ignore";
+  };
+
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql;
+    ensureDatabases = [ "mlflow_db" ];
+    ensureUsers = [{
+      name = "mlflow";
+      ensurePermissions = { "mlflow_db.*" = "ALL PRIVILEGES"; };
+    }];
   };
 
 

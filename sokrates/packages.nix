@@ -28,10 +28,12 @@
           # dropbox-cli
           emacs
           evince
+          font-manager
           # firefox # installed via programs.firefox.enable
-          # tridactyl-native
           geeqie
           gimp
+          # gnome.gnome-calendar # maybe a better calendar app? no, bloaty, have
+          # to do additional things and services for it to work
           gnuplot
           google-chrome # for DRM-protected streaming
           gparted
@@ -40,6 +42,7 @@
           libreoffice
           lingot # guitar tuner
           kitty # terminal emulator
+          # morgen # better calendar app?
           mpv # much faster than big ol' vlc
           musescore
           obs-studio
@@ -52,9 +55,10 @@
           spotify
           # tabula # for extracting tables from PDFs
           # tdesktop # some people still use Telegram
+          tridactyl-native # For a better browser.
           # threema-desktop # Threema is OK I guess # installed in user env
           # teamviewer # sometimes needed, happy when its already installed
-          # thunderbird
+          thunderbird # not the best but also not the worst I guess
           # tor-browser-bundle-bin
           # vimHugeX # huge b/c want to have gvim around
           vim # huge b/c want to have gvim around
@@ -172,6 +176,7 @@
           # newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
+          rclone # for syncing encrypted content to The Cloud
           rcm
           p7zip
           pandoc
@@ -330,6 +335,9 @@
         shellcheck
         # weka
       ];
+
+
+      #! nix-shell -i python -p "python39.withPackages(ps: with ps; [ click ipython numpy (opencv4.override({ enableFfmpeg = true; enableGtk3 = true; })) tqdm ])"
 
     in sys ++ applications.main ++ applications.utility
     ++ graphical-user-interface ++ mutt ++ commandline.main
