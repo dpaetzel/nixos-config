@@ -3,8 +3,8 @@
 {
   services.xserver = {
     enable = true;
-    layout = "de";
-    xkbVariant = "neo";
+    xkb.layout = "de";
+    xkb.variant = "neo";
 
     # TODO only laptops need this
     libinput = {

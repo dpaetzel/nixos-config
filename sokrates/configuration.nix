@@ -63,9 +63,10 @@
 
   programs.firefox = {
     enable = true;
+    # TODO Retry getting this to work using “please add `tridactyl-native` to
+    # `programs.firefox.nativeMessagingHosts.packages` instead”.
     # This doesn't seem to work out of the box?
-    nativeMessagingHosts.tridactyl = true;
-    # TODO This does not work yet, need to investigate
+    # nativeMessagingHosts.tridactyl = true;
     # package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     #   # https://github.com/openlab-aux/vuizvui/blob/fc26d6ac90386bb8b5630fee569db17e7cffa882/pkgs/aszlig/firefox/default.nix#L43
     #   extraNativeMessagingHosts = [
