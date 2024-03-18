@@ -33,7 +33,19 @@
     backend = "glx";
     fade = true;
     inactiveOpacity = 0.7;
-    opacityRules = [ "100:class_g = 'dmenu'" ];
+    opacityRules = [
+      "100:class_g = 'dmenu'"
+      # Not working.
+      # "100:class_g = 'gimp'"
+      # "100:class_i = 'gimp'"
+      # "100:class_g = 'Gimp'"
+      # "100:class_i = 'Gimp'"
+    ];
     vSync = true;
+    settings = {
+      "detect-transient" = true;
+      "detect-client-leader" = true;
+      "focus-exclude" = [ "class_g = 'Gimp'" ];
+    };
   };
 }
