@@ -74,9 +74,9 @@
             khal = super.khal.overridePythonAttrs (_ : { doCheck = false; });
           })
           yapfToml
-          (self: super: {
-            nix-direnv = super.nix-direnv.override { enableFlakes = true; };
-          })
+          # (self: super: {
+          #   nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+          # })
           # (self: super: {
           #   steam = super.steam.override { extraPkgs = pkgs: with pkgs; [ super.openssl ]; };
           # })

@@ -131,7 +131,7 @@
           curl
           # dbacl
           dfc
-          direnv nix-direnv
+          # direnv nix-direnv
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
           espeak # for when I can't speak
@@ -162,7 +162,7 @@
           mosh # less laggy than SSH
           # While I started using emanote my Emacs stuff still relies on neuron
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
-          inputs.emanote.packages."${system}".default # Zettelkasten ftw
+          # inputs.emanote.packages."${system}".default # Zettelkasten ftw
           # newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
