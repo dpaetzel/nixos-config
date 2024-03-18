@@ -60,6 +60,7 @@
           android_sdk.accept_license = true;
           oraclejdk.accept_license = true;
           allowUnfree = true;
+          allowBroken = true;
           chromium.pulseSupport = true;
           # permittedInsecurePackages = [
           #   # TODO I'm not sure yet which package requires this, we probably just

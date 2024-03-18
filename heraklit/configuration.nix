@@ -80,11 +80,11 @@
   # each and hyper-threading).”
   nix.maxJobs = 4;
 
-  nixpkgs.config = {
-    kodi = {
-      enableAdvancedLauncher = true;
-    };
-  };
+  # nixpkgs.config = {
+  #   kodi = {
+  #     enableAdvancedLauncher = true;
+  #   };
+  # };
 
   environment.systemPackages =
     with (import ../packages.nix pkgs);

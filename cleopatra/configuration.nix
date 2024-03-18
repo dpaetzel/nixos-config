@@ -94,7 +94,7 @@
   # disable the internal wifi-card as it interfers with the USB one
   # networking.networkmanager.unmanaged = [ "mac:40:f0:2f:57:6b:47" ];
 
-  nixpkgs.config.chromium.gnomeSupport = true;
+  # nixpkgs.config.chromium.gnomeSupport = true;
 
   nix.maxJobs = 4;
 
