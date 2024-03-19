@@ -162,6 +162,7 @@
           mosh # less laggy than SSH
           # While I started using emanote my Emacs stuff still relies on neuron
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
+          emanote # Zettelkasten ftw
           # inputs.emanote.packages."${system}".default # Zettelkasten ftw
           # newsboat # fetches RSS feeds
           nixfmt

@@ -24,9 +24,9 @@
       # "github:dpaetzel/nixpkgs/1e2590679d0ed2cee2736e8b80373178d085d263";
       "github:dpaetzel/nixpkgs/dpaetzel/nixos-config";
 
-    emanote.url = "github:srid/emanote";
-    # This leads to a very long compile.
-    emanote.inputs.nixpkgs.follows = "nixpkgs";
+    # emanote.url = "github:srid/emanote";
+    # # This leads to a very long compile.
+    # emanote.inputs.nixpkgs.follows = "nixpkgs";
 
     neuron.url = "github:srid/neuron/master";
     # This seems to be broken?
