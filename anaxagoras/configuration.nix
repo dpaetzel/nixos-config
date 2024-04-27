@@ -109,6 +109,9 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
   '';
 
+  # Required for udiskie.
+  services.udisks2.enable = true;
+
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles =
