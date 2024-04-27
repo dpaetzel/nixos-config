@@ -44,6 +44,7 @@
           mpv # much faster than big ol' vlc
           musescore
           openshot-qt # if I ever need to quickly edit video
+          rclone # for syncing between drives as well as with cloud
           signal-desktop
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
