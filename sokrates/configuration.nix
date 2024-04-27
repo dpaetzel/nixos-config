@@ -163,6 +163,10 @@
   '';
 
 
+  # Required for udiskie.
+  services.udisks2.enable = true;
+
+
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
