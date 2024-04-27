@@ -8,6 +8,7 @@
       applications = {
         main = [
           androidenv.androidPkgs_9_0.androidsdk
+          anki # try to get smarter, always
           audacity
           lame
           # chromium
