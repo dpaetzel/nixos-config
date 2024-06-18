@@ -124,6 +124,7 @@
 
       commandline = {
         main = [
+          autossh # for the occasional SSH tunnel which should be kept open
           # aqbanking
           atool
           # (haskellPackages.arbtt)
