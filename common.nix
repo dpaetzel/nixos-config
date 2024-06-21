@@ -147,6 +147,7 @@
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
+    # I don't know why past-David put this here.
     daemon.config = {
       default-sample-format = "s24";
       default-sample-rate = 48000;

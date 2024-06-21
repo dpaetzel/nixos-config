@@ -57,12 +57,6 @@
   # other services
 
 
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-  };
-
-
   hardware.bluetooth.enable = true;
 
 
@@ -105,23 +99,6 @@
   programs.starship.enable = true;
 
   # TODO starship, eza have more options if i use home-manager
-
-
-  # This is broken somehow as of 2022-05-31 (I always get an index too large
-  # error when doing arbtt-stats on the file this creates).
-  # services.arbtt = {
-  #   enable = true;
-  #   sampleRate = 30;
-  # };
-
-
-  # For Gnome calendar to work.
-  #
-  # See https://nixos.wiki/wiki/GNOME/Calendar .
-  # programs.dconf.enable = true;
-  # services.gnome.evolution-data-server.enable = true;
-  # services.gnome.gnome-online-accounts.enable = true;
-  # services.gnome.gnome-keyring.enable = true;
 
 
   services.cron = {
@@ -191,6 +168,14 @@
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+
+
+  # This would have to depend on VPN being up and that's just too much of a
+  # hassle to script. For now, I'll use autossh instead.
+  # systemd.services.mlflowtunnel = {
+  #   enable = true;
+  #   description = "SSH tunnel for mlflow";
+  # };
 
 
   # The NixOS release to be compatible with for stateful data such as databases.
