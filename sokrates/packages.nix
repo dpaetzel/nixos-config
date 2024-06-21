@@ -158,6 +158,7 @@
           khal # calendar
           khard # contacts
           ledger # accounting made nice
+          libcgroup # the occasional process limits using cgcreate and friends
           lzip # some people do use LZMA compression
           magic-wormhole
           mr

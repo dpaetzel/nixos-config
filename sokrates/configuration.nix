@@ -129,6 +129,9 @@
   };
 
 
+  services.clipmenu.enable = true;
+
+
   services.openssh.enable = true;
 
 

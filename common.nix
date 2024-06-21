@@ -42,6 +42,7 @@
       lmmath
       lmodern
       noto-fonts-emoji # seems to be broken as of 2023-02
+      noto-fonts-monochrome-emoji
       twitter-color-emoji
       (nerdfonts.override { fonts = ["FiraCode"]; })
       powerline-fonts
