@@ -70,11 +70,15 @@
       # General purpose Python shell I use everyday (I have an alias that runs
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
       pythonEnv = let
-        cmdstanpy = pkgs.python.pkgs.buildPythonPackage rec {
+        # We use the default Python 3 currently used by nixpkgs (3.11.9 as of
+        # 2024-06-22) because the version does really not matter much in
+        # everyday use.
+        mypython = pkgs.python3;
+        cmdstanpy = mypython.pkgs.buildPythonPackage rec {
           pname = "cmdstanpy";
           version = "1.0.7";
 
-          propagatedBuildInputs = with pkgs.python.pkgs; [ numpy pandas tqdm ujson ];
+          propagatedBuildInputs = with mypython.pkgs; [ numpy pandas tqdm ujson ];
 
           patches =
             [ "${self}/0001-Remove-dynamic-cmdstan-version-selection.patch" ];
@@ -87,13 +91,13 @@
 
           doCheck = false;
 
-          src = pkgs.python.pkgs.fetchPypi {
+          src = mypython.pkgs.fetchPypi {
             inherit pname version;
             sha256 = "sha256-AyzbqfVKup4pLl/JgDcoNKFi5te4QfO7KKt3pCNe4N8=";
           };
         };
 
-      in pkgs.python310.withPackages (ps:
+      in mypython.withPackages (ps:
         with ps; [
           # pkgs.cmdstan # Rather large.
           # cmdstanpy
