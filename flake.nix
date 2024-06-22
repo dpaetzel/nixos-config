@@ -9,32 +9,14 @@
   # inputs.nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
   inputs = {
     nixpkgs.url =
-      # "github:NixOS/nixpkgs/6d8215281b2f87a5af9ed7425a26ac575da0438f";
-      # 2022-04-05
-      # "github:NixOS/nixpkgs/bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13";
-      # 2022-06-22
-      # "github:NixOS/nixpkgs/0d68d7c857fe301d49cdcd56130e0beea4ecd5aa";
-      # 2022-11-10
-      # "github:NixOS/nixpkgs/093268502280540a7f5bf1e2a6330a598ba3b7d0";
-      # 2023-01-15
-      # "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
-      # 2023-02-09
-      # "github:NixOS/nixpkgs/fab09085df1b60d6a0870c8a89ce26d5a4a708c2";
-      # 2023-03-10
-      # "github:dpaetzel/nixpkgs/1e2590679d0ed2cee2736e8b80373178d085d263";
       "github:dpaetzel/nixpkgs/dpaetzel/nixos-config";
-
-    # emanote.url = "github:srid/emanote";
-    # # This leads to a very long compile.
-    # emanote.inputs.nixpkgs.follows = "nixpkgs";
 
     neuron.url = "github:srid/neuron/master";
     # This seems to be broken?
     # neuron.inputs.nixpkgs.follows = "nixpkgs";
 
-    # mach-nix.url = "github:DavHau/mach-nix/master";
-    # mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     musnix.url = "github:musnix/musnix";
+    musnix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
