@@ -7,7 +7,7 @@
       sys = [ cryptsetup ntfs3g ];
       applications = {
         main = [
-          androidenv.androidPkgs_9_0.androidsdk
+          android-tools # I sometimes need adb
           anki # try to get smarter, always
           audacity
           lame
