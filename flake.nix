@@ -24,14 +24,15 @@
     overlays.url = "github:dpaetzel/overlays/master";
     overlays.inputs.nixpkgs.follows = "nixpkgs";
 
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     # TODO Maybe use these
-    # home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, nixpkgs, musnix, nixos-hardware, overlays, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, musnix, nixos-hardware, overlays, ... }:
 
     let
       system = "x86_64-linux";
@@ -147,6 +148,19 @@
           ./desktop.nix
           ./theme.nix
           ./workstation.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              # Use the global nixpkgs instance.
+              useGlobalPkgs = true;
+              # Store user packages in `/etc/profiles/per-user/<username>`.
+              useUserPackages = true;
+              # I don't need this right now.
+              # extraSpecialArgs = {inherit inputs outputs;};
+              users.david = import ./sokrates/home.nix;
+            };
+          }
         ];
       };
 
