@@ -132,7 +132,7 @@
           cachix # another Nix cache, originally required for installing neuron
           curl
           # dbacl
-          dfc
+          dfc # df looks ugly, dfc less so because more colors
           # direnv nix-direnv
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
@@ -155,12 +155,12 @@
           hugo
           inotify-tools
           jq # command line json query tool
-          khal # calendar
-          khard # contacts
+          # khal # calendar
+          # khard # contacts
           ledger # accounting made nice
           libcgroup # the occasional process limits using cgcreate and friends
           lzip # some people do use LZMA compression
-          magic-wormhole
+          # magic-wormhole
           mr
           mosh # less laggy than SSH
           # While I started using emanote my Emacs stuff still relies on neuron
@@ -168,7 +168,7 @@
           emanote # Zettelkasten ftw
           # inputs.emanote.packages."${system}".default # Zettelkasten ftw
           # newsboat # fetches RSS feeds
-          nixfmt
+          nixfmt-rfc-style
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
           rclone # for syncing encrypted content to The Cloud
           rcm
@@ -180,18 +180,18 @@
           # signal-cli
           socat
           sshfs
-          starship # Better prompts.
+          # starship # Better prompts but enabled via program.starship.enable.
           # teamspeak_client
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
           # transmission
-          todoman # Manage todos synced via CalDAV/vdirsyncer.
+          # todoman # Manage todos synced via CalDAV/vdirsyncer.
           tree
           unison
           units
           unrar
           unzip
-          vdirsyncer
+          # vdirsyncer
           wally-cli # for flashing my flashy keyboard
           # weechat
           zip
@@ -232,7 +232,7 @@
           # wirelesstools
           which
           whois
-          youtube-dl
+          # youtube-dl # Does not work reliably, currently using ytmdl instead
           xclip
         ];
       };
