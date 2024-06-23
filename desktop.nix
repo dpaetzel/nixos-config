@@ -6,15 +6,6 @@
     xkb.layout = "de";
     xkb.variant = "neo";
 
-    # TODO only laptops need this
-    libinput = {
-      enable = true;
-      touchpad = {
-        scrollMethod = "twofinger";
-        disableWhileTyping = true;
-      };
-    };
-
     displayManager.lightdm.enable = true;
 
     desktopManager.xterm.enable = false;

@@ -4,6 +4,7 @@
 {
   networking.hostName = "sokrates";
 
+  laptop.enable = true;
 
   users.extraUsers.david = {
     shell = "${pkgs.fish}/bin/fish";
@@ -16,7 +17,6 @@
       "networkmanager"
       "plugdev"
       "vboxusers"
-      "video" # to be able to use `light`
       "wheel"
     ];
   };
@@ -111,13 +111,6 @@
   };
 
 
-  services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
-  };
-
-
   services.mysql = {
     enable = true;
     package = pkgs.mysql;
@@ -139,9 +132,6 @@
     enable = true;
     drivers = [ pkgs.gutenprint pkgs.hplip pkgs.postscript-lexmark ];
   };
-
-
-  services.tlp.enable = true; # power management/saving for laptops
 
 
   # udev rule for my android phone(s)

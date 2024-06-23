@@ -91,6 +91,7 @@
     })
     config.nix.registry;
 
+  # TODO Is this still required?
   environment.pathsToLink = [
     "/share/nix-direnv"
   ];
@@ -121,9 +122,6 @@
 
     "_selected_drivers" = "ath9k";
   };
-
-  # Proper backlight management.
-  programs.light.enable = true;
 
   # Screen locking.
   programs.slock.enable = true;

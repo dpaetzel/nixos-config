@@ -138,6 +138,7 @@
         inherit system pkgs;
         specialArgs = { inherit pkgs system inputs pythonEnv; };
         modules = [
+          ./nixos
           # Not quite my t470 but close enough.
           nixos-hardware.nixosModules.lenovo-thinkpad-t470s
           ./sokrates/configuration.nix
