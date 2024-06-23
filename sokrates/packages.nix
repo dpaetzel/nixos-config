@@ -180,7 +180,7 @@
           # signal-cli
           socat
           sshfs
-          # starship # Better prompts but enabled via program.starship.enable.
+          starship # `programs.starship.enable` alone doesn't seem to cut it for fish
           # teamspeak_client
           # tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
