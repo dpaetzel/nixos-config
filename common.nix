@@ -22,6 +22,10 @@
     firewall.enable = false;
   };
 
+  environment.systemPackages = with pkgs; [
+    trash-cli # Put stuff into freedesktop-compatible trash.
+  ];
+
   # Installed fonts.
   fonts = {
     fontDir.enable = true;
@@ -136,6 +140,8 @@
       pl="nix run path:/home/david/NixOS#pythonShell -- --profile=p";
       # No profile.
       pn = "${pythonEnv}/bin/ipython";
+      mvt = "trash-put --verbose";
+      rm = "echo Use `mvt` or `command rm`";
     };
   };
 
