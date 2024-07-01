@@ -145,7 +145,13 @@
     };
   };
 
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    settings = {
+      default-cache-ttl = 86400;
+    };
+  };
   # Must be disabled for GnuPGAgent to work (or so someone said once).
   programs.ssh.startAgent = false;
 
