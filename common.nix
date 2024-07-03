@@ -1,5 +1,12 @@
 { self, config, pkgs, stdenv, lib, pythonEnv, inputs, ... }:
 
+# Emacs is central to everything, so let's pin its version to more
+# consciously upgrade it.
+# TODO Put this into an overlay so I don't have to provide it to *all* scripts
+# below but can leave the curly braces empty
+let myemacs = pkgs.emacs29;
+in
+
 {
   # Required for ThinkPad T470 Wifi and Bluetooth drivers.
   hardware.enableRedistributableFirmware = true;
@@ -22,9 +29,17 @@
     firewall.enable = false;
   };
 
-  environment.systemPackages = with pkgs; [
-    trash-cli # Put stuff into freedesktop-compatible trash.
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      trash-cli # Put stuff into freedesktop-compatible trash.
+    ]
+    # Create a script package for all shell scripts in ./scripts.
+    ++ (map (fpath: pkgs.callPackage fpath { inherit myemacs; }) (lib.filesystem.listFilesRecursive ./scripts));
+    # TODO While this avoids repeating `writeShellScriptBin` in each of the
+    # script files, this does not allow me to specify script dependencies
+    # ++ (map (
+    #   fname: writeShellScriptBin (toString fname) (builtins.readFile fname)
+    # ) (lib.filesystem.listFilesRecursive ./scripts));
 
   # Installed fonts.
   fonts = {
@@ -163,6 +178,14 @@
       default-sample-format = "s24";
       default-sample-rate = 48000;
     };
+  };
+
+  services.emacs = {
+    enable = true;
+    defaultEditor = true;
+    # Emacs is central to everything, so let's pin its version to more
+    # consciously upgrade it.
+    package = myemacs;
   };
 
   services.redshift.enable = true;

@@ -27,7 +27,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO Maybe use these
+    # TODO Maybe use these, but they're both somewhat broken in 2024
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };

@@ -17,7 +17,7 @@
           # discord # some people force me to use this
           # docker docker_compose
           # dropbox-cli
-          emacs
+          # emacs # I'm using the service now.
           evince
           font-manager
           # firefox # installed via programs.firefox.enable
