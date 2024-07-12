@@ -54,6 +54,11 @@
           # ];
         };
         overlays = with overlays; [
+          (self: super: {
+            # Emacs is central to everything, so let's pin its version to more
+            # consciously upgrade it.
+            myemacs = super.emacs29;
+          })
           # https://github.com/NixOS/nixpkgs/issues/205014#issuecomment-1402380175
           (self: super: {
             khal = super.khal.overridePythonAttrs (_: { doCheck = false; });

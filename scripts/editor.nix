@@ -1,5 +1,7 @@
 { writeShellScriptBin, myemacs }:
 
 (writeShellScriptBin "editor" ''
-  pgrep emacs && ${myemacs}/bin/emacsclient -n $@ || ${myemacs}/bin/emacs -nw $@
+  pgrep emacs \
+    && ${myemacs}/bin/emacsclient --create-frame --no-wait $@ \
+    || ${myemacs}/bin/emacs --tty $@
 '')
