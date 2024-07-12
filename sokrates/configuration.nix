@@ -18,7 +18,6 @@
       "plugdev"
       "vboxusers"
       "wheel"
-      "ydotool"
     ];
   };
 
