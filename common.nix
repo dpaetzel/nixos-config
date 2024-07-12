@@ -188,6 +188,8 @@ in
     package = myemacs;
   };
 
+  programs.ydotool.enable = true;
+
   services.redshift.enable = true;
   location.latitude = 48.3;
   location.longitude = 10.9;
