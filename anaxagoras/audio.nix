@@ -9,14 +9,16 @@
     # I don't think I want an ALSA sequencer.
     alsaSeq.enable = false;
 
-    # There seems to be a typo in musnix (underscore instead of dash) which is
-    # why I have to set this option to a non-defaul value.
+    # Musnix is weird, this only seems to work as of 2024-06 because I exposed
+    # the overlays via a Flake output.
     #
-    # Also, there's a problem with NVidia (probably because the driver is too
-    # *new* if I read this correctly?). Seems to be this issue
+    # Also, there was once(?) a problem with NVidia (probably because the driver
+    # is too *new* if I read this correctly?). Seems to be this issue
     # https://github.com/musnix/musnix/issues/127 . I solved this by choosing
-    # the _latest kernel on 2023-10-30 but I don't know why that works.
-    kernel.packages = pkgs.linuxPackages-rt_latest;
+    # the `_latest` kernel on 2023-10-30 but I don't know why that works or
+    # whether it is still relevant.
+    kernel.packages = pkgs.linuxPackages_6_9_rt;
+
 
     # 00:1b.0 Audio device: Intel Corporation 9 Series Chipset Family HD Audio Controller
     # 01:00.1 Audio device: NVIDIA Corporation GK104 HDMI Audio Controller (rev a1)

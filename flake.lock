@@ -91,15 +91,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1718505366,
-        "narHash": "sha256-lOfBFT5M7ns3XcKLVoN/6oh63FWPtuPYDYxC//Z8mhg=",
-        "owner": "musnix",
+        "lastModified": 1720964546,
+        "narHash": "sha256-HSGkLtz8Qu1RTl9FcdxgGcBTTJshXOMhEPeMPypb5wc=",
+        "owner": "dpaetzel",
         "repo": "musnix",
-        "rev": "cf456e0ae1548eb16c485ca7157d9dd5b8525dd5",
+        "rev": "89f3b8a420fdb687d7feb36c81920159bd1a9f89",
         "type": "github"
       },
       "original": {
-        "owner": "musnix",
+        "owner": "dpaetzel",
+        "ref": "expose-overlay",
         "repo": "musnix",
         "type": "github"
       }

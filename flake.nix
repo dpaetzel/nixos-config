@@ -15,7 +15,7 @@
     # This seems to be broken?
     # neuron.inputs.nixpkgs.follows = "nixpkgs";
 
-    musnix.url = "github:musnix/musnix";
+    musnix.url = "github:dpaetzel/musnix/expose-overlay";
     musnix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -59,6 +59,7 @@
             khal = super.khal.overridePythonAttrs (_: { doCheck = false; });
           })
           yapfToml
+          musnix.overlays.musnix
           # (self: super: {
           #   nix-direnv = super.nix-direnv.override { enableFlakes = true; };
           # })
@@ -123,6 +124,8 @@
         inherit system pkgs;
         specialArgs = { inherit pkgs system inputs pythonEnv; };
         modules = [
+          musnix.nixosModules.musnix
+
           ./anaxagoras/configuration.nix
           ./anaxagoras/packages.nix
           ./anaxagoras/audio.nix
@@ -130,8 +133,6 @@
           ./common.nix
           ./desktop.nix
           ./theme.nix
-
-          musnix.nixosModules.musnix
         ];
       };
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
