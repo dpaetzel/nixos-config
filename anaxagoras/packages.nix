@@ -4,22 +4,12 @@
 
 {
 
-  # TODO Why do I have to do this here as well? Why doesn't it suffice to do
-  # this when I `import nixpkgs` in flake.nix?
-  nixpkgs.config = {
-    allowUnfree = true;
-    chromium.pulseSupport = true;
-    android_sdk.accept_license = true;
-    oraclejdk.accept_license = true;
-    nvidia.acceptLicense = true;
-  };
-
   environment.systemPackages = with pkgs;
     let
       sys = [ cryptsetup ntfs3g ];
       applications = {
         main = [
-          androidenv.androidPkgs_9_0.androidsdk
+          android-tools
           audacity
           lame
           # chromium
@@ -159,7 +149,7 @@
           mr
           mosh # less laggy than SSH
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
-          inputs.emanote.packages."${system}".default # Zettelkasten ftw
+          emanote # Zettelkasten ftw
           newsboat # fetches RSS feeds
           nixfmt
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
