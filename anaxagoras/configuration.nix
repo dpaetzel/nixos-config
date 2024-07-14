@@ -88,7 +88,7 @@
     jack.enable = true;
     pulse.enable = true;
   };
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = lib.mkForce false;
   # Acc. to NixOS wiki, rtkit is optional but recommended for using PipeWire.
   security.rtkit.enable = true;
 
