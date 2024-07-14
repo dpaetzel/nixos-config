@@ -34,6 +34,11 @@
     #   nameList = "rtc0 snd";
     # };
   };
+
+  environment.systemPackages = with pkgs; [
+      jack-example-tools
+      alsa-scarlett-gui
+  ];
 }
 
 
