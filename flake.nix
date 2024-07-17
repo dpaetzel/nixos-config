@@ -58,6 +58,10 @@
             # Emacs is central to everything, so let's pin its version to more
             # consciously upgrade it.
             myemacs = super.emacs29;
+            # We use the default Python 3 currently used by nixpkgs (3.11.9 as
+            # of 2024-06-22) because the version does really not matter much in
+            # everyday use.
+            mypython = super.python3;
           })
           # https://github.com/NixOS/nixpkgs/issues/205014#issuecomment-1402380175
           (self: super: {
@@ -77,15 +81,11 @@
       # General purpose Python shell I use everyday (I have an alias that runs
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
       pythonEnv = let
-        # We use the default Python 3 currently used by nixpkgs (3.11.9 as of
-        # 2024-06-22) because the version does really not matter much in
-        # everyday use.
-        mypython = pkgs.python3;
-        cmdstanpy = mypython.pkgs.buildPythonPackage rec {
+        cmdstanpy = pkgs.mypython.pkgs.buildPythonPackage rec {
           pname = "cmdstanpy";
           version = "1.0.7";
 
-          propagatedBuildInputs = with mypython.pkgs; [ numpy pandas tqdm ujson ];
+          propagatedBuildInputs = with pkgs.mypython.pkgs; [ numpy pandas tqdm ujson ];
 
           patches =
             [ "${self}/0001-Remove-dynamic-cmdstan-version-selection.patch" ];
@@ -98,13 +98,13 @@
 
           doCheck = false;
 
-          src = mypython.pkgs.fetchPypi {
+          src = pkgs.mypython.pkgs.fetchPypi {
             inherit pname version;
             sha256 = "sha256-AyzbqfVKup4pLl/JgDcoNKFi5te4QfO7KKt3pCNe4N8=";
           };
         };
 
-      in mypython.withPackages (ps:
+      in pkgs.mypython.withPackages (ps:
         with ps; [
           # pkgs.cmdstan # Rather large.
           # cmdstanpy
