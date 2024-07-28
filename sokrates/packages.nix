@@ -310,6 +310,7 @@
               newtx scheme-full wrapfig xstring;
           })
         biber
+        pplatex # supposedly better logs
 
         # Everything else
         automake
