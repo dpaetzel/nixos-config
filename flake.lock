@@ -160,16 +160,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1718895438,
-        "narHash": "sha256-k3JqJrkdoYwE3fHE6xGDY676AYmyh4U2Zw+0Bwe5DLU=",
+        "lastModified": 1721147740,
+        "narHash": "sha256-xAt1Tp/egEs5HLmchvfN5fD/opRPp0f5O820IgPIogg=",
         "owner": "dpaetzel",
         "repo": "nixpkgs",
-        "rev": "d603719ec6e294f034936c0d0dc06f689d91b6c3",
+        "rev": "0fa1fbd5fcc4f4d76622d730c64fd81f6278bd03",
         "type": "github"
       },
       "original": {
         "owner": "dpaetzel",
-        "ref": "dpaetzel/nixos-config",
+        "ref": "update-clipmenu",
         "repo": "nixpkgs",
         "type": "github"
       }

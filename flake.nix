@@ -9,7 +9,8 @@
   # inputs.nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
   inputs = {
     nixpkgs.url =
-      "github:dpaetzel/nixpkgs/dpaetzel/nixos-config";
+      # "github:dpaetzel/nixpkgs/dpaetzel/nixos-config";
+      "github:dpaetzel/nixpkgs/update-clipmenu";
 
     neuron.url = "github:srid/neuron/master";
     # This seems to be broken?
