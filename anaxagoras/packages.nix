@@ -324,8 +324,10 @@
 
         # effects
         calf
-        mooSpace
         lsp-plugins
+        mooSpace
+        talentedhack
+        x42-plugins
 
         # eqs/filters
         eq10q
