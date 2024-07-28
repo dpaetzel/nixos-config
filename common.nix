@@ -149,6 +149,8 @@
       # No profile.
       pn = "${pythonEnv}/bin/ipython";
       mvt = "trash-put --verbose";
+      # Unclear why this is not part of the `trash-*` utilities.
+      trash-size = "du -hs ~/.local/share/Trash";
       rm = "echo Use `mvt` or `command rm`";
     };
   };
