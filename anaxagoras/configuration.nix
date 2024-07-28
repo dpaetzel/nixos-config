@@ -73,11 +73,6 @@
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
-  # services.jack = {
-  #   jackd.enable = true;
-  #   alsa.enable = true;
-  # };
-
   # I'm a big noob and can't jack get to work with ardour somehow.
   services.pipewire = {
     enable = true;
