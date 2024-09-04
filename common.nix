@@ -199,4 +199,7 @@
     keyMap = "neo";
   };
   time.timeZone = "Europe/Berlin";
+
+  dp.fish.enable = true;
+  dp.latex.enable = true;
 }

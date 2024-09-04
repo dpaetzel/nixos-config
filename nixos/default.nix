@@ -1,3 +1,7 @@
 {
-  imports = [ ./laptop ];
+  imports = [
+    ./fish
+    ./laptop
+    ./latex
+  ];
 }
