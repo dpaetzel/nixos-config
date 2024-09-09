@@ -34,7 +34,11 @@
   stdout, stderr = proc.communicate(input=options)
   choice = stdout.decode().strip()
 
-  if choice == disconnect.strip():
+  # If we didn't select anything, don't do anything (esp. don't disconnect me
+  # from everything).
+  if proc.returncode == 1:
+      sys.exit(1)
+  elif choice == disconnect.strip():
       for addr in devs.values():
           proc = Popen(["${bluez}/bin/bluetoothctl", "disconnect", addr])
           proc.communicate()
