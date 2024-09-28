@@ -21,7 +21,7 @@ in
       (pkgs.writeScriptBin "mkrefs" ''
         #!${pkgs.fish}/bin/fish
 
-        find ~/Literatur \
+        find $HOME/3Ressourcen/Literatur \
             -iname '*.bib' \
             '!' -iname 'References.bib' \
             -exec echo '{}' \; \

@@ -86,8 +86,7 @@ in
           function fish_title; end
         end
 
-set -xg PATH $PATH "$HOME/Bin"
-set -xg TEMPORARY "$HOME/Temporary"
+set -xg PATH $PATH "$HOME/5Code/utility"
 set -xg INBOX "$HOME/Inbox"
 
 
