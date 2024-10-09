@@ -70,6 +70,9 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # Not the best but also not the worst, I guess.
+  programs.thunderbird.enable = true;
+
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
