@@ -132,6 +132,7 @@
         modules = [
           musnix.nixosModules.musnix
 
+          ./nixos
           ./anaxagoras/configuration.nix
           ./anaxagoras/packages.nix
           ./anaxagoras/audio.nix
@@ -139,6 +140,19 @@
           ./common.nix
           ./desktop.nix
           ./theme.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              # Use the global nixpkgs instance.
+              useGlobalPkgs = true;
+              # Store user packages in `/etc/profiles/per-user/<username>`.
+              useUserPackages = true;
+              # I don't need this right now.
+              # extraSpecialArgs = {inherit inputs outputs;};
+              users.david = import ./anaxagoras/home.nix;
+            };
+          }
         ];
       };
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
