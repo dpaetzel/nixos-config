@@ -16,12 +16,24 @@ in
   options.dp.fish.enable = mkEnableOption "Enable my Fish config";
 
   config = mkIf cfg.enable {
-    # programs.fish = {
-    #   enable = true;
-    # };
-
-    # Consider to use hlissner's abstraction here instead, see
+    # Consider to use hlissner's abstraction here instead of
+    # `home-manager.users.david`, see
     # https://github.com/hlissner/dotfiles/blob/master/modules/home.nix#L78
+
+    home-manager.users.david.programs = {
+        direnv.enableFishIntegration = true;
+        eza.enableFishIntegration = true;
+        fzf.enableFishIntegration = true;
+        kitty.shellIntegration.enableFishIntegration = true;
+    };
+
+    home-manager.users.david.services.gpg-agent.enableFishIntegration = true;
+
+    home-manager.users.david.programs.starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     home-manager.users.david.programs.fish = {
       enable = true;
       functions = {
