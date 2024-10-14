@@ -34,7 +34,6 @@
           mpv # much faster than big ol' vlc
           musescore
           openshot-qt # if I ever need to quickly edit video
-          rclone # for syncing between drives as well as with cloud
           signal-desktop
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
@@ -53,7 +52,7 @@
           # (nixpkgs20200702.wine) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
           # (nixpkgs20200702.wine.override { wineBuild = "wine64"; }) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
           xournal # for annotating PDFs (e.g. for signing stuff)
-          zathura
+          zathura # for viewing PDFs
           zoom-us # people make me use this >.<
         ];
         # useful esp. if there is no desktop environment
@@ -118,9 +117,10 @@
 
       commandline = {
         main = [
-          aqbanking
+          autossh # for the occasional SSH tunnel which should be kept open
+          # aqbanking
           atool
-          (haskellPackages.arbtt)
+          # (haskellPackages.arbtt)
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
@@ -134,6 +134,11 @@
           fd # fast and user-friendly alternative to `find`
           feedgnuplot # stream data to gnu plot for live graphs
           ffmpeg
+          fishPlugins.done # notify me of long-running jobs
+          fishPlugins.fzf-fish
+          fishPlugins.autopair # add a ) when you type (
+          fishPlugins.puffer # auto expand ... etc.
+          fishPlugins.grc grc # colorize output
           fzf # fuzzy file finder
           git
           gitAndTools.git-annex
@@ -141,18 +146,23 @@
           hledger # accounting made nicer
           hugo
           inotify-tools
-          khal # calendar
-          khard # contacts
+          jq # command line json query tool
+          # khal # calendar
+          # khard # contacts
           ledger # accounting made nice
+          libcgroup # the occasional process limits using cgcreate and friends
           lzip # some people do use LZMA compression
-          magic-wormhole
+          # magic-wormhole
           mr
           mosh # less laggy than SSH
+          # While I started using emanote my Emacs stuff still relies on neuron
           inputs.neuron.outputs.defaultPackage."${system}" # Zettelkasten ftw
           emanote # Zettelkasten ftw
-          newsboat # fetches RSS feeds
+          # inputs.emanote.packages."${system}".default # Zettelkasten ftw
+          # newsboat # fetches RSS feeds
           nixfmt-rfc-style
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
+          rclone # for syncing encrypted content to The Cloud
           rcm
           p7zip
           pandoc
@@ -161,20 +171,24 @@
           pdftk
           qrencode # for creating the occasional QR code
           # signal-cli
+          socat
+          sshfs
           # teamspeak_client
           tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
           transmission
           tree
           unison
+          units
           unrar
           unzip
-          vdirsyncer
+          # vdirsyncer
           wally-cli # for flashing my flashy keyboard
           # weechat
           zip
         ];
         utility = [
+          abduco # Detach from commands and reattach later.
           acpi # for a more nicely formatted battery status in conky
           bind # for the occasional `dig`
           cifs-utils
@@ -195,14 +209,14 @@
           nmap
           # pastebinit
           pdfgrep
-          pmount
+          # pmount
           poppler_utils
           # powertop
           psmisc
           pv
           python3Packages.pygments
           ripgrep
-          tmux
+          tmux # Probably suboptimal, use abduco instead?
           traceroute
           usbutils
           veracrypt
@@ -210,7 +224,7 @@
           # wirelesstools
           which
           whois
-          youtube-dl
+          # youtube-dl # Does not work reliably, currently using ytmdl instead
           xclip
         ];
       };
@@ -262,6 +276,7 @@
         #     seaborn
         #   ]
         # ))
+        python3Packages.black
         python3Packages.isort
         python3Packages.mypy
         python3Packages.pyflakes
@@ -283,6 +298,7 @@
               newtx scheme-full wrapfig xstring;
           })
         biber
+        pplatex # supposedly better logs
 
         # Everything else
         automake
@@ -291,7 +307,8 @@
         gcc
         gdb # sometimes you just need it
         gnumake
-        netlogo
+        just
+        # netlogo
         # openjdk
         patchelf # so handy
         # R

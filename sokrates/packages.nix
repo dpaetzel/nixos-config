@@ -49,6 +49,7 @@
           tridactyl-native # For a better browser.
           # threema-desktop # Threema is OK I guess # installed in user env
           # teamviewer # sometimes needed, happy when its already installed
+          # TODO Enable via programs.thunderbird.enable
           thunderbird # not the best but also not the worst I guess
           # tor-browser-bundle-bin
           # vimHugeX # huge b/c want to have gvim around
