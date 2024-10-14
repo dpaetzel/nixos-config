@@ -11,4 +11,9 @@
     # TODO Add nativeMessagingHosts for tridactyl
     # TODO Add config options
   };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }

@@ -135,6 +135,7 @@
           feedgnuplot # stream data to gnu plot for live graphs
           ffmpeg
           fishPlugins.done # notify me of long-running jobs
+          # TODO Move this to home-manager (enable fzf and its fishIntegration)
           fishPlugins.fzf-fish
           fishPlugins.autopair # add a ) when you type (
           fishPlugins.puffer # auto expand ... etc.
