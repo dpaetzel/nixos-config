@@ -21,6 +21,7 @@
     enable = true;
     script = ''
       polybar top &
+      polybar bottom &
     '';
     settings = import ./polybar.nix;
   };

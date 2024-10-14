@@ -32,13 +32,52 @@
 
     font-0 = "monospace;2";
 
-    modules-left = "xworkspaces xwindow";
-    modules-right = "filesystem pulseaudio xkeyboard memory cpu wlan eth date";
+    modules-right = "xwindow xworkspaces";
 
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
 
+    # https://polybar.readthedocs.io/en/stable/user/ipc.html
     enable-ipc = true;
+
+    enable-struts = true;
+  };
+
+  "bar/bottom" = {
+    bottom = true;
+
+    width = "100%";
+    height = "24pt";
+    radius = 6;
+
+    background = "\${colors.background}";
+    foreground = "\${colors.foreground}";
+
+    line-size = "3pt";
+
+    border-size = "0pt";
+    border-color = "#00000000";
+
+    padding-left = 0;
+    padding-right = 1;
+
+    module-margin = 1;
+
+    separator = "|";
+    separator-foreground = "\${colors.disabled}";
+
+    font-0 = "monospace;2";
+
+    modules-left = "wlan eth";
+    modules-right = "filesystem xkeyboard memory cpu date";
+
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+
+    # https://polybar.readthedocs.io/en/stable/user/ipc.html
+    enable-ipc = true;
+
+    enable-struts = true;
   };
 
   "module/xworkspaces" = {
@@ -56,9 +95,10 @@
     label-urgent-background = "\${colors.alert}";
     label-urgent-padding = 1;
 
-    label-empty = "%name%";
-    label-empty-foreground = "\${colors.disabled}";
-    label-empty-padding = 1;
+    # I don't want to see empy workspaces in the bar.
+    label-empty = "";
+    # label-empty-foreground = "\${colors.disabled}";
+    # label-empty-padding = 1;
   };
 
   "module/xwindow" = {
@@ -71,8 +111,10 @@
     interval = 25;
 
     mount-0 = "/";
+    mount-1 = "/home";
 
-    label-mounted = "%{F#F0C674}%mountpoint%%{F-} %percentage_used%%";
+    label-mounted = "%mountpoint%%{F-} %percentage_used%%";
+    label-mounted-foreground = "\${colors.primary}";
 
     label-unmounted = "%mountpoint% not mounted";
     label-unmounted-foreground = "\${colors.disabled}";
@@ -127,30 +169,33 @@
     interval = 5;
     format-connected = "<label-connected>";
     format-disconnected = "<label-disconnected>";
-    label-disconnected = "%{F#F0C674}%ifname%%{F#707880} disconnected";
+    label-disconnected = "%ifname%%{F#707880} disconnected";
+    label-connected-foreground = "\${colors.primary}";
   };
 
   "module/wlan" = {
     "inherit" = "network-base";
     interface-type = "wireless";
-    label-connected = "%{F#F0C674}%ifname%%{F-} %essid% %local_ip%";
+    label-connected = "%ifname%%{F-} %essid% %local_ip%";
+    label-connected-foreground = "\${colors.primary}";
   };
 
   "module/eth" = {
     "inherit" = "network-base";
     interface-type = "wired";
-    label-connected = "%{F#F0C674}%ifname%%{F-} %local_ip%";
+    label-connected = "%ifname%%{F-} %local_ip%";
+    label-connected-foreground = "\${colors.primary}";
   };
 
   "module/date" = {
     type = "internal/date";
     interval = 1;
 
-    date = "%H:%M";
+    date = "%Y-%m-%d %H:%M";
     date-alt = "%Y-%m-%d %H:%M:%S";
 
     label = "%date%";
-    label-foreground = "\${colors.primary}";
+    # label-foreground = "\${colors.foreground}";
   };
 
   settings = {
@@ -160,7 +205,6 @@
 }
 
 # TODO Add pomodoro
-# TODO Add bottom bar
 # TODO Consider to add xmonad-log
 # TODO Add volume
 # "module/volume" = {
