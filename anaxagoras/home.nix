@@ -16,4 +16,12 @@
     enable = true;
     enableFishIntegration = true;
   };
+
+  services.polybar = {
+    enable = true;
+    script = ''
+      polybar top &
+    '';
+    settings = import ./polybar.nix;
+  };
 }
