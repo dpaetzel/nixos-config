@@ -6,6 +6,20 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      PreferredAuthentications publickey
+      IdentityFile /home/%u/.ssh/id_rsa.%h.%r
+    '';
+    matchBlocks = {
+      "oc*.informatik.uni-augsburg.de" = {
+        hostname = "%h";
+        identityFile = "/home/%u/.ssh/id_rsa.oc.%r";
+      };
+    };
+  };
+
   programs.firefox = {
     enable = true;
     # TODO Add nativeMessagingHosts for tridactyl
