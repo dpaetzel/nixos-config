@@ -258,7 +258,29 @@
 
       development = [
         # Julia development
-        (julia.withPackages ["CairoMakie"])
+        (julia.withPackages.override
+          {
+            extraLibs = [];
+            # GLMakie requires the opengl-driver path.
+            makeWrapperArgs = "--prefix LD_LIBRARY_PATH : /run/opengl-driver/lib";
+          }
+          [
+            "AlgebraOfGraphics"
+            "BenchmarkTools"
+            "CairoMakie"
+            "DataFrames"
+            "DataFramesMeta"
+            "Distributions"
+            # Not working due to ERROR: LoadError: InitError:
+            # Exception[GLFW.GLFWError(65550, "Failed to detect any supported
+            # platform"), ErrorException("glfwInit failed")]
+            # "GLMakie"
+            "Infiltrator"
+            "OhMyREPL"
+            "Statistics"
+            "StatsBase"
+          ]
+        )
 
         # Haskell development
         binutils # I sometimes need `ar` for building Haskell stuff
