@@ -231,6 +231,9 @@
       };
 
       development = [
+        # Julia development
+        (julia.withPackages ["CairoMakie"])
+
         # Haskell development
         binutils # I sometimes need `ar` for building Haskell stuff
         cabal2nix
