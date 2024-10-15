@@ -1,14 +1,26 @@
-{ inputs, pkgs, system, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 
 # TODO De-duplicate this with sokrates/packages.nix
 
 {
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     let
-      sys = [ cryptsetup ntfs3g ];
+      sys = [
+        cryptsetup
+        ntfs3g
+      ];
       applications = {
         main = [
+          # anaxagoras-only
+          glxinfo
+
           android-tools
           audacity
           lame
@@ -113,7 +125,14 @@
         # zuki-themes
       ];
 
-      mutt = [ elinks msmtp neomutt notmuch offlineimap urlscan ];
+      mutt = [
+        elinks
+        msmtp
+        neomutt
+        notmuch
+        offlineimap
+        urlscan
+      ];
 
       commandline = {
         main = [
@@ -124,7 +143,8 @@
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
-          direnv nix-direnv
+          direnv
+          nix-direnv
           dbacl
           dfc
           # droopy # browser-based file sharing
@@ -139,7 +159,8 @@
           fishPlugins.fzf-fish
           fishPlugins.autopair # add a ) when you type (
           fishPlugins.puffer # auto expand ... etc.
-          fishPlugins.grc grc # colorize output
+          fishPlugins.grc
+          grc # colorize output
           fzf # fuzzy file finder
           git
           gitAndTools.git-annex
@@ -167,7 +188,12 @@
           rcm
           p7zip
           pandoc
-          (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+          (pass.withExtensions (
+            ext: with ext; [
+              pass-otp
+              pass-update
+            ]
+          ))
           pciutils
           pdftk
           qrencode # for creating the occasional QR code
@@ -249,17 +275,18 @@
         #     turtle
         #   ]
         # ))
-        (haskellPackages.ghcWithPackages
-          (ps: # [2020-08-11] random-fu broken in master
-            with ps; [
-              # protolude
-              optparse-applicative
-              random-fu
-              # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
-              random
-              text
-              # turtle
-            ]))
+        (haskellPackages.ghcWithPackages (
+          ps: # [2020-08-11] random-fu broken in master
+          with ps; [
+            # protolude
+            optparse-applicative
+            random-fu
+            # nixpkgs20200702.haskellPackages.random # [2020-08-11] broken in master
+            random
+            text
+            # turtle
+          ]
+        ))
         ormolu
         # haskellPackages.ghc-mod # TODO currently not working
         haskellPackages.hlint
@@ -296,11 +323,23 @@
         # spago # build broken as of 2022-04-05
 
         # LaTeX
-        (with texlive;
+        (
+          with texlive;
           combine {
-            inherit biblatex biblatex-ieee capt-of inconsolata libertine logreq
-              newtx scheme-full wrapfig xstring;
-          })
+            inherit
+              biblatex
+              biblatex-ieee
+              capt-of
+              inconsolata
+              libertine
+              logreq
+              newtx
+              scheme-full
+              wrapfig
+              xstring
+              ;
+          }
+        )
         biber
         pplatex # supposedly better logs
 
@@ -361,7 +400,14 @@
         # MaPitchshift
       ];
 
-    in sys ++ applications.main ++ applications.utility
-    ++ graphical-user-interface ++ mutt ++ commandline.main
-    ++ commandline.utility ++ development ++ creativity;
+    in
+    sys
+    ++ applications.main
+    ++ applications.utility
+    ++ graphical-user-interface
+    ++ mutt
+    ++ commandline.main
+    ++ commandline.utility
+    ++ development
+    ++ creativity;
 }
