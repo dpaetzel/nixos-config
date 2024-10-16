@@ -1,0 +1,115 @@
+#!/usr/bin/env sh
+
+
+distractions=telegram-desktop
+
+
+if test -z "$2"; then
+    min=25
+else
+    min=$2
+fi
+
+
+# if test -n "$3"; then
+#     task="$3"
+# else
+#     task="unspezifiziert"
+# fi
+
+
+pidFile=/tmp/pomodoro.pid
+
+
+secs=$(( 60 * min))
+
+
+killDistractions() {
+    echo "Killing distractions"
+    for d in $distractions; do
+        killall "$d" > /dev/null 2>&1 || echo "  -" "$d" "wasn't running"
+    done
+    echo "Killed distractions"
+}
+
+case $1 in
+    start | s )
+        printf "🍅  "
+
+        # killDistractions
+        if test -f "$pidFile"; then
+            echo "Aborting previous pomodoro"
+            kill "$(head -1 $pidFile)"
+            rm "$pidFile"
+        fi
+
+        sleep "$secs" &&\
+            { mpv "$HOME/.pomodoro-sound.mp3" > /dev/null 2>&1 &
+              notify-send -u critical "🍅 Take a break!" "You should take a break now.";
+              rm "$pidFile";
+            } &
+
+        echo $! > "$pidFile"
+        # echo "$task" >> "$pidFile"
+        echo $(($(date +%s) + secs)) >> "$pidFile"
+
+        echo "Started new pomodoro at $(date +%H:%M) ($min min)"
+        ;;
+
+    status )
+        printf "🍅  "
+
+        if test -f "$pidFile"; then
+            end=$(tail -1 "$pidFile")
+
+            left=$(( (end - $(date +%s)) / 60 ))
+
+            if test "$left" -ge 0; then
+                echo "Pomodoro has $left min left"
+            else
+                echo "Pomodoro over since $((- left)) min"
+            fi
+        else
+            echo "No pomodoro running!"
+        fi
+
+        ;;
+
+    polybar )
+        if test -f "$pidFile"; then
+            end=$(tail -1 "$pidFile")
+
+            left=$(( (end - $(date +%s)) / 60 ))
+
+            echo "$left min"
+        fi
+
+        ;;
+
+    conky )
+        if test -f "$pidFile"; then
+            end=$(tail -1 "$pidFile")
+
+            left=$(( (end - $(date +%s)) / 60 ))
+
+            echo "\${color red}\${voffset -2}\$font2🍅\$font $left min\$color\${voffset -2}"
+            # echo "\${color red}$left min\$color"
+        else
+            echo "      "
+        fi
+
+        ;;
+
+    stop )
+        if test -f "$pidFile"; then
+            kill "$(head -1 $pidFile)"
+            rm "$pidFile"
+            echo "Stopped pomodoro at $(date +%H:%M)"
+        else
+            echo "No pomodoro running!"
+        fi
+        ;;
+    * )
+        echo "Usage: pomodoro {start,status,conky,stop}"
+        ;;
+esac

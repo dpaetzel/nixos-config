@@ -37,12 +37,14 @@
       trash-cli # Put stuff into freedesktop-compatible trash.
     ]
     # Create a script package for all shell scripts in ./scripts.
-    ++ (map (fpath: pkgs.callPackage fpath {}) (lib.filesystem.listFilesRecursive ./scripts));
-    # TODO While this avoids repeating `writeShellScriptBin` in each of the
-    # script files, this does not allow me to specify script dependencies
-    # ++ (map (
-    #   fname: writeShellScriptBin (toString fname) (builtins.readFile fname)
-    # ) (lib.filesystem.listFilesRecursive ./scripts));
+    ++ (map (fpath: pkgs.callPackage fpath { }) (
+      lib.filter (file: lib.hasSuffix ".nix" file) (lib.filesystem.listFilesRecursive ./scripts)
+    ));
+  # TODO While this avoids repeating `writeShellScriptBin` in each of the
+  # script files, this does not allow me to specify script dependencies
+  # ++ (map (
+  #   fname: writeShellScriptBin (toString fname) (builtins.readFile fname)
+  # ) (lib.filesystem.listFilesRecursive ./scripts));
 
   # Installed fonts.
   fonts = {

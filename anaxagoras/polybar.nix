@@ -202,9 +202,19 @@
     screenchange-reload = true;
     pseudo-transparency = true;
   };
+
+  # TODO Add pomodoro
+  # Not yet working, command not found
+  # "module/pomodoro" = {
+  #   type = "custom/script";
+  #   # We have to supply `0` right now because of the script being buggy, ignore
+  #   # that.
+  #   exec = "pomodoro polybar 0";
+  #   interval = 5;
+  #   label = "🍅 %output%";
+  # };
 }
 
-# TODO Add pomodoro
 # TODO Consider to add xmonad-log
 # TODO Add volume
 # "module/volume" = {
