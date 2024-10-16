@@ -1,4 +1,13 @@
-{ self, config, pkgs, stdenv, lib, pythonEnv, inputs, ... }:
+{
+  self,
+  config,
+  pkgs,
+  stdenv,
+  lib,
+  pythonEnv,
+  inputs,
+  ...
+}:
 
 {
   # Required for ThinkPad T470 Wifi and Bluetooth drivers.
@@ -22,7 +31,8 @@
     firewall.enable = false;
   };
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
       trash-cli # Put stuff into freedesktop-compatible trash.
     ]
@@ -56,7 +66,7 @@
       noto-fonts-emoji # seems to be broken as of 2023-02
       noto-fonts-monochrome-emoji
       twitter-color-emoji
-      (nerdfonts.override { fonts = ["FiraCode"]; })
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
       powerline-fonts
       source-code-pro
       # symbola # Cannot download 2022-06-22
@@ -65,7 +75,7 @@
       unifont
     ];
     fontconfig.defaultFonts = {
-      emoji = ["Twitter Color Emoji"];
+      emoji = [ "Twitter Color Emoji" ];
     };
   };
 
@@ -88,20 +98,19 @@
   # https://github.com/Saethox/nixos-config/blob/main/nixos/default.nix#L35-L36
   # Add each flake input as a registry to make Nix commands consistent with
   # this flake.
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+    (lib.filterAttrs (_: lib.isType "flake")) inputs
+  );
 
   # https://github.com/Saethox/nixos-config/blob/main/nixos/default.nix#L38
   # Add the inputs to the system's legacy channels, making legacy nix commands
   # consistent as well.
   # https://github.com/NixOS/nix/issues/9574
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
+  nix.nixPath = [ "/etc/nix/path" ];
+  environment.etc = lib.mapAttrs' (name: value: {
+    name = "nix/path/${name}";
+    value.source = value.flake;
+  }) config.nix.registry;
 
   # TODO Is this still required?
   environment.pathsToLink = [
@@ -143,9 +152,9 @@
     enable = true;
     shellAliases = {
       p = "${pythonEnv}/bin/ipython --profile=p";
-      pplot="${pythonEnv}/bin/ipython --profile=p --matplotlib=auto";
+      pplot = "${pythonEnv}/bin/ipython --profile=p --matplotlib=auto";
       # Local shell in case I changed something but did not push yet.
-      pl="nix run path:/home/david/NixOS#pythonShell -- --profile=p";
+      pl = "nix run path:/home/david/NixOS#pythonShell -- --profile=p";
       # No profile.
       pn = "${pythonEnv}/bin/ipython";
       mvt = "trash-put --verbose";
