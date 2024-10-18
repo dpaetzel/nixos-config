@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   services.xserver = {
@@ -6,7 +6,12 @@
     xkb.layout = "de";
     xkb.variant = "neo";
 
-    displayManager.lightdm.enable = true;
+    displayManager.lightdm = {
+      enable = true;
+      # Too noisy.
+      # background = pkgs.nixos-artwork.wallpapers.binary-black.gnomeFilePath;
+      background = "#000000";
+    };
 
     desktopManager.xterm.enable = false;
 
