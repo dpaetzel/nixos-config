@@ -32,6 +32,7 @@
 
     font-0 = "monospace;2";
 
+    modules-left = "pomodoro";
     modules-right = "xwindow xworkspaces";
 
     cursor-click = "pointer";
@@ -68,8 +69,8 @@
 
     font-0 = "monospace;2";
 
-    modules-left = "wlan eth";
-    modules-right = "filesystem xkeyboard memory cpu date";
+    modules-left = "spotify";
+    modules-right = "wlan eth filesystem xkeyboard memory cpu date";
 
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
@@ -203,16 +204,23 @@
     pseudo-transparency = true;
   };
 
-  # TODO Add pomodoro
-  # Not yet working, command not found
-  # "module/pomodoro" = {
-  #   type = "custom/script";
-  #   # We have to supply `0` right now because of the script being buggy, ignore
-  #   # that.
-  #   exec = "pomodoro polybar 0";
-  #   interval = 5;
-  #   label = "🍅 %output%";
-  # };
+  "module/spotify" = {
+    type = "custom/script";
+    # We have to supply `0` right now because of the script being buggy, ignore
+    # that.
+    exec = "/run/current-system/sw/bin/info-spotify";
+    interval = 5;
+    label = "%output%";
+  };
+
+  "module/pomodoro" = {
+    type = "custom/script";
+    # We have to supply `0` right now because of the script being buggy, ignore
+    # that.
+    exec = "/run/current-system/sw/bin/pomodoro polybar 0";
+    interval = 5;
+    label = "🍅 %output%";
+  };
 }
 
 # TODO Consider to add xmonad-log
