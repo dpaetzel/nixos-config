@@ -55,7 +55,7 @@
       corefonts
       dejavu_fonts
       fira
-      # fira-code
+      fira-code
       # fira-code-symbols
       font-awesome
       google-fonts
@@ -68,7 +68,7 @@
       noto-fonts-emoji # seems to be broken as of 2023-02
       noto-fonts-monochrome-emoji
       twitter-color-emoji
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "NerdFontsSymbolsOnly" ]; })
       powerline-fonts
       source-code-pro
       # symbola # Cannot download 2022-06-22

@@ -22,7 +22,7 @@
     border-size = "0pt";
     border-color = "#00000000";
 
-    padding-left = 0;
+    padding-left = 1;
     padding-right = 1;
 
     module-margin = 1;
@@ -30,7 +30,8 @@
     separator = "|";
     separator-foreground = "\${colors.disabled}";
 
-    font-0 = "monospace;2";
+    font-0 = "Fira Code:style=Regular";
+    font-1 = "Noto Color Emoji";
 
     modules-left = "pomodoro";
     modules-right = "xwindow xworkspaces";
@@ -59,7 +60,7 @@
     border-size = "0pt";
     border-color = "#00000000";
 
-    padding-left = 0;
+    padding-left = 1;
     padding-right = 1;
 
     module-margin = 1;
@@ -67,7 +68,8 @@
     separator = "|";
     separator-foreground = "\${colors.disabled}";
 
-    font-0 = "monospace;2";
+    font-0 = "Fira Code:style=Regular";
+    font-1 = "Noto Color Emoji";
 
     modules-left = "spotify";
     modules-right = "wlan eth filesystem xkeyboard memory cpu date";
@@ -206,8 +208,6 @@
 
   "module/spotify" = {
     type = "custom/script";
-    # We have to supply `0` right now because of the script being buggy, ignore
-    # that.
     exec = "/run/current-system/sw/bin/info-spotify";
     interval = 5;
     label = "%output%";
