@@ -1,4 +1,4 @@
-{ writeShellApplication, stdenv }:
+{ writeShellApplication, coreutils, libnotify }:
 
 # Workaround which I used before figuring out to switch keyboad layouts before
 # `xdotool type`.
@@ -6,7 +6,7 @@
 writeShellApplication {
   name = "pomodoro";
 
-  runtimeInputs = [ stdenv ];
+  runtimeInputs = [ coreutils libnotify ];
 
   text = builtins.readFile ./pomodoro;
 }
