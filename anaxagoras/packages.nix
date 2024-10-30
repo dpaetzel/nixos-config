@@ -258,29 +258,35 @@
 
       development = [
         # Julia development
-        (julia.withPackages.override
-          {
-            extraLibs = [];
-            # GLMakie requires the opengl-driver path.
-            makeWrapperArgs = "--prefix LD_LIBRARY_PATH : /run/opengl-driver/lib";
-          }
-          [
-            "AlgebraOfGraphics"
-            "BenchmarkTools"
-            "CairoMakie"
-            "DataFrames"
-            "DataFramesMeta"
-            "Distributions"
-            # Not working due to ERROR: LoadError: InitError:
-            # Exception[GLFW.GLFWError(65550, "Failed to detect any supported
-            # platform"), ErrorException("glfwInit failed")]
-            # "GLMakie"
-            "Infiltrator"
-            "OhMyREPL"
-            "Statistics"
-            "StatsBase"
-          ]
-        )
+        myjulia
+        # This withPackages stuff is fairly new to nixpkgs and seems still
+        # somewhat broken. It is likely the reason for the many annoying
+        # recompiles I observe, presumably due to interference with projects
+        # managed using Julia's Pkg. Also, some things just don't work (e.g.
+        # building system images or native executables).
+        # (julia_110-bin.withPackages.override
+        #   {
+        #     extraLibs = [];
+        #     # GLMakie requires the opengl-driver path.
+        #     makeWrapperArgs = "--prefix LD_LIBRARY_PATH : /run/opengl-driver/lib";
+        #   }
+        #   [
+        #     "AlgebraOfGraphics"
+        #     "BenchmarkTools"
+        #     "CairoMakie"
+        #     "DataFrames"
+        #     "DataFramesMeta"
+        #     "Distributions"
+        #     # Not working due to ERROR: LoadError: InitError:
+        #     # Exception[GLFW.GLFWError(65550, "Failed to detect any supported
+        #     # platform"), ErrorException("glfwInit failed")]
+        #     # "GLMakie"
+        #     "Infiltrator"
+        #     "OhMyREPL"
+        #     "Statistics"
+        #     "StatsBase"
+        #   ]
+        # )
 
         # Haskell development
         binutils # I sometimes need `ar` for building Haskell stuff
@@ -317,7 +323,7 @@
 
         # Python development
         autoflake
-        python3
+        mypython
         # (python3.withPackages(ps:
         #   with ps; [
         #     click
@@ -329,10 +335,10 @@
         #     seaborn
         #   ]
         # ))
-        python3Packages.black
-        python3Packages.isort
-        python3Packages.mypy
-        python3Packages.pyflakes
+        mypython.pkgs.black
+        mypython.pkgs.isort
+        mypython.pkgs.mypy
+        mypython.pkgs.pyflakes
         # python3Packages.poetry
         # python39Packages.yapfToml
         # inputs.mach-nix.defaultPackage."${system}"

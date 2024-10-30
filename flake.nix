@@ -37,6 +37,18 @@
 
     let
       system = "x86_64-linux";
+      myoverlay = (final: prev: {
+        # Emacs is central to everything, so let's pin its version to more
+        # consciously upgrade it.
+        myemacs = prev.emacs29;
+        # We use the default Python 3 currently used by nixpkgs (3.11.9 as
+        # of 2024-06-22) because the version does really not matter much in
+        # everyday use.
+        mypython = prev.python3;
+        # TODO Expose pythonEnv and python app?
+
+        myjulia = prev.julia_110-bin;
+      });
       pkgs = import nixpkgs {
         inherit system;
         # Add nixpkgs overlays and config here. They apply to system and
@@ -55,15 +67,7 @@
           # ];
         };
         overlays = with overlays; [
-          (self: super: {
-            # Emacs is central to everything, so let's pin its version to more
-            # consciously upgrade it.
-            myemacs = super.emacs29;
-            # We use the default Python 3 currently used by nixpkgs (3.11.9 as
-            # of 2024-06-22) because the version does really not matter much in
-            # everyday use.
-            mypython = super.python3;
-          })
+          myoverlay
           # https://github.com/NixOS/nixpkgs/issues/205014#issuecomment-1402380175
           (self: super: {
             khal = super.khal.overridePythonAttrs (_: { doCheck = false; });
@@ -195,6 +199,8 @@
           })
         ];
       };
+
+      overlays.my = myoverlay;
 
       # Expose the Python shell.
       apps.${system}.pythonShell = {
