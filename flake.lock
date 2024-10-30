@@ -180,11 +180,11 @@
         "ktLegacySrc": "ktLegacySrc"
       },
       "locked": {
-        "lastModified": 1647347991,
-        "narHash": "sha256-UYO60L03uNiEvb3uGc8AeCk2if6xObz/mURbviEbtJ4=",
+        "lastModified": 1730279895,
+        "narHash": "sha256-AVmQ3wNhMsDIoLzXE16On+OZQ5hOd+Zx5NcWsoSRPr4=",
         "owner": "dpaetzel",
         "repo": "overlays",
-        "rev": "0ee7f9e874d1679c4303759968887ca80571b257",
+        "rev": "6af48ca67dcc4abd7ee5592592b358df96fa0497",
         "type": "github"
       },
       "original": {
