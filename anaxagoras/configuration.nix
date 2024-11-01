@@ -76,7 +76,7 @@
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
-  # I'm a big noob and can't jack get to work with ardour somehow.
+  # I'm a big noob and can't get jack to work with ardour somehow.
   services.pipewire = {
     enable = true;
     alsa = {
@@ -89,6 +89,9 @@
   hardware.pulseaudio.enable = lib.mkForce false;
   # Acc. to NixOS wiki, rtkit is optional but recommended for using PipeWire.
   security.rtkit.enable = true;
+
+  # anaxagoras has a dongle now! But it does not like Pipewire/Jack. :(
+  # hardware.bluetooth.enable = true;
 
   hardware.keyboard.zsa.enable = true;
 
