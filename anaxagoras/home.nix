@@ -96,6 +96,23 @@
     settings = import ./polybar.nix;
   };
 
+  # We'll see when this bites us.
+  home.file.".config/MuseScore/MuseScore4.ini".text = ''
+    [application]
+    hasCompletedFirstLaunchSetup=true
+    paths\myPlugins=/home/david
+    paths\myScores=/home/david
+    paths\mySoundfonts=/home/david/.config/MuseScore/SoundFonts
+    paths\myStyles=/home/david
+    paths\myTemplates=/home/david
+
+    [cloud]
+    clientId=-7624189cce7890af
+
+    [ui]
+    application\currentThemeCode=dark
+  '';
+
   home.file.".julia/config/startup.jl".text = ''
     try
         using Revise
