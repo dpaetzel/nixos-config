@@ -1,18 +1,23 @@
 getPlaybackStatus() {
-    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus'
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' 2> /dev/null
 }
 
 playbackStatus=$(getPlaybackStatus | grep -E "variant" | sed -r 's/.*string "(.*)"/\1/')
 
 getDbusMetadata() {
-    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' 2> /dev/null
 }
 
 
-# Note that the awk stuff in the end is for abbreviating too-long lines.
-title=$(getDbusMetadata | grep -E -A 1 "title" | grep -E -v "title" | cut -b 44- | cut -d '"' -f 1 | grep -E -v '^$' | awk '{ if (length($0) > 32) print substr($0, 1, 31)"…"; else print $0 }')
-artist=$(getDbusMetadata | grep -E -A 2 "artist" | grep -E -v "artist" | grep -E -v "array" | cut -b 27- | cut -d '"' -f 1 | grep -E -v '^$')
-album=$(getDbusMetadata | grep -E -A 1 "album" | grep -E -v "album" | cut -b 44- | cut -d '"' -f 1 | grep -E -v '^$' | awk '{ if (length($0) > 32) print substr($0, 1, 31)"…"; else print $0 }')
+{
+    # Note that the awk stuff in the end is for abbreviating too-long lines.
+    title=$(getDbusMetadata | grep -E -A 1 "title" | grep -E -v "title" | cut -b 44- | cut -d '"' -f 1 | grep -E -v '^$' | awk '{ if (length($0) > 32) print substr($0, 1, 31)"…"; else print $0 }')
+    artist=$(getDbusMetadata | grep -E -A 2 "artist" | grep -E -v "artist" | grep -E -v "array" | cut -b 27- | cut -d '"' -f 1 | grep -E -v '^$')
+    album=$(getDbusMetadata | grep -E -A 1 "album" | grep -E -v "album" | cut -b 44- | cut -d '"' -f 1 | grep -E -v '^$' | awk '{ if (length($0) > 32) print substr($0, 1, 31)"…"; else print $0 }')
+} || {
+    echo
+    exit 0
+}
 
 output() {
     printf '%s %s – %s (%s)\n' "$1" "$artist" "$title" "$album"
