@@ -221,7 +221,7 @@
           cifs-utils
           coreutils
           dosfstools
-          entr
+          entr # will be replaced by watchexec, I guess?
           file
           ghostscript
           htop
@@ -247,6 +247,7 @@
           traceroute
           usbutils
           veracrypt
+          watchexec # monitor for changes and do stuff
           wget
           # wirelesstools
           which
