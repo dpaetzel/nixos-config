@@ -12,7 +12,7 @@ set allowed \
   3Ressourcen \
   4Archiv \
   5Code \
-  In.org \
+  Inbox.md \
   Inbox \
   VMs \
   Outbox \
