@@ -1,5 +1,5 @@
 # home-manager configuration file of `anaxagoras` (replaces ~/.config/nixpkgs/home.nix).
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # Don't change this. Version that I originally installed home-manager with.
   #
@@ -100,21 +100,36 @@
   };
 
   # We'll see when this bites us.
-  home.file.".config/MuseScore/MuseScore4.ini".text = ''
-    [application]
-    hasCompletedFirstLaunchSetup=true
-    paths\myPlugins=/home/david
-    paths\myScores=/home/david
-    paths\mySoundfonts=/home/david/.config/MuseScore/SoundFonts
-    paths\myStyles=/home/david
-    paths\myTemplates=/home/david
+  xdg.configFile."MuseScore/HomeManagerInit_MuseScore4.ini" = {
+    text = ''
+      [application]
+      hasCompletedFirstLaunchSetup=true
+      paths\myPlugins=/home/david
+      paths\myScores=/home/david
+      paths\mySoundfonts=/home/david/.config/MuseScore/SoundFonts
+      paths\myStyles=/home/david
+      paths\myTemplates=/home/david
+      skippedVersion=4.4.3
 
-    [cloud]
-    clientId=-7624189cce7890af
+      [cloud]
+      clientId=-10ec283abac1cf0c
 
-    [ui]
-    application\currentThemeCode=dark
-  '';
+      [ui]
+      application\currentThemeCode=dark
+    '';
+    # Copy and backup current config so that we can change stuff (and can see
+    # what we change in the program itself last time we used it).
+    # Inspired by: https://github.com/nix-community/home-manager/issues/3090#issuecomment-2010891733
+    #
+    # This is still a bit wobbly and I may have to delete some of the files by
+    # hand to make it do everything on activation (I think I had to do that
+    # right now but I'm not 100% sure).
+    onChange = ''
+      mv ${config.xdg.configHome}/MuseScore/MuseScore4.ini ${config.xdg.configHome}/MuseScore/MuseScore4.ini.prev || true
+      cp ${config.xdg.configHome}/MuseScore/HomeManagerInit_MuseScore4.ini ${config.xdg.configHome}/MuseScore/MuseScore4.ini
+      chmod u+w ${config.xdg.configHome}/MuseScore/MuseScore4.ini
+    '';
+  };
 
   home.file.".julia/config/startup.jl".text = ''
     try
