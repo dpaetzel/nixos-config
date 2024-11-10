@@ -6,6 +6,9 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 
+  # Required so that I can configure GUI stuff like polybar via home-manager.
+  xsession.enable = true;
+
   programs.ssh = {
     enable = true;
     extraConfig = ''
