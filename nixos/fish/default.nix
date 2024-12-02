@@ -312,15 +312,6 @@ function cpull
 end
 
 
-function mkrefs
-    find ~/Literatur \
-        -iname '*.bib' \
-        '!' -iname 'References.bib' \
-        -exec echo '{}' \; \
-        -exec awk '{print}; END {print "\n"}' '{}' \;
-end
-
-
 function texr
     if test "$argv" = "--fix"
         entr fish -c "mkrefs > References.bib ; latexmk -f $argv | grep -v 'characters of junk seen' ; fixfonts out/*.pdf"
@@ -416,16 +407,16 @@ function lit
         set -l short "$author$year"
         set -l long "$year $title"
 
-        if test -d "$HOME/Literatur/$short$num"
+        if test -d "$HOME/3Ressourcen/Literatur/$short$num"
             if test "$num" = ""
                 lit "$pdf" "$author" "$year" "$title" "b"
             else
                 lit "$pdf" "$author" "$year" "$title" (chr (math (ord "$num") + 1))
             end
         else
-            echo "Creating Literatur/$short$num"
-            mkdir "$HOME/Literatur/$short$num"
-            mv "$pdf" "$HOME/Literatur/$short$num/$long.pdf"
+            echo "Creating $HOME/3Ressourcen/Literatur/$short$num"
+            mkdir "$HOME/3Ressourcen/Literatur/$short$num"
+            mv "$pdf" "$HOME/3Ressourcen/Literatur/$short$num/$long.pdf"
         end
     end
 end
@@ -437,7 +428,7 @@ function bib
         set -l name "$argv[2]"
 
         editor "$file"
-        and cp "$file" "$HOME/Literatur/$name/$name.bib"
+        and cp "$file" "$HOME/3Ressourcen/Literatur/$name/$name.bib"
         and mvt "$file"
     end
 end
