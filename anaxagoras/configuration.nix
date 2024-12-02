@@ -34,6 +34,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/home" =
+    { device = "/dev/vg1/home";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }];
 
@@ -52,8 +57,17 @@
     "usb_storage"
     "sd_mod"
     "sr_mod"
+    # Not sure whether the next two are really required if I don't encrypt root
+    # but just /home.
+    "aesni_intel"
+    "cryptd"
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
+  # Decrypt /dev/sda1 (the HDD that /home is on) during boot. Within the LUKS,
+  # there is an LVM. This line makes this inner LVM volume available as
+  # /dev/mapper/home-decrypted.
+  boot.initrd.luks.devices.home-decrypted.device =
+    "/dev/disk/by-uuid/843950ed-e5ca-4604-9398-d840bd84ff81";
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
