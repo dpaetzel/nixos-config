@@ -33,7 +33,16 @@
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, musnix, nixos-hardware, overlays, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      musnix,
+      nixos-hardware,
+      overlays,
+      ...
+    }:
 
     let
       system = "x86_64-linux";
@@ -98,54 +107,69 @@
 
       # General purpose Python shell I use everyday (I have an alias that runs
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
-      pythonEnv = let
-        cmdstanpy = pkgs.mypython.pkgs.buildPythonPackage rec {
-          pname = "cmdstanpy";
-          version = "1.0.7";
+      pythonEnv =
+        let
+          cmdstanpy = pkgs.mypython.pkgs.buildPythonPackage rec {
+            pname = "cmdstanpy";
+            version = "1.0.7";
 
-          propagatedBuildInputs = with pkgs.mypython.pkgs; [ numpy pandas tqdm ujson ];
+            propagatedBuildInputs = with pkgs.mypython.pkgs; [
+              numpy
+              pandas
+              tqdm
+              ujson
+            ];
 
-          patches =
-            [ "${self}/0001-Remove-dynamic-cmdstan-version-selection.patch" ];
+            patches = [ "${self}/0001-Remove-dynamic-cmdstan-version-selection.patch" ];
 
-          postPatch = ''
-            sed -i \
-              "s|\(cmdstan = \)\.\.\.|\1\"${pkgs.cmdstan}/opt/cmdstan\"|" \
-              cmdstanpy/utils/cmdstan.py
-          '';
+            postPatch = ''
+              sed -i \
+                "s|\(cmdstan = \)\.\.\.|\1\"${pkgs.cmdstan}/opt/cmdstan\"|" \
+                cmdstanpy/utils/cmdstan.py
+            '';
 
-          doCheck = false;
+            doCheck = false;
 
-          src = pkgs.mypython.pkgs.fetchPypi {
-            inherit pname version;
-            sha256 = "sha256-AyzbqfVKup4pLl/JgDcoNKFi5te4QfO7KKt3pCNe4N8=";
+            src = pkgs.mypython.pkgs.fetchPypi {
+              inherit pname version;
+              sha256 = "sha256-AyzbqfVKup4pLl/JgDcoNKFi5te4QfO7KKt3pCNe4N8=";
+            };
           };
-        };
 
-      in pkgs.mypython.withPackages (ps:
-        with ps; [
-          # pkgs.cmdstan # Rather large.
-          # cmdstanpy
-          click
-          deap
-          graphviz
-          ipython
-          matplotlib
-          numpy
-          pandas
-          requests
-          scikit-learn
-          scipy
-          seaborn
-          tabulate # For to_markdown of pandas DataFrames.
-          toolz
-          tqdm
-          xlrd
-        ]);
-    in {
+        in
+        pkgs.mypython.withPackages (
+          ps: with ps; [
+            # pkgs.cmdstan # Rather large.
+            # cmdstanpy
+            click
+            deap
+            graphviz
+            ipython
+            matplotlib
+            numpy
+            pandas
+            requests
+            scikit-learn
+            scipy
+            seaborn
+            tabulate # For to_markdown of pandas DataFrames.
+            toolz
+            tqdm
+            xlrd
+          ]
+        );
+    in
+    {
       nixosConfigurations.anaxagoras = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs system inputs pythonEnv; };
+        specialArgs = {
+          inherit
+            pkgs
+            system
+            inputs
+            pythonEnv
+            ;
+        };
         modules = [
           musnix.nixosModules.musnix
 
@@ -174,7 +198,14 @@
       };
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        specialArgs = { inherit pkgs system inputs pythonEnv; };
+        specialArgs = {
+          inherit
+            pkgs
+            system
+            inputs
+            pythonEnv
+            ;
+        };
         modules = [
           ./nixos
           # Not quite my t470 but close enough.
@@ -196,7 +227,9 @@
               # Store user packages in `/etc/profiles/per-user/<username>`.
               useUserPackages = true;
               # I don't need this right now.
-              # extraSpecialArgs = {inherit inputs outputs;};
+              extraSpecialArgs = {
+                inherit inputs;
+              };
               users.david = import ./sokrates/home.nix;
             };
           }
@@ -207,9 +240,15 @@
         inherit system pkgs;
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ({ pkgs, ... }: {
-            environment.systemPackages = [ pkgs.inxi pkgs.hwinfo ];
-          })
+          (
+            { pkgs, ... }:
+            {
+              environment.systemPackages = [
+                pkgs.inxi
+                pkgs.hwinfo
+              ];
+            }
+          )
         ];
       };
 
