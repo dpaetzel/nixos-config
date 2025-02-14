@@ -45,6 +45,8 @@
           makemkv
           mpv # much faster than big ol' vlc
           musescore
+          obsidian # I was finally broken and switched to the dark side
+          # TODO Disable emanote and neuron and their services
           openshot-qt # if I ever need to quickly edit video
           signal-desktop
           simplescreenrecorder
@@ -54,6 +56,7 @@
           steam-tui
           # tabula # for extracting tables from PDFs
           tdesktop # some people still use Telegram
+          # teams # people make me use this >.< but its not supported for x86_64-linux anyways
           threema-desktop # Threema is OK I guess
           # teamviewer # sometimes needed, happy when its already installed
           # thunderbird
@@ -88,10 +91,12 @@
         dmenu
         dunst
         dzen2
+        # emote # emojis make my life brighter 😊 but `smile` seems a bit nicer maybe, we'll see
         libnotify
         lxappearance
         networkmanagerapplet
         picom
+        smile # emojis make my life brighter 😊
         # setroot # build broken as of 2022-04-05
         xfce.thunar
         unclutter
