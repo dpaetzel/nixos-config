@@ -403,10 +403,12 @@
         # PipeWire graph stuff.
         helvum # Acc. to the pipewire repository, this should be the patchbay of choice.
         qpwgraph
+        wireplumber
         pulseaudio # For pactl and other sound debugging equipment.
         alsa-utils # For aplay and other sound debugging equipment.
 
-        kdenlive # openshot-qt is super buggy but we still want to edit videos sometimes.
+        # https://github.com/NixOS/nixpkgs/issues/293315
+        kdePackages.kdenlive # openshot-qt is super buggy but we still want to edit videos sometimes.
         # flowblade # Maybe flowblade > kdenlive? However, flowblade segfaults
         # upon startup on 2023-11-03.
 
