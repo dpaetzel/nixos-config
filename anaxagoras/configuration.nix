@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, config, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
 
 {
   networking.hostName = "anaxagoras";
@@ -10,7 +16,7 @@
   # Operating System: 	Linux 64-bit
   # Language: 	English (US)
   # File Size: 	259.78 MB
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
@@ -34,13 +40,12 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home" =
-    { device = "/dev/vg1/home";
-      fsType = "ext4";
-    };
+  fileSystems."/home" = {
+    device = "/dev/vg1/home";
+    fsType = "ext4";
+  };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; } ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
@@ -66,8 +71,7 @@
   # Decrypt /dev/sda1 (the HDD that /home is on) during boot. Within the LUKS,
   # there is an LVM. This line makes this inner LVM volume available as
   # /dev/mapper/home-decrypted.
-  boot.initrd.luks.devices.home-decrypted.device =
-    "/dev/disk/by-uuid/843950ed-e5ca-4604-9398-d840bd84ff81";
+  boot.initrd.luks.devices.home-decrypted.device = "/dev/disk/by-uuid/843950ed-e5ca-4604-9398-d840bd84ff81";
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
@@ -118,7 +122,11 @@
 
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint pkgs.hplip pkgs.postscript-lexmark ];
+    drivers = [
+      pkgs.gutenprint
+      pkgs.hplip
+      pkgs.postscript-lexmark
+    ];
   };
 
   # udev rule for my android phone(s)
@@ -132,8 +140,7 @@
 
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
-  security.pki.certificateFiles =
-    [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "22.05";
