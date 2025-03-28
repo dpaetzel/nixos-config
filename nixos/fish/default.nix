@@ -78,6 +78,10 @@ in
         '';
       };
 
+      shellAliases = {
+        j = "julia --project=$HOME/5Code/DPPlots.jl --startup-file=no --load $HOME/5Code/DPPlots.jl/startup.jl";
+      };
+
       # TODO Extract from this to functions and aliases
       shellInit = ''
         # Fixes strange output when Emacs runs Fish
