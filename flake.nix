@@ -23,7 +23,8 @@
 
     overlays.url = "github:dpaetzel/overlays/master";
 
-    home-manager.url = "github:nix-community/home-manager";
+    # NOTE Update home-manager release if nixpkgs release is updated.
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO Maybe use these, but they're both somewhat broken in 2024
