@@ -176,6 +176,21 @@
   # Must be disabled for GnuPGAgent to work (or so someone said once).
   programs.ssh.startAgent = false;
 
+  # Sometimes I'm less masochistic and don't want to package stuff but just run
+  # it. This allows to Just Execute stuff (i.e. `./thefile`).
+  programs.nix-ld.enable = true;
+  # Set up the libraries to load with `nix-ld`.
+  # programs.nix-ld.libraries = with pkgs; [
+  #   stdenv.cc.cc
+  #   zlib
+  #   fuse3
+  #   icu
+  #   nss
+  #   openssl
+  #   curl
+  #   expat
+  # ];
+
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
