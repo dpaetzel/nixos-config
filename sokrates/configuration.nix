@@ -63,6 +63,11 @@
   hardware.keyboard.zsa.enable = true;
 
 
+  # Not sure why I have to disable this. Apparantly this is enabled by default
+  # but conflicts with pulseaudio?
+  services.pipewire.enable = false;
+
+
   programs.firefox = {
     enable = true;
     # TODO Retry getting this to work using “please add `tridactyl-native` to
