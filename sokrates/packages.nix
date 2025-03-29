@@ -37,6 +37,7 @@
           mpv # much faster than big ol' vlc
           musescore
           obs-studio
+          obsidian # I succumbed after all
           openshot-qt # if I ever need to quickly edit video # Somehow no audio gets exported
           portfolio # aka Portfolio Performance.
           pympress # giving talks with beamer slides was never more pleasant
@@ -183,7 +184,7 @@
           sshfs
           starship # `programs.starship.enable` alone doesn't seem to cut it for fish
           # teamspeak_client
-          # tigervnc # somehow this works best for me
+          tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
           # transmission
           # todoman # Manage todos synced via CalDAV/vdirsyncer.
