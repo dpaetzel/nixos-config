@@ -6,26 +6,6 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 
-  # Zettelkasten ftw.
-  systemd.user.services.emanote = {
-    Unit = {
-      Description = "emanote";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      # It is recommended to use Type=exec for long-running services, as it
-      # ensures that process setup errors (e.g. errors such as a missing service
-      # executable, or missing user) are properly tracked.
-      Type = "exec";
-      WorkingDirectory = "/home/david/Zettels";
-      ExecStart = "${pkgs.emanote}/bin/emanote run -p 8000";
-      TimeoutStartSec = 30;
-      Restart = "always";
-    };
-  };
-
   # Required so that I can configure GUI stuff like polybar via home-manager.
   xsession.enable = true;
 
