@@ -99,6 +99,28 @@
     settings = import ./polybar.nix;
   };
 
+  # TODO Move to common
+  # Instead of getting
+  # ```
+  # DBI connect(…) failed: unable to open database file at
+  # /run/current-system/sw/bin/command-not-found line 13.
+  # cannot open database `…' at /run/current-system/sw/bin/command-not-found
+  # line 13.
+  # ```
+  # I want to get
+  # ```
+  # The program 'hello' is currently not installed. It is provided by several
+  # packages. You can install it by typing one of the following:
+  # nix-env -iA nixpkgs.haskellPackages.hello.out
+  # nix-env -iA nixpkgs.mbedtls.out
+  # nix-env -iA nixpkgs.hello.out
+  # …
+  # ```
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   # We'll see when this bites us.
   xdg.configFile."MuseScore/HomeManagerInit_MuseScore4.ini" = {
     text = ''
