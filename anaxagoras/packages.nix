@@ -27,6 +27,7 @@
           # chromium
           # cura # for the occasional 3D-print
           diffpdf
+          digikam # let's try this for non-hierarchical management of photos
           # discord # some people force me to use this
           # docker docker_compose
           # dropbox-cli
@@ -145,6 +146,9 @@
           # aqbanking
           atool
           # (haskellPackages.arbtt)
+          beancount # accounting made even nicer than (h)ledger?
+          beancount-black # formatter for beancount
+          fava # web interface for beancount
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
@@ -189,8 +193,7 @@
           # newsboat # fetches RSS feeds
           nixfmt-rfc-style
           nix-index # builds an index for `nix-locate` which helps me to search my nix-store
-          rclone # for syncing encrypted content to The Cloud
-          rcm
+          ocrmypdf # super useful for scanned stuff
           p7zip
           pandoc
           (pass.withExtensions (
@@ -202,6 +205,8 @@
           pciutils
           pdftk
           qrencode # for creating the occasional QR code
+          rclone # for syncing encrypted content to The Cloud
+          rcm
           # signal-cli
           socat
           sshfs
