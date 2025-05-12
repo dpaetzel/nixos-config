@@ -46,12 +46,12 @@
   };
 
   # Manual mount:
-  # `sudo mount -t cifs -o uid=1000,gid=100,credentials=/home/david/1Projekte/Cloud/credentials //192.168.178.74/HoefflCloud /mnt/HoefflCloud`
+  # `sudo mount -t cifs -o uid=1000,gid=100,credentials=/home/david/1Projekte/Cloud/credentials //192.168.178.120/HoefflCloud /mnt/HoefflCloud`
   # See https://wiki.archlinux.org/title/Autofs#Samba .
   services.autofs.autoMaster =
     let
       mapConf = pkgs.writeText "auto" ''
-        HoefflCloud -fstype=cifs,uid=1000,gid=100,credentials=/home/david/5Code/nixos-config/anaxagoras/credentials ://192.168.178.74/HoefflCloud
+        HoefflCloud -fstype=cifs,uid=1000,gid=100,credentials=/home/david/5Code/nixos-config/anaxagoras/credentials ://192.168.178.120/HoefflCloud
       '';
     in
     ''
