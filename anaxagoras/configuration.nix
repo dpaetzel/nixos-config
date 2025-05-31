@@ -110,11 +110,6 @@
 
   services.openssh.enable = true;
 
-  services.clipmenu = {
-    enable = true;
-    syncPrimaryToClipboard = true;
-  };
-
   services.printing = {
     enable = true;
     drivers = [

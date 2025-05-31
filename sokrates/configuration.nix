@@ -124,12 +124,6 @@
   };
 
 
-  services.clipmenu = {
-    enable = true;
-    syncPrimaryToClipboard = true;
-  };
-
-
   services.openssh.enable = true;
 
 

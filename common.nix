@@ -223,7 +223,6 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
   '';
 
-  services.emacs = {
   hardware.keyboard.zsa.enable = true;
 
   programs.direnv = {
@@ -231,11 +230,9 @@
     nix-direnv.enable = true;
   };
 
+  services.clipmenu = {
     enable = true;
-    defaultEditor = true;
-    # Emacs is central to everything, so let's pin its version to more
-    # consciously upgrade it.
-    package = pkgs.myemacs;
+    syncPrimaryToClipboard = true;
   };
 
   # Required for udiskie.
