@@ -83,6 +83,8 @@ in
       };
 
       # TODO Extract from this to functions and aliases
+      # Cannot really use home-manager's mkOutOfStoreSymlink here because fish
+      # config is merged from multiple things (integrations etc.)
       shellInit = ''
         # Fixes strange output when Emacs runs Fish
         # https://github.com/fish-shell/fish-shell/issues/1155#issuecomment-420962831

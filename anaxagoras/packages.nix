@@ -224,7 +224,7 @@
           # vdirsyncer
           wally-cli # for flashing my flashy keyboard
           # weechat
-          whisper-cpp # audio to text
+          # whisper-cpp # audio to text
           zip
         ];
         utility = [
