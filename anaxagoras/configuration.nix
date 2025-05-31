@@ -45,20 +45,6 @@
     fsType = "ext4";
   };
 
-  # Manual mount:
-  # `sudo mount -t cifs -o uid=1000,gid=100,credentials=/home/david/1Projekte/Cloud/credentials //192.168.178.120/HoefflCloud /mnt/HoefflCloud`
-  # See https://wiki.archlinux.org/title/Autofs#Samba .
-  services.autofs.autoMaster =
-    let
-      mapConf = pkgs.writeText "auto" ''
-        HoefflCloud -fstype=cifs,uid=1000,gid=100,credentials=/home/david/5Code/nixos-config/anaxagoras/credentials ://192.168.178.120/HoefflCloud
-      '';
-    in
-    ''
-      /mnt/HoefflCloud file:${mapConf} --timeout 60 --browse
-    '';
-  services.autofs.enable = true;
-
   swapDevices = [ { device = "/dev/disk/by-uuid/201fcb80-0361-409f-a878-87719366a4f3"; } ];
 
   boot.loader.grub.enable = true;
@@ -102,9 +88,6 @@
     dedicatedServer.openFirewall = true;
   };
 
-  # Not the best but also not the worst, I guess.
-  programs.thunderbird.enable = true;
-
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
@@ -124,8 +107,6 @@
 
   # anaxagoras has a dongle now! But it does not like Pipewire/Jack. :(
   # hardware.bluetooth.enable = true;
-
-  hardware.keyboard.zsa.enable = true;
 
   services.openssh.enable = true;
 

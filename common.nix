@@ -31,6 +31,20 @@
     firewall.enable = false;
   };
 
+  # Manual mount:
+  # `sudo mount -t cifs -o uid=1000,gid=100,credentials=/home/david/1Projekte/Cloud/credentials //192.168.178.120/HoefflCloud /mnt/HoefflCloud`
+  # See https://wiki.archlinux.org/title/Autofs#Samba .
+  services.autofs.autoMaster =
+    let
+      mapConf = pkgs.writeText "auto" ''
+        HoefflCloud -fstype=cifs,uid=1000,gid=100,credentials=/home/david/5Code/nixos-config/credentials ://192.168.178.120/HoefflCloud
+      '';
+    in
+    ''
+      /mnt/HoefflCloud file:${mapConf} --timeout 60 --browse
+    '';
+  services.autofs.enable = true;
+
   environment.systemPackages =
     with pkgs;
     [
@@ -191,6 +205,9 @@
   #   expat
   # ];
 
+  # Not the best but also not the worst, I guess.
+  programs.thunderbird.enable = true;
+
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
@@ -202,6 +219,7 @@
   };
 
   services.emacs = {
+  hardware.keyboard.zsa.enable = true;
     enable = true;
     defaultEditor = true;
     # Emacs is central to everything, so let's pin its version to more
