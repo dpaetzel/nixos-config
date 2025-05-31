@@ -146,9 +146,10 @@
           # aqbanking
           atool
           # (haskellPackages.arbtt)
-          beancount # accounting made even nicer than (h)ledger?
+          # beancount # accounting made even nicer than (h)ledger? I install
+          # that in the Flake though
           beancount-black # formatter for beancount
-          fava # web interface for beancount
+          # fava # web interface for beancount
           bup # backup solution
           cachix # another Nix cache, originally required for installing neuron
           curl
