@@ -211,6 +211,7 @@
           # signal-cli
           socat
           sshfs
+          tesseract # image to text
           # teamspeak_client
           tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
@@ -223,6 +224,7 @@
           # vdirsyncer
           wally-cli # for flashing my flashy keyboard
           # weechat
+          whisper-cpp # audio to text
           zip
         ];
         utility = [
