@@ -98,11 +98,6 @@
   };
 
 
-  programs.starship.enable = true;
-
-  # TODO starship, eza have more options if i use home-manager
-
-
   services.cron = {
     enable = true;
     systemCronJobs = [
