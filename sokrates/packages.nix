@@ -17,7 +17,7 @@
           # discord # some people force me to use this
           # docker docker_compose
           # dropbox-cli
-          # emacs # I'm using the service now.
+          emacs # I'm not using the service anymore. I think it's buggy if Doom.
           evince
           font-manager
           # firefox # installed via programs.firefox.enable

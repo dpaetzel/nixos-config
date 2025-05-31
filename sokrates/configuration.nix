@@ -139,35 +139,6 @@
   };
 
 
-  # udev rule for my android phone(s)
-  services.udev.extraRules = ''
-    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
-    SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
-  '';
-
-
-  # Required for udiskie.
-  services.udisks2.enable = true;
-
-
-  # Please don't lock me out.
-  services.earlyoom = {
-    enable = true;
-    # Minimum available memory and swap in percent above which “the killing
-    # begins” (i.e. if both are surpassed at the same time).
-    freeMemThreshold = 10;
-    freeSwapThreshold = 10;
-    # I want to know what's going on.
-    enableNotifications = true;
-    extraArgs = ["--prefer '^(emanote|.spotify-wrappe|.mscore-wrapped|Isolated Web Co)$'"];
-  };
-
-
-  # “A list of files containing trusted root certificates in PEM format. These
-  # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
-  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
-
-
   # This would have to depend on VPN being up and that's just too much of a
   # hassle to script. For now, I'll use autossh instead.
   # systemd.services.mlflowtunnel = {
