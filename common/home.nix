@@ -6,26 +6,6 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 
-  # Zettelkasten ftw.
-  systemd.user.services.emanote = {
-    Unit = {
-      Description = "emanote";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      # It is recommended to use Type=exec for long-running services, as it
-      # ensures that process setup errors (e.g. errors such as a missing service
-      # executable, or missing user) are properly tracked.
-      Type = "exec";
-      WorkingDirectory = "/home/david/Zettels";
-      ExecStart = "${pkgs.emanote}/bin/emanote run -p 8000";
-      TimeoutStartSec = 30;
-      Restart = "always";
-    };
-  };
-
   # Required so that I can configure GUI stuff like polybar via home-manager.
   xsession.enable = true;
 
@@ -119,6 +99,27 @@
     settings = import ./polybar.nix;
   };
 
+  # Instead of getting
+  # ```
+  # DBI connect(…) failed: unable to open database file at
+  # /run/current-system/sw/bin/command-not-found line 13.
+  # cannot open database `…' at /run/current-system/sw/bin/command-not-found
+  # line 13.
+  # ```
+  # I want to get
+  # ```
+  # The program 'hello' is currently not installed. It is provided by several
+  # packages. You can install it by typing one of the following:
+  # nix-env -iA nixpkgs.haskellPackages.hello.out
+  # nix-env -iA nixpkgs.mbedtls.out
+  # nix-env -iA nixpkgs.hello.out
+  # …
+  # ```
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   # We'll see when this bites us.
   xdg.configFile."MuseScore/HomeManagerInit_MuseScore4.ini" = {
     text = ''
@@ -151,6 +152,7 @@
     '';
   };
 
+  # TODO Use mkOutOfStoreSymlink
   home.file.".julia/config/startup.jl".text = ''
     try
         using Revise
