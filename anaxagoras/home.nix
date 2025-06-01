@@ -1,5 +1,5 @@
 # home-manager configuration file of `anaxagoras` (replaces ~/.config/nixpkgs/home.nix).
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   # Don't change this. Version that I originally installed home-manager with.
   #

@@ -189,7 +189,7 @@
               # Store user packages in `/etc/profiles/per-user/<username>`.
               useUserPackages = true;
               # I don't need this right now.
-              # extraSpecialArgs = {inherit inputs outputs;};
+              extraSpecialArgs = { configPath = "/home/david/5Code/nixos-config/"; };
               users.david = import ./anaxagoras/home.nix;
             };
           }
