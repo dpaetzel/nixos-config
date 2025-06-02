@@ -82,7 +82,12 @@
       noto-fonts-emoji # seems to be broken as of 2023-02
       noto-fonts-monochrome-emoji
       twitter-color-emoji
-      (nerdfonts.override { fonts = [ "FiraCode" "NerdFontsSymbolsOnly" ]; })
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "NerdFontsSymbolsOnly"
+        ];
+      })
       powerline-fonts
       source-code-pro
       # symbola # Cannot download 2022-06-22
