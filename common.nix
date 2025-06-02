@@ -273,5 +273,6 @@
   time.timeZone = "Europe/Berlin";
 
   dp.fish.enable = true;
+  dp.julia.enable = true;
   dp.latex.enable = true;
 }

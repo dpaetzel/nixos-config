@@ -104,6 +104,18 @@
         ];
       };
 
+      juliaEnv = pkgs.julia.withPackages [
+        "AlgebraOfGraphics"
+        "CairoMakie"
+        "DataFrames"
+        "DataFramesMeta"
+        "Distributions"
+        "Infiltrator"
+        "KittyTerminalImages"
+        "OhMyREPL"
+        "StatsBase"
+      ];
+
       # General purpose Python shell I use everyday (I have an alias that runs
       # `nix run github:dpaetzel/nixos-config#pythonShell -- --profile=p`).
       pythonEnv =
@@ -167,6 +179,7 @@
             system
             inputs
             pythonEnv
+            juliaEnv
             ;
         };
         modules = [

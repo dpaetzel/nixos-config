@@ -156,7 +156,4 @@
       chmod u+w ${config.xdg.configHome}/MuseScore/MuseScore4.ini
     '';
   };
-
-  # TODO Make a module out of this
-  home.file.".julia/config/startup.jl".source = config.lib.file.mkOutOfStoreSymlink "${configPath}/dotfiles/julia/config/startup.jl";
 }
