@@ -44,6 +44,8 @@
     }:
 
     let
+      # Required for `mkOutOfStoreSymlink`.
+      configPath = "/home/david/5Code/nixos-config/";
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -180,6 +182,7 @@
             inputs
             pythonEnv
             juliaEnv
+            configPath
             ;
         };
         modules = [
@@ -202,7 +205,9 @@
               # Store user packages in `/etc/profiles/per-user/<username>`.
               useUserPackages = true;
               # I don't need this right now.
-              extraSpecialArgs = { configPath = "/home/david/5Code/nixos-config/"; };
+              extraSpecialArgs = {
+                inherit configPath;
+              };
               users.david = import ./anaxagoras/home.nix;
             };
           }
