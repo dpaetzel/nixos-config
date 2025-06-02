@@ -220,6 +220,7 @@
             pkgs
             system
             inputs
+            juliaEnv
             pythonEnv
             ;
         };
