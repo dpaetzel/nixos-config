@@ -164,21 +164,7 @@
   programs.slock.enable = true;
 
   programs.zsh.enable = true;
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      p = "${pythonEnv}/bin/ipython --profile=p";
-      pplot = "${pythonEnv}/bin/ipython --profile=p --matplotlib=auto";
-      # Local shell in case I changed something but did not push yet.
-      pl = "nix run path:/home/david/NixOS#pythonShell -- --profile=p";
-      # No profile.
-      pn = "${pythonEnv}/bin/ipython";
-      mvt = "trash-put --verbose";
-      # Unclear why this is not part of the `trash-*` utilities.
-      trash-size = "du -hs ~/.local/share/Trash";
-      rm = "echo Use `mvt` or `command rm`";
-    };
-  };
+  programs.fish.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -253,7 +239,6 @@
   # “A list of files containing trusted root certificates in PEM format. These
   # are concatenated to form /etc/ssl/certs/ca-certificates.crt”
   security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
-
 
   services.redshift.enable = true;
   location.latitude = 48.3;
