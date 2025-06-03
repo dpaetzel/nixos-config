@@ -9,4 +9,6 @@ using KittyTerminalImages
 using StatsBase
 
 
-println("Consider to run `pushKittyDisplay!()` manually …")
+atreplinit() do repl
+    pushKittyDisplay!()
+end
