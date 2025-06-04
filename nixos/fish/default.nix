@@ -173,49 +173,16 @@ alias la='ls -a'
 alias lla='ll -a'
 alias tree='exa --tree'
 alias lld='du -h | grep \'\./[^/]\+$\' | sed -e "s/\(.*\)\.\/\(.*\)/\1\2/"'
-# function n --description='Echo newly created files'
-#   if test -z "$argv"; or test "$argv" = "t"
-#     echo $TEMPORARY/(command ls --sort time $TEMPORARY | head -1)
-#   else if test $argv[1] = "f"
-#     command ls --sort time (find $argv[2] -maxdepth 1 -type f \! -path './.*') | head -1
-#   else if test $argv[1] = "d"
-#     command ls --directory --sort time (find -maxdepth 1 -type d \! -path './.*' \! -name '.') | head -1
-#   else if test -z $argv; or test $argv = "t"
-#     echo $INBOX/(command ls --sort time $TEMPORARY | head -1)
-#   end
-# end
-# Analyse the size of directories.
-# function lsd
-#     for d in (find . -maxdepth 2 -mindepth 2 -type d)
-#         du -h --dereference "$d" | tail -1
-#     end
-# end
-
-
-# Short for Python here (e.g. if I'm in a dev shell).
-alias ph="ipython --profile=p"
 
 
 alias cp='cp --verbose --interactive'
 alias mv='mv --verbose --interactive'
-# function mvc --wraps=mv --description='Create the destination directory, then move the files there'
-#   if test (count $argv) -gt 1
-#       mkdir -p $argv[-1]
-#       mv $argv
-#   else
-#       echo "Not enough arguments given"
-#   end
-# end
-
-
-alias x='chmod +x'
 
 
 alias df='dfc'
 
 
 alias g='git'
-alias led="ledger -f $HOME/Buchhaltung/Gesamt.ledger"
 alias o='open'
 alias ont='o (n t)'
 alias onf='o (n f)'
@@ -227,54 +194,11 @@ alias mutt='neomutt'
 alias feh='feh --scale-down --theme=default'
 
 
-# function sortimgs
-#     set -l folder (mktemp -d -p .)
-#     feh --action "mv '%f' $folder" --action1 "mkdir TRASH; mv '%f' TRASH" $argv
-#     command ls $folder
-#     read name
-#     mv "$folder" "$name"
-# end
-
-
-# function selimgs
-#     set -l folder (mktemp -d -p .)
-#     feh --action "cp '%f' $folder" --action1 "mkdir TRASH; mv '%f' TRASH" $argv
-#     command ls $folder
-#     read name
-#     mv "$folder" "$name"
-# end
-
-
-# Did not copy that one, did not use it ever again.
-# function sortzets
-#     set -l folder (mktemp -d -p .)
-#     for f in *.md
-#         grep "^# " $f
-#         read -P "Is it work? [y/N]" -l reply
-#         if test "X$reply" = "Xy"
-#             mv $f $folder
-#         end
-#     end
-#     read name
-#     mv "$folder" "$name"
-# end
-
-
 alias m='udiskie-mount -ar'
 alias mc='cd (udiskie-mount -ar | sed --regexp-extended "s/mounted .* on (.*)/\1/" | head -1)'
 alias um='udiskie-umount -a'
 # alias umoc='sudo umount -l /mnt/oc-h ; sudo umount -l /mnt/oc-m'
 # alias moc='sudo mount /mnt/oc-h ; sudo mount /mnt/oc-m'
-alias moc="mkdir -p ~/ocm ; sudo moc mount --types cifs --options vers=3.0,credentials=/home/david/.credentials,uid=1000 '//cfs-informatik.informatik.uni-augsburg.de/oc-m' ~/ocm"
-alias umoc='sudo umount -l ~/ocm'
-
-
-alias tnat='nix-shell -p python3 --command "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/master/native/install.sh | bash"'
-
-
-# alias plotting='nix-shell -p gnuplot haskellPackages.cassava haskellPackages.gnuplot ghc'
-alias plotting='nix-shell -p "haskellPackages.ghcWithPackages (pkgs : [ pkgs.cassava pkgs.easyplot ])" gnuplot'
-alias plottingNoEasy='nix-shell -p "haskellPackages.ghcWithPackages (pkgs : [ pkgs.cassava ])" gnuplot'
 
 
 function hearthstone
