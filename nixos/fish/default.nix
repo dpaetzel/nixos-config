@@ -328,29 +328,6 @@ function cpull
 end
 
 
-function texr
-    if test "$argv" = "--fix"
-        entr fish -c "mkrefs > References.bib ; latexmk -f $argv | grep -v 'characters of junk seen' ; fixfonts out/*.pdf"
-    else
-        entr fish -c "mkrefs > References.bib ; latexmk -f $argv | grep -v 'characters of junk seen'"
-    end
-end
-function texrnon
-    if test "$argv" = "--fix"
-        entr fish -c "mkrefs > References.bib ; latexmk -f -interaction=nonstopmode $argv | grep -v 'characters of junk seen' ; fixfonts out/*.pdf"
-    else
-        entr fish -c "mkrefs > References.bib ; latexmk -f -interaction=nonstopmode $argv | grep -v 'characters of junk seen'"
-    end
-end
-function texrl
-    if test "$argv" = "--fix"
-        entr fish -c "mkrefs > References.bib ; latexmk -f -interaction=nonstopmode -norc -r ./.latexmkrc $argv | grep -v 'characters of junk seen' ; fixfonts out/*.pdf"
-    else
-        entr fish -c "mkrefs > References.bib ; latexmk -f -interaction=nonstopmode -norc -r ./.latexmkrc $argv | grep -v 'characters of junk seen'"
-    end
-end
-
-
 function hearthstone
     set -x WINEPREFIX "$HOME/Spiele/Hearthstone"
     wine "C:/Program Files/Battle.net/Battle.net Launcher.exe"
@@ -415,11 +392,6 @@ function checkpass
 end
 
 
-function mkmail
-    mkdir -p "$argv"/{cur,new,tmp}
-end
-
-
 function cinit
     cabal init \
         --cabal-version=2.2 \
@@ -465,12 +437,6 @@ function cinit
 end
 
 
-alias update-spacemacs="\
-cd ~/.emacs.d && \
-git pull --rebase; \
-find ~/.emacs.d/elpa/2*/develop/org-plus-contrib* -name '*.elc' -delete"
-
-
 function gong
     date
     for t in $argv
@@ -494,9 +460,6 @@ alias randid="cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1"
 function camera
     ffmpeg -f v4l2 -video_size 1920x1080 -i /dev/video0 -c:v libx264 -preset ultrafast (date -I)\ "$argv.mp4"
 end
-
-
-alias neu="neuron -d $HOME/Zettels"
 
 
 alias vpn="nmcli con up uni-vpn-neu"
@@ -538,29 +501,7 @@ end
 
 alias abduco="abduco -e ^q"
 
-alias ssh="kitten ssh"
 alias dt="date '+%F %T'"
-function zets -d "List Zettels by file path and title"
-    set paths $argv
-    set -l expanded_paths
-    if test (count $paths) -eq 0
-        set expanded_paths **.md
-    else
-        # Expand any directories provided recursively.
-        for path in $paths
-            if test -d $path
-                set expanded_paths $expanded_paths $path/**.md
-            else
-                set expanded_paths $expanded_paths $path
-            end
-        end
-    end
-
-    for fpath in $expanded_paths
-        # Print the first toplevel heading.
-        command awk '/^# /{print FILENAME " : " $0; exit}' $fpath
-    end
-end
       '';
     };
   };
