@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : lhsescape
+#key : tex
+#contributor : 
+# --
+{-"$1"-}

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./emacs
     ./fish
     ./julia
     ./laptop

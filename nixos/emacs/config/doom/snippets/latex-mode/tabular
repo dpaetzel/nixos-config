@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: tabular
+# key: tabular
+# condition: t
+# --
+\\begin{tabular}{$1}
+\\toprule
+$2
+\\midrule
+$3
+\\bottomrule
+\\end{tabular}

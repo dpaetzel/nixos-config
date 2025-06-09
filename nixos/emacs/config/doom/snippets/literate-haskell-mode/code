@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : code block
+# key: code
+# --
+\begin{code}
+$0
+\end{code}

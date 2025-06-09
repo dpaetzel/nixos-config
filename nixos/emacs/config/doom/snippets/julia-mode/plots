@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: imports for plotting
+# key: plots
+# --
+using AlgebraOfGraphics: AlgebraOfGraphics
+const AOG = AlgebraOfGraphics
+using CairoMakie
+using KittyTerminalImages
+using LaTeXStrings
+using PlotUtils

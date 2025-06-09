@@ -265,4 +265,5 @@
   dp.fish.enable = true;
   dp.julia.enable = true;
   dp.latex.enable = true;
+  dp.emacs.enable = true;
 }

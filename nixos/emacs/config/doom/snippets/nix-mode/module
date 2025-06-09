@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NixOS module
+# key: module
+# --
+{ self, lib, config, options, pkgs, ... }:
+
+with lib;
+with self.lib;
+let cfg = config.$1;
+in {
+  imports = [];
+
+  options.$1 = mkEnableOption "Enable $1 stuff";
+  # options.other = with types; {
+    # opt1 = mkBoolOpt false;
+    # opt2 = mkOpt str "";
+  };
+
+  config = mkIf cfg.enable {
+    # TODO
+    $3
+  };
+}

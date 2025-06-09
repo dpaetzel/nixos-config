@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: NumPy returns documentation
+# key: returns
+# --
+Returns
+-------

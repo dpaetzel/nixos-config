@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: type ignore
+# key: ign
+# --
+# type: ignore

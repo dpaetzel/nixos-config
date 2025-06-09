@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: scrlttr2
+# key: scrlttr2
+# --
+\documentclass[parskip=half]{scrlttr2}
+
+
+\usepackage{libertineRoman}
+
+
+\usepackage[ngerman]{babel}
+
+
+\begin{document}
+\setkomavar{fromname}{Regine Pätzel}
+\setkomavar{fromaddress}{%
+  Panoramastr.\@ 1b\\
+  86199 Augsburg
+}
+\setkomavar{specialmail}{Einschreiben mit Rückschein}
+\setkomavar{subject}{}
+\setkomavar{signature}{}
+\setkomavar{date}{}
+\begin{letter}{%
+Bayerischen Staatsministerium der Justiz\\
+Personalabteilung\\
+Prielmayerstr.\@ 7\\
+80097 München
+}
+\pagestyle{empty}
+
+
+\opening{}
+
+
+$1
+
+
+\closing{}
+
+
+\end{letter}
+\end{document}

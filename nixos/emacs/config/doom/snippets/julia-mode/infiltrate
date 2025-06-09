@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: infiltrate
+# key: infil
+# --
+Main.@infiltrate
+error("Infiltrated")

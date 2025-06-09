@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: nix-shell
+# key: nix-shell
+# condition: t
+# --
+#!/usr/bin/env nix-shell
+#! nix-shell -i python -p "python39.withPackages(ps: with ps; [ ipython numpy $1 ])"

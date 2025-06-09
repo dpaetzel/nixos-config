@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: beamer
+# key: beamer
+# --
+\documentclass{beamer}
+
+
+\title{$1}
+\author{$2}
+
+
+\usetheme[%
+block=fill,
+]{metropolis}
+\setbeamertemplate{caption}[default]
+% \metroset{background=dark}
+\setbeameroption{show notes on second screen=right}
+\setbeamertemplate{note page}{
+  \insertnote
+}
+
+
+\usepackage{fontspec}
+
+
+\usepackage[british]{babel}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+$3
+
+
+\end{document}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: embed IPython
+# key: embed
+# --
+import IPython; IPython.embed(banner1=""); import sys; sys.exit(1) # fmt: skip

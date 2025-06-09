@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: license
+# key: license
+# --
+Copyright (C) 2022 David Pätzel <david.paetzel@posteo.de>
+SPDX-License-Identifier: GPL-3.0-only

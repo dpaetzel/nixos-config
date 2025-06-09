@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: todoin
+# key: tdi
+# --
+\todoin{$1}
