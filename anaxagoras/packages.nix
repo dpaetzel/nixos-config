@@ -173,7 +173,9 @@
           grc # colorize output
           fzf # fuzzy file finder
           git
+          git-lfs
           gitAndTools.git-annex
+          git-filter-repo
           gitstats
           hledger # accounting made nicer
           hugo
