@@ -12,6 +12,7 @@ set allowed \
   3Ressourcen \
   4Archiv \
   5Code \
+  6Games \
   Inbox.md \
   Inbox \
   VMs \
@@ -28,7 +29,7 @@ if set -q argv[1]
         case p
             begin
                 command ls --quote -1 $HOME/1Projekte/
-                command ls --quote -1 $HOME/Zettels/1Projekte/
+                command ls --quote -1 $HOME/Zettels/Zettels/1Projekte/
             end | sed -r 's/.md//' | sort | uniq
 
         case clean
