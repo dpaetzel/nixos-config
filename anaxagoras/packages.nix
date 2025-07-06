@@ -38,7 +38,7 @@
           gimp
           gnuplot
           google-chrome # for DRM-protected streaming
-          gparted
+          gparted exfat exfatprogs
           inkscape
           libreoffice
           lingot # guitar tuner
