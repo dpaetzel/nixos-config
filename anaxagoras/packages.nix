@@ -24,6 +24,7 @@
           android-tools
           audacity
           lame
+          anki # practice recall of important things
           # chromium
           # cura # for the occasional 3D-print
           diffpdf
