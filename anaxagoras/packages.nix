@@ -20,6 +20,7 @@
         main = [
           # anaxagoras-only
           glxinfo
+          activitywatch
 
           android-tools
           audacity
@@ -244,6 +245,7 @@
           imagemagick
           inetutils # telnet and friends
           ffmpeg
+          mypython.pkgs.fritzconnection
           lm_sensors
           lsof
           man-pages
@@ -276,6 +278,7 @@
       development = [
         # Julia development
         myjulia
+        pprof # View profiling data in Google's pprof format (e.g. using PProf.jl).
         # This withPackages stuff is fairly new to nixpkgs and seems still
         # somewhat broken. It is likely the reason for the many annoying
         # recompiles I observe, presumably due to interference with projects
