@@ -88,6 +88,12 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # Notify me here when I'm being called on my phone.
+  programs.kdeconnect.enable = true;
+
+  # Replaces KDE Connect?
+  programs.localsend.enable = true;
+
   # Enabled in initial generated config.
   hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
 
