@@ -109,6 +109,7 @@
       juliaEnv = pkgs.julia.withPackages [
         "AlgebraOfGraphics"
         "CairoMakie"
+        "CSV"
         "DataFrames"
         "DataFramesMeta"
         "Distributions"
