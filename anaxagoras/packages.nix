@@ -40,7 +40,9 @@
           gimp
           gnuplot
           google-chrome # for DRM-protected streaming
-          gparted exfat exfatprogs
+          gparted
+          exfat
+          exfatprogs
           inkscape
           libreoffice
           lingot # guitar tuner
@@ -278,7 +280,8 @@
       development = [
         # Julia development
         myjulia
-        pprof # View profiling data in Google's pprof format (e.g. using PProf.jl).
+        pprof
+        graphviz # View profiling data in Google's pprof format (e.g. using PProf.jl).
         # This withPackages stuff is fairly new to nixpkgs and seems still
         # somewhat broken. It is likely the reason for the many annoying
         # recompiles I observe, presumably due to interference with projects
