@@ -87,7 +87,7 @@ in
 
             editor "$file"
             and cp "$file" "$HOME/3Ressourcen/Literatur/$name/$name.bib"
-            and mvt "$file"
+            and trash-put "$file"
         end
       '')
     ];
