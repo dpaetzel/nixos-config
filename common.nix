@@ -208,10 +208,11 @@
       default-sample-rate = 48000;
     };
   };
-  # udev rule for my android phone(s)
+  # udev rule for my android phone(s) and Tolino.
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666"
     SUBSYSTEM=="usb", ATTR{idVendor}=="054c", MODE="0666"
+    ATTR{idVendor}=="4173", ATTR{idProduct}=="8000", MODE="660", GROUP="plugdev", SYMLINK+="libmtp-%k"
   '';
 
   hardware.keyboard.zsa.enable = true;
