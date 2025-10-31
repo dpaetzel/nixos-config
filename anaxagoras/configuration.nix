@@ -21,6 +21,10 @@
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
+  users.groups = {
+    plugdev = { };
+  };
+
   users.extraUsers.david = {
     shell = "${pkgs.fish}/bin/fish";
     isNormalUser = true;
