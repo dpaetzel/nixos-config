@@ -14,6 +14,9 @@
   # Required so that I can configure GUI stuff like polybar via home-manager.
   xsession.enable = true;
 
+  # Auto-mount.
+  services.udiskie.enable = true;
+
   programs.ssh = {
     enable = true;
     extraConfig = ''
