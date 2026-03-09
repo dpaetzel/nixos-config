@@ -127,6 +127,9 @@
       pkgs.hplip
       pkgs.postscript-lexmark
     ];
+    # Add a to-PDF printer. Setting this as the default printer presumably helps
+    # with musescore startup times. lol
+    cups-pdf.enable = true;
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
