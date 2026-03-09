@@ -72,7 +72,7 @@
       fira-code
       # fira-code-symbols
       font-awesome
-      google-fonts
+      # google-fonts # Too much, makes Firefox startup times go crazy.
       inconsolata
       # ipafont
       kochi-substitute
