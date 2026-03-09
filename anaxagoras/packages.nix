@@ -26,8 +26,10 @@
           audacity
           lame
           anki # practice recall of important things
+          devenv
           # chromium
           # cura # for the occasional 3D-print
+          # claude-code # let's give it a try # installed from most recent commit via nix-env
           diffpdf
           digikam # let's try this for non-hierarchical management of photos
           # discord # some people force me to use this
@@ -53,6 +55,7 @@
           obsidian # I was finally broken and switched to the dark side
           # TODO Disable emanote and neuron and their services
           openshot-qt # if I ever need to quickly edit video
+          pympress # giving talks with beamer slides was never more pleasant
           signal-desktop
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
