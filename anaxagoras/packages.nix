@@ -103,7 +103,7 @@
         picom
         smile # emojis make my life brighter 😊
         # setroot # build broken as of 2022-04-05
-        xfce.thunar
+        # xfce.thunar # enabled, so settings are saved properly
         unclutter
 
         # works

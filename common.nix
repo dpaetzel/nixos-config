@@ -222,12 +222,14 @@
     nix-direnv.enable = true;
   };
 
+  programs.thunar.enable = true;
+
   services.clipmenu = {
     enable = true;
     syncPrimaryToClipboard = true;
   };
 
-  # Required for udiskie.
+  # Required for udiskie-*.
   services.udisks2.enable = true;
 
   # Please don't lock me out.
