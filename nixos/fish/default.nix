@@ -37,6 +37,9 @@ in
 
     home-manager.users.david.programs.fish = {
       enable = true;
+      shellAbbrs = {
+        ntfy = "ntfyme '$status'";
+      };
       functions = {
         # Echo newly created files
         n = ''
