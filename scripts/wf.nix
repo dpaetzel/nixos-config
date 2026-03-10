@@ -27,10 +27,19 @@ if set -q argv[1]
 
     switch $cmd
         case p
-            begin
-                command ls --quote -1 $HOME/1Projekte/
-                command ls --quote -1 $HOME/Zettels/Zettels/1Projekte/
-            end | sed -r 's/.md//' | sort | uniq
+            for dir in 1Projekte 2Bereiche
+                begin
+                    command ls -1 $HOME/$dir/
+                    command ls -1 $HOME/Zettels/Zettels/$dir/
+                end | string replace -r '\.md$' "" | sort -u | while read -l name
+                    if not test -e "$HOME/Zettels/Zettels/$dir/$name.md"; and not test -e "$HOME/Zettels/Zettels/$dir/$name"
+                        echo "$name  ✗"
+                    else
+                        echo "$name"
+                    end
+                end
+                echo
+            end
 
         case clean
             # Clean up the $HOME directory (moving anything not belonging there
