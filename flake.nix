@@ -198,6 +198,8 @@
           ./desktop.nix
           ./theme.nix
 
+          ./backups/backup-remote.nix
+
           home-manager.nixosModules.home-manager
           {
             home-manager = {
