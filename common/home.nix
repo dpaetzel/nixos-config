@@ -89,6 +89,7 @@
 
   programs.firefox = {
     enable = true;
+    nativeMessagingHosts = [ pkgs.keepassxc ];
     # TODO Add nativeMessagingHosts for tridactyl
     # TODO Add config options
   };

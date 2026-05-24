@@ -22,6 +22,7 @@
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
   users.groups = {
+    dialout = { };  # required for chrome-based firmware flashing
     plugdev = { };
   };
 
@@ -32,6 +33,7 @@
     extraGroups = [
       "audio"
       "cdrom"
+      "dialout" # required for chrome-based firmware flashing
       "jackaudio"
       "networkmanager"
       "plugdev"

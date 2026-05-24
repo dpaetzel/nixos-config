@@ -48,6 +48,7 @@
           inkscape
           libreoffice
           lingot # guitar tuner
+          keepassxc # better cross-device support than the beautiful `pass`
           kitty # terminal emulator
           makemkv
           mpv # much faster than big ol' vlc
@@ -56,6 +57,7 @@
           # TODO Disable emanote and neuron and their services
           openshot-qt # if I ever need to quickly edit video
           pympress # giving talks with beamer slides was never more pleasant
+          rustdesk # teamviewer is shady, this is less so
           signal-desktop
           simplescreenrecorder
           skypeforlinux # too many people use this -.-
