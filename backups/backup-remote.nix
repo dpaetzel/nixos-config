@@ -1,6 +1,8 @@
 # No connection details, repository location or ntfy credentials appear here or
 # in the host's configuration.nix, they live in out-of-store, uncommitted files
-# under /etc/restic/.
+# under /etc/restic/:
+#
+# connect.sh  env  known_hosts  password  repository  ssh_key
 { config, lib, pkgs, ... }:
 
 let
@@ -42,7 +44,9 @@ in
 
           #!/bin/sh
           exec ssh -F none -i /etc/restic/ssh_key -o IdentitiesOnly=yes \
-            -p 23 uXXXXXX@uXXXXXX.your-storagebox.de -s sftp
+            -o UserKnownHostsFile=/etc/restic/known_hosts \
+            -o StrictHostKeyChecking=yes \
+            -p 23 uXXXXX@uXXXXX.your-storagebox.de -s sftp
       '';
     };
 
