@@ -21,7 +21,8 @@
     enable = true;
     extraConfig = ''
       PreferredAuthentications publickey
-      IdentityFile /home/%u/.ssh/id_rsa.%h.%r
+      IdentityFile %d/.ssh/id_rsa.%h.%r
+      IdentityFile %d/.ssh/id_ed25519.%h.%r
     '';
     matchBlocks = {
       "oc*.informatik.uni-augsburg.de" = {

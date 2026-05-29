@@ -94,6 +94,9 @@
       # terminus_font
       ubuntu_font_family
       unifont
+
+      # flyer for my choir
+      montserrat
     ];
     fontconfig.defaultFonts = {
       emoji = [ "Twitter Color Emoji" ];

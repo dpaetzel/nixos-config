@@ -49,6 +49,7 @@
           libreoffice
           lingot # guitar tuner
           keepassxc # better cross-device support than the beautiful `pass`
+          keepmenu # could this get me back my passmenu?
           kitty # terminal emulator
           makemkv
           mpv # much faster than big ol' vlc
@@ -57,6 +58,7 @@
           # TODO Disable emanote and neuron and their services
           openshot-qt # if I ever need to quickly edit video
           pympress # giving talks with beamer slides was never more pleasant
+          restic # backups
           rustdesk # teamviewer is shady, this is less so
           signal-desktop
           simplescreenrecorder
@@ -165,6 +167,7 @@
           direnv
           nix-direnv
           dbacl
+          deploy-rs
           dfc
           # droopy # browser-based file sharing
           dos2unix # people sometimes send me bad files
