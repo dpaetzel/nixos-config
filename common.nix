@@ -178,13 +178,14 @@
 
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    # I'd rather use ssh-agent directly.
+    enableSSHSupport = false;
     settings = {
       default-cache-ttl = 86400;
     };
   };
-  # Must be disabled for GnuPGAgent to work (or so someone said once).
-  programs.ssh.startAgent = false;
+
+  programs.ssh.startAgent = true;
 
   # Sometimes I'm less masochistic and don't want to package stuff but just run
   # it. This allows to Just Execute stuff (i.e. `./thefile`).
