@@ -197,7 +197,6 @@
     in
     {
       nixosConfigurations.anaxagoras = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
         specialArgs = {
           inherit
             pkgs
@@ -238,8 +237,8 @@
           }
         ];
       };
+
       nixosConfigurations.sokrates = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
         specialArgs = {
           inherit
             pkgs
@@ -247,6 +246,7 @@
             inputs
             juliaEnv
             pythonEnv
+            configPath
             ;
         };
         modules = [
@@ -280,12 +280,15 @@
       };
 
       nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
+        specialArgs = {
+          inherit system pkgs;
+        };
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           (
             { pkgs, ... }:
             {
+              nixpkgs.hostPlatform = "x86_64-linux";
               environment.systemPackages = [
                 pkgs.inxi
                 pkgs.hwinfo
@@ -297,7 +300,6 @@
 
       # This uses nixpkgs-stable because I just want it to work.
       nixosConfigurations.nasty = nixpkgs-stable.lib.nixosSystem {
-        pkgs = pkgsStable;
         specialArgs = {
           inherit
             system

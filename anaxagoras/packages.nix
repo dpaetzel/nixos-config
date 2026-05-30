@@ -229,7 +229,7 @@
           # teamspeak_client
           tigervnc # somehow this works best for me
           timidity # for playing the occasional MIDI file
-          transmission
+          transmission_4
           tree
           unison
           units

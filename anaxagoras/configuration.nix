@@ -3,10 +3,20 @@
   lib,
   inputs,
   config,
+  modulesPath,
   ...
 }:
 
 {
+  imports = [
+      # I'm injecting a ready-made pkgs into this from above, so nixpgks.*
+      # options should be disabled.
+      (modulesPath + "/misc/nixpkgs/read-only.nix")
+  ];
+
+  # See above comment on read-only.nix.
+  nixpkgs.pkgs = pkgs;
+
   networking.hostName = "anaxagoras";
 
   # NVidia GeForce GTX 760 TI OEM

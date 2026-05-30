@@ -1,7 +1,16 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, modulesPath, ... }:
 
 
 {
+  imports = [
+      # I'm injecting a ready-made pkgs into this from above, so nixpgks.*
+      # options should be disabled.
+      (modulesPath + "/misc/nixpkgs/read-only.nix")
+  ];
+
+  # See above comment on read-only.nix.
+  nixpkgs.pkgs = pkgs;
+
   networking.hostName = "sokrates";
 
   laptop.enable = true;
