@@ -12,6 +12,8 @@
       # "github:dpaetzel/nixpkgs/dpaetzel/nixos-config";
       "github:dpaetzel/nixpkgs/update-clipmenu";
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+
     neuron.url = "github:srid/neuron/master";
     # This seems to be broken?
     # neuron.inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +29,8 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     # TODO Maybe use these, but they're both somewhat broken in 2024
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     # nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
@@ -36,10 +40,12 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       musnix,
       nixos-hardware,
       overlays,
+      deploy-rs,
       ...
     }:
 
@@ -103,6 +109,22 @@
                 '';
               };
           })
+        ];
+      };
+
+      pkgsStable = import nixpkgs-stable {
+        inherit system;
+        config = {
+          allowBroken = true;
+          oraclejdk.accept_license = true;
+        };
+      };
+
+      deployPkgs = import nixpkgs-stable {
+        inherit system;
+        overlays = [
+          deploy-rs.overlays.default
+          (self: super: { deploy-rs = { inherit (pkgsStable) deploy-rs; lib = super.deploy-rs.lib; }; })
         ];
       };
 
@@ -272,6 +294,34 @@
           )
         ];
       };
+
+      # This uses nixpkgs-stable because I just want it to work.
+      nixosConfigurations.nasty = nixpkgs-stable.lib.nixosSystem {
+        pkgs = pkgsStable;
+        specialArgs = {
+          inherit
+            system
+            inputs
+            ;
+          pkgs = pkgsStable;
+        };
+        modules = [
+          ./nasty/configuration.nix
+        ];
+      };
+
+      deploy.nodes.nasty = {
+        hostname = "nasty";
+        profiles.system = {
+          sshUser = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.nasty;
+        };
+      };
+
+      # Uses the raw flake deploy-rs.lib (system-indexed), not deployPkgs. OK
+      # for just schema checks, I guess. Nicer would be to use deployPkgs here,
+      # too?
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       # Expose the Python shell.
       apps.${system}.pythonShell = {

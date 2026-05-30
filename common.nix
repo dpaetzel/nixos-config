@@ -104,7 +104,9 @@
   };
 
   nix = {
-    package = pkgs.nixFlakes;
+    # Fixes a weird bug in nix_2_18—and I don't want to upgrade the full system
+    # right now.
+    package = pkgs.nixVersions.nix_2_24;
     # keep-* is recommended for nix-direnv.
     extraOptions = ''
       experimental-features = nix-command flakes
