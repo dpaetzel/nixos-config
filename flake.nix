@@ -288,7 +288,7 @@
           (
             { pkgs, ... }:
             {
-              nixpkgs.hostPlatform = "x86_64-linux";
+              nixpkgs.pkgs = pkgs;
               environment.systemPackages = [
                 pkgs.inxi
                 pkgs.hwinfo
