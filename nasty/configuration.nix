@@ -13,6 +13,17 @@
       (modulesPath + "/misc/nixpkgs/read-only.nix")
     ];
 
+  fileSystems."/mnt/nas1" = {
+    device = "/dev/disk/by-uuid/040769c0-60a5-4045-86af-e995cd7cf18d";
+    fsType = "btrfs";
+    options = [
+      "subvol=/"
+      "noatime"
+      "nofail"
+      "x-systemd.device-timeout=15s"
+    ];
+  };
+
   # See above comment on read-only.nix.
   nixpkgs.pkgs = pkgs;
 
@@ -68,17 +79,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    btrfs-progs
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
 
