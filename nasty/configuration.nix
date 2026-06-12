@@ -82,12 +82,18 @@
     btrfs-progs
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    restic # will enable the service but let's do a one-off first
   ];
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.myBackup = {
+    enable  = true;
+    homeDir = "/mnt/nas1/HoefflCloud";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -309,6 +309,7 @@
         };
         modules = [
           ./nasty/configuration.nix
+          ./backups/backup-remote.nix
         ];
       };
 
