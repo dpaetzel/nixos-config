@@ -80,15 +80,17 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     btrfs-progs
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    git
     restic # will enable the service but let's do a one-off first
+    tmux # sometimes I need to detach
+    vim # still the best non-GUI editor
   ];
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  programs.mosh.enable = true;
 
   services.myBackup = {
     enable  = true;
