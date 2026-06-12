@@ -97,6 +97,12 @@
     homeDir = "/mnt/nas1/HoefflCloud";
   };
 
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="sd[a-z]", \
+      ENV{ID_MODEL}=="ST4000NM000A-2HZ100", \
+      RUN+="${pkgs.hdparm}/sbin/hdparm -S 120 /dev/%k"
+  '';
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
