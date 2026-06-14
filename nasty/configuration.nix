@@ -95,6 +95,9 @@
   services.myBackup = {
     enable  = true;
     homeDir = "/mnt/nas1/HoefflCloud";
+    # Distinct verify hour from anaxagoras so the two repos don't both saturate
+    # the Storage Box link at once.
+    verifyCalendar = "Mon *-*-* 03:00:00";
   };
 
   services.udev.extraRules = ''

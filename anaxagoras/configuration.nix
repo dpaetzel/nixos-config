@@ -147,6 +147,9 @@
   services.myBackup = {
     enable  = true;
     homeDir = "/home/david";
+    # Distinct verify hour from nasty so the two repos don't both saturate the
+    # Storage Box link at once.
+    verifyCalendar = "Tue *-*-* 05:00:00";
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
