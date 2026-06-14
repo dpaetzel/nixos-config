@@ -80,6 +80,7 @@
           # (nixpkgs20200702.wine.override { wineBuild = "wine64"; }) (nixpkgs20200702.winetricks) # always handy to keep around; you never know x)
           xournal # for annotating PDFs (e.g. for signing stuff)
           zathura # for viewing PDFs
+          zed-editor # it's not what it looks like, Emacs
           zoom-us # people make me use this >.<
         ];
         # useful esp. if there is no desktop environment
